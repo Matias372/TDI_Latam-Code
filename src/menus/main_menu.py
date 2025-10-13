@@ -14,7 +14,8 @@ class MainMenu:
         self.reports = Reports(self.freshdesk_service)
         self.processes = Processes(self.freshdesk_service)
         self.reports_menu = ReportsMenu(self.reports)
-        self.processes_menu = ProcessesMenu(self.processes)
+        # Pasar tanto processes como config_manager a ProcessesMenu
+        self.processes_menu = ProcessesMenu(self.processes, self.config_manager)
 
     def mostrar_estado_sistema(self):
         """Mostrar estado actual del sistema"""

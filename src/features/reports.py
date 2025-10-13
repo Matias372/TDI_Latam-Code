@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 from datetime import datetime
 from services.freshdesk_service import FreshdeskService
 from utils.file_utils import FileUtils
@@ -6,6 +7,44 @@ from utils.file_utils import FileUtils
 class Reports:
     def __init__(self, freshdesk_service):
         self.service = freshdesk_service
+
+    def _obtener_ruta_descargas(self):
+        """Obtiene la ruta de la carpeta de Descargas del usuario actual"""
+        # Para Windows
+        if os.name == 'nt':
+            import ctypes
+            from ctypes import wintypes, windll
+            
+            # Usar SHGetFolderPath para obtener la carpeta Downloads
+            CSIDL_PERSONAL = 5  # My Documents
+            SHGFP_TYPE_CURRENT = 0
+            
+            buf = ctypes.create_unicode_buffer(wintypes.MAX_PATH)
+            windll.shell32.SHGetFolderPathW(None, CSIDL_PERSONAL, None, SHGFP_TYPE_CURRENT, buf)
+            
+            # En Windows, Downloads está dentro de Documents
+            downloads_path = os.path.join(buf.value, "Downloads")
+        else:
+            # Para Linux/Mac
+            downloads_path = os.path.join(os.path.expanduser("~"), "Downloads")
+        
+        # Crear la carpeta si no existe
+        os.makedirs(downloads_path, exist_ok=True)
+        return downloads_path
+
+    def _guardar_en_descargas(self, df, nombre_archivo):
+        """Guarda un DataFrame en la carpeta de Descargas"""
+        ruta_descargas = self._obtener_ruta_descargas()
+        ruta_completa = os.path.join(ruta_descargas, nombre_archivo)
+        
+        try:
+            df.to_excel(ruta_completa, index=False)
+            print(f"📁 Archivo guardado en: {ruta_completa}")
+            return ruta_completa
+        except Exception as e:
+            print(f"❌ Error al guardar el archivo: {str(e)}")
+            # Fallback: guardar en la carpeta output original
+            return FileUtils.guardar_excel(df, nombre_archivo)
 
     def reporte_tickets_sin_etiquetas(self):
         """Generar reporte de tickets sin etiquetas"""
@@ -38,9 +77,10 @@ class Reports:
             print("✅ Todos los tickets tienen al menos una etiqueta.")
             return
 
-        # Crear DataFrame y guardar
+        # Crear DataFrame y guardar en Descargas
         df = pd.DataFrame(tickets_sin_etiquetas)
-        ruta_archivo = FileUtils.guardar_excel(df, "Reporte_Tickets_Sin_Etiquetas.xlsx")
+        nombre_archivo = f"Reporte_Tickets_Sin_Etiquetas_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        self._guardar_en_descargas(df, nombre_archivo)
         print(f"✅ Reporte generado con {len(tickets_sin_etiquetas)} tickets sin etiquetas.")
 
     def reporte_empresas(self):
@@ -62,5 +102,6 @@ class Reports:
             })
 
         df = pd.DataFrame(datos_empresas)
-        ruta_archivo = FileUtils.guardar_excel(df, "Reporte_Empresas.xlsx")
+        nombre_archivo = f"Reporte_Empresas_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        self._guardar_en_descargas(df, nombre_archivo)
         print(f"✅ Reporte generado con {len(datos_empresas)} empresas.")

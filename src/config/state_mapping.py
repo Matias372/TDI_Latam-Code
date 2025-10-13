@@ -1,3 +1,4 @@
+# Mapeo de estados de Freshdesk (numéricos) a Clarity (textuales)
 MAPEO_ESTADOS_FD_A_CLARITY = {
     2: "Abierta",                    # Open
     3: "En evaluación",              # Pending -> En evaluación
