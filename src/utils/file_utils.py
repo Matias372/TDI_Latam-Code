@@ -1,23 +1,46 @@
 import os
 import pandas as pd
 from tkinter import filedialog, Tk
-from config.constants import DATA_DIR, OUTPUT_DIR, TEMPLATES_DIR, CONFIG_FILE, AGENTES_TEMPLATE
+
+# Calcular rutas manualmente para evitar import circular
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+OUTPUT_DIR = os.path.join(DATA_DIR, "output")
+TEMPLATES_DIR = os.path.join(DATA_DIR, "templates")
+CONFIG_DIR = os.path.join(DATA_DIR, "config")
+CONFIG_FILE = os.path.join(CONFIG_DIR, "freshdesk_config.json")
+AGENTES_TEMPLATE = os.path.join(TEMPLATES_DIR, "AGENTES_FD.xlsx")
+
+# Asegurar que las carpetas existan
+os.makedirs(TEMPLATES_DIR, exist_ok=True)
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+os.makedirs(CONFIG_DIR, exist_ok=True)
 
 class FileUtils:
     @staticmethod
-    def seleccionar_archivo(titulo="Seleccionar archivo", tipos_archivo=[("Todos los archivos", "*.*"), ("Excel files", "*.xlsx *.xls"), ("CSV files", "*.csv")]):
-        """Seleccionar archivo mediante diálogo"""
-        root = Tk()
-        root.withdraw()
-        root.attributes('-topmost', True)
+    def seleccionar_archivo(titulo="Seleccionar archivo", tipos_archivo=None):
+        """Seleccionar archivo con fallback para entornos sin GUI"""
+        # Intentar con Tkinter primero
+        try:
+            root = Tk()
+            root.withdraw()
+            root.attributes('-topmost', True)
+            archivo = filedialog.askopenfilename(
+                title=titulo,
+                filetypes=tipos_archivo or [("Todos los archivos", "*.*")],
+                initialdir=DATA_DIR
+            )
+            root.destroy()
+            if archivo:
+                return archivo
+        except Exception as e:
+            print(f"⚠️  Diálogo gráfico no disponible: {e}")
         
-        archivo = filedialog.askopenfilename(
-            title=titulo,
-            filetypes=tipos_archivo,
-            initialdir=DATA_DIR
-        )
-        root.destroy()
-        return archivo
+        # Fallback a entrada por consola
+        print(f"\n📁 {titulo}")
+        print("💡 Ingrese la ruta del archivo manualmente:")
+        ruta_manual = input("👉 Ruta: ").strip()
+        return ruta_manual if ruta_manual else None
 
     @staticmethod
     def listar_archivos_input():

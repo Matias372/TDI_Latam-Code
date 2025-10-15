@@ -1,7 +1,7 @@
 {
-    "api_key": "4MAG0b1h3Qka8wNDjPG",
-    "freshdesk_domain": "https://tdilatam.freshdesk.com",
-    "clarity_username": "matias.ruibal.cw",
-    "clarity_password": "Clarity925",
-    "clarity_domain": "https://pmservice.tdilatam.com:8043/ppm/rest/v1"
+    "api_key": "",
+    "freshdesk_domain": "",
+    "clarity_username": "",
+    "clarity_password": "",
+    "clarity_domain": ""
 }

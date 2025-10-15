@@ -5,6 +5,8 @@ from services.clarity_service import ClarityService
 from utils.file_utils import FileUtils
 from datetime import datetime
 import unicodedata
+from config.state_mapping import MAPEO_ESTADOS_FD_TEXTO_A_CLARITY, mapear_estado_desde_texto
+from utils.display_utils import display
 
 class SyncProcess:
     def __init__(self, config_manager):
@@ -12,131 +14,136 @@ class SyncProcess:
         self.freshdesk_service = FreshdeskService(config_manager)
         self.clarity_service = ClarityService(config_manager)
         
-        # 🎯 MAPEO EXACTO BASADO EN LOS VALORES REALES DE LOS ARCHIVOS
-        # Freshdesk -> Clarity
-        self.mapeo_estados_exacto = {
-            # Estados de Freshdesk -> Estados de Clarity
-            "Closed": "Cerrada",
-            "Derivado al Fabricante": "Derivado al Fabricante",
-            "En evaluación": "En evaluación", 
-            "En progreso": "En progreso",
-            "Esperando al cliente": "Esperando al cliente",
-            "Open": "Abierta",
-            "Resolved": "Resuelto"
-        }
+        # 🎯 USAR MAPEO UNIFICADO
+        self.mapeo_estados_exacto = MAPEO_ESTADOS_FD_TEXTO_A_CLARITY    
+        
 
     def sincronizar_estados(self):
-        """Proceso principal de sincronización desde archivos Excel/CSV"""
+        """🎯 ACTUALIZADO: Flujo completo con barras de progreso"""
+        display.clear_screen()
+        print("╔══════════════════════════════════════════════╗")
+        print("║           🔄 SINCRONIZACIÓN ESTADOS          ║")
+        print("╚══════════════════════════════════════════════╝")
         print("🚀 INICIANDO SINCRONIZACIÓN DESDE ARCHIVOS EXCEL/CSV")
         print("═" * 60)
         
         if not self.config.validar_configuracion_clarity():
             print("❌ Configuración de Clarity incompleta. Use el menú de configuración primero.")
+            display.press_enter_to_continue()
             return False
 
-        # 1. Cargar archivo de Freshdesk
-        print("\n📁 CARGANDO ARCHIVO DE FRESHDESK")
-        print("-" * 40)
-        ruta_freshdesk = FileUtils.seleccionar_archivo("Seleccione el archivo de Freshdesk", [("Excel files", "*.xlsx *.xls")])
-        if not ruta_freshdesk:
-            print("❌ No se seleccionó archivo de Freshdesk.")
-            return False
-
-        df_freshdesk = FileUtils.cargar_excel(ruta_freshdesk)
-        if df_freshdesk is None or df_freshdesk.empty:
-            print("❌ No se pudo cargar el archivo de Freshdesk o está vacío.")
-            return False
-
-        # 2. Cargar archivo de Clarity
-        print("\n📁 CARGANDO ARCHIVO DE CLARITY")
-        print("-" * 40)
-        ruta_clarity = FileUtils.seleccionar_archivo("Seleccione el archivo de Clarity", [("CSV files", "*.csv")])
-        if not ruta_clarity:
-            print("❌ No se seleccionó archivo de Clarity.")
-            return False
-
-        df_clarity = FileUtils.cargar_csv(ruta_clarity)
-        if df_clarity is None or df_clarity.empty:
-            print("🔄 La carga automática falló, intentando carga manual...")
-            df_clarity = FileUtils.cargar_csv_manual(ruta_clarity)
-        
-        if df_clarity is None or df_clarity.empty:
-            print("❌ No se pudo cargar el archivo de Clarity o está vacío.")
-            return False
-
-        # 3. Verificación de estructura de archivos CORREGIDA
-        print("\n🔍 VERIFICANDO ESTRUCTURA DE ARCHIVOS")
-        print("-" * 40)
-        if not self.verificar_estructura_archivos(df_freshdesk, df_clarity):
-            return False
-
-        print(f"✅ Archivo Freshdesk cargado: {len(df_freshdesk)} tickets")
-        print(f"✅ Archivo Clarity cargado: {len(df_clarity)} tickets")
-
-        # 4. Análisis de estados y comparación LOCAL
-        print("\n📊 ANALIZANDO ESTADOS Y BUSCANDO DIFERENCIAS")
-        print("-" * 40)
-        analisis_estados = self.analizar_estados_archivos(df_freshdesk, df_clarity)
-        self.mostrar_analisis_estados(analisis_estados)
-        
-        # 🎯 COMPARACIÓN SOLO LOCAL - CON COLUMNA CORRECTA
-        diferencias_locales = self._comparar_estados_locales(df_freshdesk, df_clarity)
-        
-        if not diferencias_locales:
-            print("🎉 No se encontraron diferencias entre Freshdesk y Clarity")
-            return True
-
-        # 5. 🎯 SOLO AHORA buscar IDs en Clarity para tickets con diferencias REALES
-        print(f"\n📥 BUSCANDO IDs EN CLARITY PARA {len(diferencias_locales)} TICKETS CON DIFERENCIAS REALES")
-        print("-" * 50)
-        diferencias_completas = self._obtener_ids_para_diferencias(diferencias_locales)
-        
-        if not diferencias_completas:
-            print("❌ No se pudieron obtener los IDs de Clarity para los tickets con diferencias")
-            return False
-
-        # 6. Mostrar resumen detallado de cambios
-        print("\n📋 RESUMEN DETALLADO DE CAMBIOS")
-        print("═" * 80)
-        self.mostrar_resumen_detallado(diferencias_completas)
-
-        # 7. 🎯 SISTEMA DE CONFIRMACIÓN CON OPCIONES
-        while True:
-            print("\n⚠️  CONFIRMACIÓN REQUERIDA")
-            print("═" * 50)
-            print("Opciones disponibles:")
-            print("1. ✅ Aplicar cambios en Clarity")
-            print("2. 📥 Descargar Excel con lista completa de cambios")
-            print("3. ❌ Cancelar proceso y volver al menú")
-            print("═" * 50)
-            
-            opcion = input("\nSeleccione una opción (1-3): ").strip()
-
-            if opcion == "1":
-                break
-            elif opcion == "2":
-                if self._descargar_excel_cambios(diferencias_completas):
-                    print("🔄 Volviendo al menú de opciones...")
-                    continue
-                else:
-                    print("❌ Error al descargar el archivo. Volviendo al menú...")
-                    continue
-            elif opcion == "3":
-                print("🚫 Proceso cancelado por el usuario")
+        try:
+            # 1. Cargar archivo de Freshdesk
+            self._mostrar_progreso_fase(1, 4, "Cargando archivo Freshdesk...")
+            print("\n\n📁 CARGANDO ARCHIVO DE FRESHDESK")
+            print("-" * 40)
+            ruta_freshdesk = FileUtils.seleccionar_archivo("Seleccione el archivo de Freshdesk", [("Excel files", "*.xlsx *.xls")])
+            if not ruta_freshdesk:
+                print("❌ No se seleccionó archivo de Freshdesk.")
                 return False
-            else:
-                print("❌ Opción inválida. Por favor, seleccione 1, 2 o 3.")
-                continue
 
-        # 8. Aplicar cambios
-        print("\n🔄 APLICANDO CAMBIOS EN CLARITY")
-        print("═" * 50)
-        resultado = self.aplicar_cambios_clarity(diferencias_completas)
+            df_freshdesk = FileUtils.cargar_excel(ruta_freshdesk)
+            if df_freshdesk is None or df_freshdesk.empty:
+                print("❌ No se pudo cargar el archivo de Freshdesk o está vacío.")
+                return False
+
+            # 2. Cargar archivo de Clarity
+            self._mostrar_progreso_fase(2, 4, "Cargando archivo Clarity...")
+            print("\n\n📁 CARGANDO ARCHIVO DE CLARITY")
+            print("-" * 40)
+            ruta_clarity = FileUtils.seleccionar_archivo("Seleccione el archivo de Clarity", [("CSV files", "*.csv")])
+            if not ruta_clarity:
+                print("❌ No se seleccionó archivo de Clarity.")
+                return False
+
+            df_clarity = FileUtils.cargar_csv(ruta_clarity)
+            if df_clarity is None or df_clarity.empty:
+                print("🔄 La carga automática falló, intentando carga manual...")
+                df_clarity = FileUtils.cargar_csv_manual(ruta_clarity)
+            
+            if df_clarity is None or df_clarity.empty:
+                print("❌ No se pudo cargar el archivo de Clarity o está vacío.")
+                return False
+
+            # 3. Verificación de estructura de archivos
+            self._mostrar_progreso_fase(3, 4, "Verificando estructura...")
+            print("\n\n🔍 VERIFICANDO ESTRUCTURA DE ARCHIVOS")
+            print("-" * 40)
+            if not self.verificar_estructura_archivos(df_freshdesk, df_clarity):
+                return False
+
+            print(f"✅ Archivo Freshdesk cargado: {len(df_freshdesk)} tickets")
+            print(f"✅ Archivo Clarity cargado: {len(df_clarity)} tickets")
+
+            # 4. Comparación de estados con barra de progreso
+            self._mostrar_progreso_fase(4, 4, "Comparando estados...", 0, len(df_freshdesk), 0)
+            print("\n\n📊 ANALIZANDO ESTADOS Y BUSCANDO DIFERENCIAS")
+            print("-" * 40)
+            
+            diferencias_locales = self._comparar_estados_locales(df_freshdesk, df_clarity)
+            
+            if not diferencias_locales:
+                display.clear_line()
+                print("\r🎉 No se encontraron diferencias entre Freshdesk y Clarity")
+                display.press_enter_to_continue()
+                return True
+
+            # 5. Buscar IDs en Clarity para tickets con diferencias
+            print(f"\n📥 BUSCANDO IDs EN CLARITY PARA {len(diferencias_locales)} TICKETS CON DIFERENCIAS")
+            print("-" * 50)
+            diferencias_completas = self._obtener_ids_para_diferencias(diferencias_locales)
+            
+            if not diferencias_completas:
+                print("❌ No se pudieron obtener los IDs de Clarity para los tickets con diferencias")
+                return False
+
+            # 6. Mostrar resumen detallado de cambios
+            print("\n📋 RESUMEN DETALLADO DE CAMBIOS")
+            print("═" * 80)
+            self.mostrar_resumen_detallado(diferencias_completas)
+
+            # 7. 🎯 SISTEMA DE CONFIRMACIÓN MEJORADO
+            while True:
+                print("\n⚠️  CONFIRMACIÓN REQUERIDA")
+                print("═" * 50)
+                print("Opciones disponibles:")
+                print("1. ✅ Aplicar cambios en Clarity")
+                print("2. 📥 Descargar Excel con cambios propuestos")
+                print("3. ❌ Cancelar proceso y volver al menú")
+                print("═" * 50)
+                
+                opcion = input("\nSeleccione una opción (1-3): ").strip()
+
+                if opcion == "1":
+                    break
+                elif opcion == "2":
+                    if self._descargar_excel_cambios(diferencias_completas):
+                        print("🔄 Volviendo al menú de opciones...")
+                        continue
+                    else:
+                        print("❌ Error al descargar el archivo. Volviendo al menú...")
+                        continue
+                elif opcion == "3":
+                    print("🚫 Proceso cancelado por el usuario")
+                    return False
+                else:
+                    print("❌ Opción inválida. Por favor, seleccione 1, 2 o 3.")
+                    continue
+
+            # 8. Aplicar cambios
+            print("\n🔄 APLICANDO CAMBIOS EN CLARITY")
+            print("═" * 50)
+            resultado = self.aplicar_cambios_clarity(diferencias_completas)
+            
+            # 9. 🎯 REPORTE FINAL MEJORADO (con opción de descargar resultados)
+            self.mostrar_reporte_final(resultado, diferencias_completas)
         
-        # 9. Reporte final
-        self.mostrar_reporte_final(resultado, diferencias_completas)
-        
-        return resultado['exitos'] > 0 or resultado['fallos'] == 0
+        except KeyboardInterrupt:
+            display.clear_line()
+            print(f"\r⏹️  Sincronización cancelada por el usuario")
+            return False
+
+        return True
         
 
     def _buscar_columna_flexible(self, df, palabras_clave):
@@ -148,6 +155,63 @@ class SyncProcess:
                 if palabra in col_lower:
                     return col
         return None
+    
+    def _descargar_excel_resultados(self, resultado):
+        """🎯 NUEVO: Descargar Excel con resultados detallados de la sincronización"""
+        try:
+            print("\n📥 PREPARANDO DESCARGA DE RESULTADOS...")
+            
+            # 🎯 CREAR DATAFRAME CON RESULTADOS DETALLADOS
+            datos_excel = []
+            for detalle in resultado['detalles']:
+                datos_excel.append({
+                    'Ticket ID': detalle['ticket_id'],
+                    'Estado Actual (Clarity)': detalle['estado_actual'],
+                    'Estado Propuesto (Freshdesk)': detalle['estado_propuesto'],
+                    'Estado Freshdesk Original': detalle['estado_freshdesk_original'],
+                    'Resultado': detalle['resultado'],
+                    'Error': detalle['error'] or '',  # 🎯 INCLUIR MOTIVO DE ERROR
+                    'Investment ID': detalle['investment_id'],
+                    'Internal ID': detalle['internal_id']
+                })
+            
+            df_resultados = pd.DataFrame(datos_excel)
+            
+            # Obtener ruta de Descargas
+            ruta_descargas = self._obtener_ruta_descargas()
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            nombre_archivo = f"Resultados_Sincronizacion_{timestamp}.xlsx"
+            ruta_completa = os.path.join(ruta_descargas, nombre_archivo)
+            
+            # Guardar Excel
+            df_resultados.to_excel(ruta_completa, index=False)
+            print(f"✅ ARCHIVO DE RESULTADOS DESCARGADO EXITOSAMENTE")
+            print(f"📁 Ubicación: {ruta_completa}")
+            print(f"📊 Total de registros: {len(resultado['detalles'])} tickets")
+            
+            # 🎯 MOSTRAR RESUMEN MEJORADO
+            print(f"\n📋 CONTENIDO DEL ARCHIVO:")
+            print(f"   - Ticket ID: Identificador único del ticket")
+            print(f"   - Estado Actual (Clarity): Estado actual en Clarity")
+            print(f"   - Estado Propuesto (Freshdesk): Estado que se intentó aplicar")
+            print(f"   - Estado Freshdesk Original: Estado original en Freshdesk")
+            print(f"   - Resultado: Éxito o Error")
+            print(f"   - Error: Motivo del error (si aplica)")
+            print(f"   - Investment ID: ID de inversión en Clarity")
+            print(f"   - Internal ID: ID interno en Clarity")
+            
+            # 🎯 ESTADÍSTICAS RÁPIDAS
+            exitos = sum(1 for d in resultado['detalles'] if d['resultado'] == 'Éxito')
+            fallos = sum(1 for d in resultado['detalles'] if d['resultado'] == 'Error')
+            print(f"\n📈 ESTADÍSTICAS INCLUIDAS:")
+            print(f"   ✅ Actualizaciones exitosas: {exitos}")
+            print(f"   ❌ Actualizaciones fallidas: {fallos}")
+            
+            return True
+            
+        except Exception as e:
+            print(f"❌ ERROR al descargar el archivo de resultados: {str(e)}")
+            return False
 
     def _descargar_excel_cambios(self, diferencias):
         """Descargar archivo Excel con la lista completa de cambios propuestos"""
@@ -366,41 +430,42 @@ class SyncProcess:
                 print(f"   ❌ {estado}")
 
     def _comparar_estados_locales(self, df_freshdesk, df_clarity):
-        """🎯 COMPARACIÓN CORREGIDA: Usar 'Estado_Freshdesk_Clarity'"""
+        """🎯 COMPARACIÓN CON BARRA DE PROGRESO"""
         diferencias = []
+        total_tickets = len(df_freshdesk)
         
-        print(f"🔍 COMPARANDO {len(df_freshdesk)} TICKETS LOCALMENTE...")
-        print(f"   🎯 Comparando 'Estado' de Freshdesk vs 'Estado_Freshdesk_Clarity' de Clarity")
-        
-        tickets_procesados = 0
-        tickets_con_diferencias = 0
-        tickets_sin_mapeo = 0
-        tickets_no_encontrados = 0
+        print(f"🔍 Comparando {total_tickets} tickets...")
         
         for index, ticket_fd in df_freshdesk.iterrows():
-            tickets_procesados += 1
-            if tickets_procesados % 1000 == 0:
-                print(f"   📊 Procesados {tickets_procesados}/{len(df_freshdesk)} tickets...")
+            current = index + 1
+            
+            # Actualizar progreso cada 50 tickets
+            if current % 50 == 0 or current == total_tickets:
+                self._mostrar_progreso_fase(
+                    fase_actual=4, 
+                    total_fases=4, 
+                    mensaje="Comparando estados",
+                    current=current,
+                    total=total_tickets,
+                    diferencias=len(diferencias)
+                )
                 
             ticket_id = str(ticket_fd['Ticket ID'])
             estado_fd_original = ticket_fd['Estado']
             
-            # 🎯 MAPEO DIRECTO SIN NORMALIZACIÓN
+            # 🎯 MAPEO DIRECTO
             estado_clarity_propuesto = self.mapeo_estados_exacto.get(estado_fd_original)
             if not estado_clarity_propuesto:
-                tickets_sin_mapeo += 1
-                continue  # Saltar estados no mapeados
+                continue
 
-            # Buscar en Clarity (localmente en el DataFrame)
+            # Buscar en Clarity
             ticket_clarity = df_clarity[df_clarity['ID'].astype(str) == ticket_id]
             if ticket_clarity.empty:
-                tickets_no_encontrados += 1
-                continue  # Ticket no existe en Clarity
+                continue
                 
             ticket_clarity = ticket_clarity.iloc[0]
             estado_clarity_actual = ticket_clarity['Estado_Freshdesk_Clarity']
             
-            # 🎯 COMPARACIÓN DIRECTA - SIN NORMALIZACIÓN
             if estado_clarity_actual != estado_clarity_propuesto:
                 diferencias.append({
                     'ticket_id': ticket_id,
@@ -408,47 +473,35 @@ class SyncProcess:
                     'clarity_estado_actual': estado_clarity_actual,
                     'clarity_estado_propuesto': estado_clarity_propuesto
                 })
-                tickets_con_diferencias += 1
         
-        print(f"✅ Comparación local completada:")
-        print(f"   📋 Tickets procesados: {tickets_procesados}")
-        print(f"   🔍 Diferencias encontradas: {tickets_con_diferencias}")
-        print(f"   ❌ Tickets sin mapeo: {tickets_sin_mapeo}")
-        print(f"   ❌ Tickets no encontrados en Clarity: {tickets_no_encontrados}")
-        print(f"   ✅ Tickets sin diferencias: {tickets_procesados - tickets_con_diferencias - tickets_sin_mapeo - tickets_no_encontrados}")
-        
-        # 🎯 DEBUG: Mostrar distribución de diferencias
-        if diferencias:
-            print(f"\n🔍 DISTRIBUCIÓN DE DIFERENCIAS (Estado_Freshdesk):")
-            cambios_tipos = {}
-            for diff in diferencias:
-                clave = f"{diff['clarity_estado_actual']} -> {diff['clarity_estado_propuesto']}"
-                cambios_tipos[clave] = cambios_tipos.get(clave, 0) + 1
-            
-            # Mostrar solo los top 10 cambios
-            for cambio, cantidad in sorted(cambios_tipos.items(), key=lambda x: x[1], reverse=True)[:10]:
-                print(f"   {cambio}: {cantidad} tickets")
+        # Limpiar y mostrar resultado final
+        display.clear_line()
+        print(f"\r✅ Comparación local completada: {len(diferencias)} diferencias encontradas")
         
         return diferencias
     
     def _obtener_ids_para_diferencias(self, diferencias_locales):
-        """🎯 Obtener IDs de Clarity SOLO para tickets con diferencias REALES"""
+        """🎯 Obtener IDs de Clarity CON BARRA DE PROGRESO"""
         if not diferencias_locales:
             return []
             
-        print(f"🔍 Obteniendo IDs de Clarity para {len(diferencias_locales)} tickets con diferencias REALES...")
+        print(f"🔍 Obteniendo IDs de Clarity para {len(diferencias_locales)} tickets...")
         
         diferencias_completas = []
         tickets_encontrados = 0
-        tickets_no_encontrados = []
         
         for i, diff in enumerate(diferencias_locales, 1):
-            if i % 50 == 0:
-                print(f"   Procesados {i}/{len(diferencias_locales)} tickets...")
+            if i % 10 == 0 or i == len(diferencias_locales):
+                display.update_progress(
+                    current=i,
+                    total=len(diferencias_locales),
+                    prefix="🔍 Buscando IDs Clarity:",
+                    suffix=f"| Encontrados: {tickets_encontrados}"
+                )
             
             ticket_id = diff['ticket_id']
             
-            # 🎯 BÚSQUEDA DIRECTA SOLO PARA ESTE TICKET
+            # 🎯 BÚSQUEDA DIRECTA
             ticket_clarity = self.clarity_service.obtener_ticket_por_codigo_directo(ticket_id)
             
             if ticket_clarity:
@@ -456,30 +509,21 @@ class SyncProcess:
                 internal_id = ticket_clarity.get('_internalId')
                 
                 if investment_id and internal_id:
-                    # Combinar información local con IDs de Clarity
                     diff_completo = diff.copy()
                     diff_completo['investment_id'] = investment_id
                     diff_completo['clarity_internal_id'] = internal_id
                     diferencias_completas.append(diff_completo)
                     tickets_encontrados += 1
-                else:
-                    tickets_no_encontrados.append(ticket_id)
-            else:
-                tickets_no_encontrados.append(ticket_id)
         
         # Reporte de resultados
-        print(f"✅ Tickets encontrados en Clarity: {tickets_encontrados}")
-        if tickets_no_encontrados:
-            print(f"⚠️  Tickets no encontrados en Clarity: {len(tickets_no_encontrados)}")
-            if len(tickets_no_encontrados) <= 10:
-                print(f"   {', '.join(tickets_no_encontrados)}")
+        display.clear_line()
+        print(f"\r✅ IDs obtenidos: {tickets_encontrados}/{len(diferencias_locales)} tickets")
         
         return diferencias_completas
 
-    # 🚀 MÉTODOS DE NORMALIZACIÓN (se mantienen igual)
     def _obtener_estado_mapeado(self, estado_original):
-        """🎯 MAPEO SIMPLE: Directo sin normalización"""
-        return self.mapeo_estados_exacto.get(estado_original)
+        """🎯 USAR FUNCIÓN HELPER UNIFICADA"""
+        return mapear_estado_desde_texto(estado_original)
 
     def _normalizar_texto(self, texto):
         """🚀 NORMALIZACIÓN CONSISTENTE: maneja acentos, mayúsculas y espacios"""
@@ -590,13 +634,11 @@ class SyncProcess:
         print("─" * 80)
 
     def aplicar_cambios_clarity(self, diferencias):
-        """Aplicar cambios en Clarity con seguimiento detallado"""
+        """🎯 MEJORADO: Captura detalles completos de cada actualización"""
         resultado = {
             'exitos': 0,
             'fallos': 0,
-            'tickets_exitosos': [],
-            'tickets_fallidos': [],
-            'errores_detallados': []
+            'detalles': []  # 🎯 NUEVO: Lista con detalles completos de cada operación
         }
         
         for i, diff in enumerate(diferencias, 1):
@@ -604,35 +646,61 @@ class SyncProcess:
             print(f"   Cambio: {diff['clarity_estado_actual']} → {diff['clarity_estado_propuesto']}")
 
             try:
-                if self.clarity_service.actualizar_estado_ticket(
+                # 🎯 INTENTAR ACTUALIZACIÓN
+                exito = self.clarity_service.actualizar_estado_ticket(
                     diff['investment_id'], 
                     diff['clarity_internal_id'], 
                     diff['clarity_estado_propuesto']
-                ):
+                )
+                
+                if exito:
                     print("   ✅ ACTUALIZACIÓN EXITOSA")
                     resultado['exitos'] += 1
-                    resultado['tickets_exitosos'].append(diff['ticket_id'])
+                    # 🎯 GUARDAR DETALLE EXITOSO
+                    resultado['detalles'].append({
+                        'ticket_id': diff['ticket_id'],
+                        'estado_actual': diff['clarity_estado_actual'],
+                        'estado_propuesto': diff['clarity_estado_propuesto'],
+                        'estado_freshdesk_original': diff['freshdesk_estado'],
+                        'resultado': 'Éxito',
+                        'error': None,
+                        'investment_id': diff['investment_id'],
+                        'internal_id': diff['clarity_internal_id']
+                    })
                 else:
                     print("   ❌ ERROR EN LA ACTUALIZACIÓN")
                     resultado['fallos'] += 1
-                    resultado['tickets_fallidos'].append(diff['ticket_id'])
-                    resultado['errores_detallados'].append({
+                    # 🎯 GUARDAR DETALLE CON ERROR
+                    resultado['detalles'].append({
                         'ticket_id': diff['ticket_id'],
-                        'error': 'Error general en la actualización'
+                        'estado_actual': diff['clarity_estado_actual'],
+                        'estado_propuesto': diff['clarity_estado_propuesto'],
+                        'estado_freshdesk_original': diff['freshdesk_estado'],
+                        'resultado': 'Error',
+                        'error': 'Error general en la actualización - API retornó False',
+                        'investment_id': diff['investment_id'],
+                        'internal_id': diff['clarity_internal_id']
                     })
+                    
             except Exception as e:
                 print(f"   ❌ ERROR EXCEPCIÓN: {str(e)}")
                 resultado['fallos'] += 1
-                resultado['tickets_fallidos'].append(diff['ticket_id'])
-                resultado['errores_detallados'].append({
+                # 🎯 GUARDAR DETALLE CON EXCEPCIÓN
+                resultado['detalles'].append({
                     'ticket_id': diff['ticket_id'],
-                    'error': str(e)
+                    'estado_actual': diff['clarity_estado_actual'],
+                    'estado_propuesto': diff['clarity_estado_propuesto'],
+                    'estado_freshdesk_original': diff['freshdesk_estado'],
+                    'resultado': 'Error',
+                    'error': f"Excepción: {str(e)}",
+                    'investment_id': diff['investment_id'],
+                    'internal_id': diff['clarity_internal_id']
                 })
         
         return resultado
 
     def mostrar_reporte_final(self, resultado, diferencias):
-        """Mostrar reporte final detallado"""
+        """🎯 MEJORADO: Incluir opción para descargar resultados"""
         print("\n" + "═" * 80)
         print("🎉 REPORTE FINAL DE SINCRONIZACIÓN")
         print("═" * 80)
@@ -642,25 +710,31 @@ class SyncProcess:
         print(f"   ❌ Actualizaciones fallidas: {resultado['fallos']}")
         print(f"   📋 Total de cambios identificados: {len(diferencias)}")
         
-        if resultado['exitos'] > 0:
-            print(f"\n🎯 TICKETS ACTUALIZADOS EXITOSAMENTE ({resultado['exitos']}):")
-            print("   " + ", ".join(resultado['tickets_exitosos'][:10]))
-            if len(resultado['tickets_exitosos']) > 10:
-                print(f"   ... y {len(resultado['tickets_exitosos']) - 10} más")
+        # 🎯 OBTENER TICKETS EXITOSOS Y FALLIDOS
+        tickets_exitosos = [d['ticket_id'] for d in resultado['detalles'] if d['resultado'] == 'Éxito']
+        tickets_fallidos = [d['ticket_id'] for d in resultado['detalles'] if d['resultado'] == 'Error']
         
-        if resultado['fallos'] > 0:
-            print(f"\n🚫 TICKETS CON ERRORES ({resultado['fallos']}):")
-            for error in resultado['errores_detallados'][:5]:
+        if tickets_exitosos:
+            print(f"\n🎯 TICKETS ACTUALIZADOS EXITOSAMENTE ({len(tickets_exitosos)}):")
+            print("   " + ", ".join(tickets_exitosos[:10]))
+            if len(tickets_exitosos) > 10:
+                print(f"   ... y {len(tickets_exitosos) - 10} más")
+        
+        if tickets_fallidos:
+            print(f"\n🚫 TICKETS CON ERRORES ({len(tickets_fallidos)}):")
+            # 🎯 MOSTRAR PRIMEROS 5 ERRORES CON DETALLE
+            errores_detallados = [d for d in resultado['detalles'] if d['resultado'] == 'Error']
+            for error in errores_detallados[:5]:
                 print(f"   ❌ Ticket {error['ticket_id']}: {error['error']}")
-            if len(resultado['errores_detallados']) > 5:
-                print(f"   ... y {len(resultado['errores_detallados']) - 5} errores más")
+            if len(errores_detallados) > 5:
+                print(f"   ... y {len(errores_detallados) - 5} errores más")
         
-        # Estadísticas de cambios aplicados
-        if resultado['exitos'] > 0:
+        # 🎯 ESTADÍSTICAS DE CAMBIOS APLICADOS
+        if tickets_exitosos:
             cambios_aplicados = {}
-            for diff in diferencias:
-                if diff['ticket_id'] in resultado['tickets_exitosos']:
-                    clave = f"{diff['clarity_estado_actual']} → {diff['clarity_estado_propuesto']}"
+            for detalle in resultado['detalles']:
+                if detalle['resultado'] == 'Éxito':
+                    clave = f"{detalle['estado_actual']} → {detalle['estado_propuesto']}"
                     cambios_aplicados[clave] = cambios_aplicados.get(clave, 0) + 1
             
             print(f"\n📈 ESTADÍSTICAS DE CAMBIOS APLICADOS:")
@@ -669,3 +743,36 @@ class SyncProcess:
         
         print(f"\n⏰ Hora de finalización: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print("═" * 80)
+        
+        # 🎯 NUEVA OPCIÓN: DESCARGAR REPORTE DE RESULTADOS
+        if resultado['detalles']:
+            print("\n📊 ¿DESEA DESCARGAR EL REPORTE DETALLADO DE RESULTADOS?")
+            print("═" * 50)
+            print("1. ✅ Sí, descargar Excel con resultados completos")
+            print("2. ❌ No, finalizar proceso")
+            print("═" * 50)
+            
+            opcion = input("\nSeleccione una opción (1-2): ").strip()
+            
+            if opcion == "1":
+                if self._descargar_excel_resultados(resultado):
+                    print("🎉 Proceso completado exitosamente")
+                else:
+                    print("⚠️  Proceso completado con errores en la descarga")
+            else:
+                print("👋 Proceso finalizado")
+
+    def _mostrar_progreso_fase(self, fase_actual, total_fases, mensaje, current=0, total=0, diferencias=0):
+        """Mostrar progreso de una fase específica"""
+        display.clear_line()
+        if total > 0:
+            # Con barra de progreso
+            display.update_progress(
+                current=current,
+                total=total,
+                prefix=f"Fase {fase_actual}/{total_fases}: {mensaje}",
+                suffix=f"| Diferencias: {diferencias}"
+            )
+        else:
+            # Solo mensaje
+            print(f"\r🔄 Fase {fase_actual}/{total_fases}: {mensaje}", end="", flush=True)

@@ -3,6 +3,7 @@ from requests.auth import HTTPBasicAuth
 import urllib3
 import time
 from typing import Dict, Optional, List
+from utils.logger import logger
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -21,8 +22,8 @@ class ClarityService:
         return HTTPBasicAuth(self.config.clarity_username, self.config.clarity_password)
 
     def obtener_ticket_por_codigo_directo(self, codigo_ticket: str) -> Optional[Dict]:
-        """Buscar ticket específico por código usando filtro directo (MÁS EFICIENTE)"""
-        print(f"   🔍 Buscando ticket {codigo_ticket} directamente en Clarity...")
+        """Buscar ticket específico por código usando filtro directo"""
+        logger.log_debug(f"Buscando ticket {codigo_ticket} directamente en Clarity...")
         
         if not self.config.validar_configuracion_clarity():
             return None
@@ -46,23 +47,18 @@ class ClarityService:
                 
                 if tasks:
                     ticket = tasks[0]
-                    print(f"   ✅ Ticket {codigo_ticket} encontrado directamente")
+                    logger.log_info(f"Ticket {codigo_ticket} encontrado directamente", f"✅ Ticket {codigo_ticket} encontrado")
                     return ticket
                 else:
-                    print(f"   ❌ Ticket {codigo_ticket} no encontrado en Clarity")
+                    logger.log_warning(f"Ticket {codigo_ticket} no encontrado en Clarity")
                     return None
             else:
-                print(f"   ❌ Error HTTP {response.status_code} buscando ticket: {response.text}")
+                logger.log_error(f"Error HTTP {response.status_code} buscando ticket: {response.text}")
                 return None
 
         except Exception as e:
-            print(f"   ❌ Error buscando ticket {codigo_ticket}: {str(e)}")
+            logger.log_error(f"Error buscando ticket {codigo_ticket}: {str(e)}")
             return None
-
-    # Mantener método existente para compatibilidad
-    def buscar_ticket_por_codigo(self, codigo_ticket: str) -> Optional[Dict]:
-        """Método legacy - usar obtener_ticket_por_codigo_directo en su lugar"""
-        return self.obtener_ticket_por_codigo_directo(codigo_ticket)
 
     def obtener_todos_tickets_clarity(self) -> Dict[str, Dict]:
         """Obtener todos los tickets de Clarity (solo para casos necesarios)"""

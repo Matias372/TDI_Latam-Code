@@ -2,7 +2,12 @@ import pandas as pd
 import os
 from tkinter import messagebox
 from .file_utils import FileUtils
-from ..config.constants import TEMPLATES_DIR, AGENTES_TEMPLATE
+
+# Calcular rutas manualmente para evitar import circular
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+TEMPLATES_DIR = os.path.join(DATA_DIR, "templates")
+AGENTES_TEMPLATE = os.path.join(TEMPLATES_DIR, "AGENTES_FD.xlsx")
 
 class TemplateManager:
     @staticmethod
@@ -33,6 +38,8 @@ class TemplateManager:
         if opcion == "1":
             return AGENTES_TEMPLATE
         elif opcion == "2":
+            # Importar localmente para evitar ciclo
+            
             archivo = FileUtils.seleccionar_archivo("Seleccione archivo de agentes")
             if archivo:
                 # Opcional: actualizar el template con el nuevo archivo

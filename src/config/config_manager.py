@@ -1,8 +1,9 @@
+from utils.logger import logger
 import json
 import os
 from getpass import getpass
 from .constants import CONFIG_FILE
-from utils.file_utils import FileUtils
+from utils.display_utils import display
 
 class ConfigManager:
     def __init__(self):
@@ -12,7 +13,7 @@ class ConfigManager:
         self.clarity_password = None
         self.clarity_domain = None
         self.load_config()
-
+    
     def load_config(self):
         """Cargar configuración desde archivo"""
         try:
@@ -23,13 +24,13 @@ class ConfigManager:
                 self.clarity_username = config.get('clarity_username')
                 self.clarity_password = config.get('clarity_password')
                 self.clarity_domain = config.get('clarity_domain')
+                
+            logger.log_info(f"Configuración cargada desde: {CONFIG_FILE}")
+            
         except FileNotFoundError:
-            # Valores por defecto
-            self.api_key = None
-            self.freshdesk_domain = None
-            self.clarity_username = None
-            self.clarity_password = None
-            self.clarity_domain = None
+            logger.log_warning("Archivo de configuración no encontrado. Se usarán valores por defecto.")
+        except Exception as e:
+            logger.log_error(f"Error al cargar configuración: {e}")
 
     def save_config(self):
         """Guardar configuración en archivo"""
@@ -46,68 +47,135 @@ class ConfigManager:
     def ingresar_datos(self):
         """Interfaz para ingresar datos de conexión"""
         while True:
-            print("\n=== CONFIGURACIÓN DE CONEXIÓN ===")
-            print("1. Ingresar/Modificar API Key Freshdesk")
-            print("2. Ingresar palabra clave de Dominio Freshdesk")
-            print("3. Ingresar Credenciales Clarity")
-            print("4. Ingresar palabra clave de Dominio Clarity")
-            print("5. Configurar Dominios Manualmente")
-            print("6. Ver configuración actual")
-            print("7. 📁 Cargar configuración desde archivo TXT")  # NUEVA OPCIÓN
-            print("0. Volver")
+            display.clear_screen()
+            print("\n╔══════════════════════════════════════════════╗")
+            print("║               🔧 CONFIGURACIÓN               ║")
+            print("╚══════════════════════════════════════════════╝")
             
-            opcion = input("Seleccione una opción: ").strip()
+            print("   🌐 1. Configurar Freshdesk (API + Dominio)")
+            print("   🔐 2. Configurar Clarity (Usuario + Contraseña + Dominio)")
+            print("   📁 3. Cargar configuración desde archivo TXT")
+            print("   👁️ 4. Ver estado de configuración")
+            print("   ↩️  0. Volver al menú principal")
+            
+            opcion = input("\n👉 Seleccione una opción: ").strip()
 
             if opcion == "1":
-                self.api_key = input("👉 Ingrese la API Key Freshdesk: ").strip()
-                self.save_config()
-                print("✅ API Key guardada.\n")
-
+                self.configurar_freshdesk_completo()
             elif opcion == "2":
-                palabra_clave = input("🔑 Ingrese la palabra clave de dominio Freshdesk (ej: 'GreenDay'): ").strip()
-                if palabra_clave:
-                    self.freshdesk_domain = f"https://{palabra_clave}.freshdesk.com"
-                    self.save_config()
-                    print(f"✅ Dominio Freshdesk configurado: {self.freshdesk_domain}\n")
-                else:
-                    print("❌ Palabra clave inválida.\n")
-
+                self.configurar_clarity_completo()
             elif opcion == "3":
-                print("\n🔐 CONFIGURACIÓN CREDENCIALES CLARITY")
-                self.clarity_username = input("👤 Usuario Clarity: ").strip()
-                self.clarity_password = input("🔐 Contraseña Clarity: ").strip()
-                self.save_config()
-                print("✅ Credenciales Clarity guardadas.\n")
-
-            elif opcion == "4":
-                print("\n🌐 CONFIGURACIÓN DOMINIO CLARITY POR PALABRA CLAVE")
-                palabra_clave = input("🔑 Ingrese la palabra clave de dominio Clarity (ej: 'GreenDay'): ").strip()
-                if palabra_clave:
-                    self.clarity_domain = f"https://pmservice.{palabra_clave}.com:8043/ppm/rest/v1"
-                    self.save_config()
-                    print(f"✅ Dominio Clarity configurado: {self.clarity_domain}\n")
-                else:
-                    print("❌ Dominio inválido.\n")
-
-            elif opcion == "5":
-                self.configurar_dominios_manualmente()
-
-            elif opcion == "6":
-                self.mostrar_configuracion()
-
-            elif opcion == "7":  # NUEVA OPCIÓN
                 self.cargar_configuracion_desde_txt()
-
+            elif opcion == "4":
+                self.mostrar_configuracion()
             elif opcion == "0":
                 break
             else:
                 print("❌ Opción inválida.\n")
+                display.press_enter_to_continue()
+
+    def configurar_freshdesk_completo(self):
+        """Configuración completa de Freshdesk en un solo flujo"""
+        display.clear_screen()
+        print("\n╔══════════════════════════════════════════════╗")
+        print("║               🌐 CONFIGURAR FRESHDESK        ║")
+        print("╚══════════════════════════════════════════════╝")
+        
+        # 1. API Key
+        print("\n🔑 INGRESE API KEY DE FRESHDESK:")
+        self.api_key = input("👉 API Key: ").strip()
+        
+        # 2. Dominio
+        print("\n🌐 CONFIGURACIÓN DE DOMINIO:")
+        print("   1. Usar palabra clave (recomendado)")
+        print("   2. Ingresar dominio manualmente")
+        
+        opcion_dominio = input("👉 Seleccione opción (1/2): ").strip()
+        
+        if opcion_dominio == "1":
+            print("\n📝 CONFIGURACIÓN AUTOMÁTICA DE DOMINIO")
+            print("💡 Ejemplo: Si ingresa 'mitienda'")
+            print("   → Se generará: https://mitienda.freshdesk.com")
+            print()
+            
+            palabra_clave = input("🔑 Palabra clave de la empresa (ej: 'mitienda'): ").strip()
+            if palabra_clave:
+                self.freshdesk_domain = f"https://{palabra_clave}.freshdesk.com"
+                print(f"✅ Dominio generado: {self.freshdesk_domain}")
+                
+        elif opcion_dominio == "2":
+            print("\n🌐 CONFIGURACIÓN MANUAL DE DOMINIO")
+            print("💡 Ingrese el dominio completo de Freshdesk")
+            print("   Ejemplo: https://mitienda.freshdesk.com")
+            print()
+            
+            dominio_manual = input("🌐 Dominio completo: ").strip()
+            if dominio_manual:
+                if not dominio_manual.startswith(('http://', 'https://')):
+                    dominio_manual = f"https://{dominio_manual}"
+                self.freshdesk_domain = dominio_manual
+        
+        # Guardar
+        self.save_config()
+        print(f"\n✅ Configuración de Freshdesk guardada:")
+        print(f"   🔑 API Key: {'✅ Configurada' if self.api_key else '❌ No configurada'}")
+        print(f"   🌐 Dominio: {self.freshdesk_domain if self.freshdesk_domain else '❌ No configurado'}")
+
+    def configurar_clarity_completo(self):
+        """Configuración completa de Clarity en un solo flujo"""
+        display.clear_screen()
+        print("\n╔══════════════════════════════════════════════╗")
+        print("║               🔐 CONFIGURAR CLARITY          ║")
+        print("╚══════════════════════════════════════════════╝")
+        
+        # 1. Usuario y Contraseña
+        print("\n👤 INGRESE CREDENCIALES DE CLARITY:")
+        self.clarity_username = input("👉 Usuario: ").strip()
+        self.clarity_password = input("🔐 Contraseña: ").strip()
+        
+        # 2. Dominio
+        print("\n🌐 CONFIGURACIÓN DE DOMINIO:")
+        print("   1. Usar palabra clave y puerto (recomendado)")
+        print("   2. Ingresar dominio manualmente")
+        
+        opcion_dominio = input("👉 Seleccione opción (1/2): ").strip()
+        
+        if opcion_dominio == "1":
+            print("\n📝 CONFIGURACIÓN AUTOMÁTICA DE DOMINIO")
+            print("💡 Ejemplo: Si ingresa 'mitienda' y '1234'")
+            print("   → Se generará: https://pmservice.mitienda.com:1234/ppm/rest/v1")
+            print()
+            
+            palabra_clave = input("🔑 Palabra clave de la empresa (ej: 'mitienda'): ").strip()
+            puerto = input("🔢 Número de puerto (ej: 1234): ").strip()
+            
+            if palabra_clave and puerto:
+                self.clarity_domain = f"https://pmservice.{palabra_clave}.com:{puerto}/ppm/rest/v1"
+                print(f"✅ Dominio generado: {self.clarity_domain}")
+                
+        elif opcion_dominio == "2":
+            print("\n🌐 CONFIGURACIÓN MANUAL DE DOMINIO")
+            print("💡 Ingrese el dominio completo de Clarity")
+            print("   Ejemplo: https://pmservice.ejemplo.com:1234/ppm/rest/v1")
+            print()
+            
+            dominio_manual = input("🌐 Dominio completo: ").strip()
+            if dominio_manual:
+                if not dominio_manual.startswith(('http://', 'https://')):
+                    dominio_manual = f"https://{dominio_manual}"
+                self.clarity_domain = dominio_manual
+        
+        # Guardar
+        self.save_config()
+        print(f"\n✅ Configuración de Clarity guardada:")
+        print(f"   👤 Usuario: {self.clarity_username if self.clarity_username else '❌ No configurado'}")
+        print(f"   🌐 Dominio: {self.clarity_domain if self.clarity_domain else '❌ No configurado'}")
 
     def cargar_configuracion_desde_txt(self):
         """Cargar configuración desde archivo de texto"""
         print("\n📁 CARGAR CONFIGURACIÓN DESDE ARCHIVO TXT")
         print("═" * 50)
-        
+        from utils.file_utils import FileUtils
         # Mostrar formato esperado
         self._mostrar_formato_txt()
         
@@ -317,25 +385,56 @@ class ConfigManager:
         print("--------------------------")
 
     def mostrar_configuracion(self):
-        """Mostrar configuración actual"""
-        print("\n--- Configuración actual ---")
-        print(f"🔑 API Key Freshdesk: {'✅ Cargada' if self.api_key else '❌ No configurada'}")
-        print(f"🌐 Dominio Freshdesk: {self.freshdesk_domain if self.freshdesk_domain else '❌ No configurado'}")
-        print(f"👤 Usuario Clarity: {self.clarity_username if self.clarity_username else '❌ No configurado'}")
-        print(f"🔐 Contraseña Clarity: {'✅ Cargada' if self.clarity_password else '❌ No configurada'}")
-        print(f"🌐 Dominio Clarity: {self.clarity_domain if self.clarity_domain else '❌ No configurado'}")
-        print("-----------------------------")
+        """Mostrar configuración actual con nuevo formato"""
+        display.clear_screen()
+        print("\n╔══════════════════════════════════════════════╗")
+        print("║               👁️ ESTADO DE CONFIGURACIÓN      ║")
+        print("╚══════════════════════════════════════════════╝")
+        
+        print("\n🔐 CONEXIONES:")
+        print(f"   🌐 Freshdesk:")
+        print(f"      {'✅' if self.api_key else '❌'} API Key: {'Configurada' if self.api_key else 'No configurada'}")
+        print(f"      {'✅' if self.freshdesk_domain else '❌'} Dominio: {self.freshdesk_domain if self.freshdesk_domain else 'No configurado'}")
+        
+        print(f"\n   🔐 Clarity:")
+        print(f"      {'✅' if self.clarity_username else '❌'} Usuario: {self.clarity_username if self.clarity_username else 'No configurado'}")
+        print(f"      {'✅' if self.clarity_domain else '❌'} Dominio: {self.clarity_domain if self.clarity_domain else 'No configurado'}")
+        
+        # Verificar estado general
+        config_completa = (self.api_key and self.freshdesk_domain and 
+                        self.clarity_username and self.clarity_password and self.clarity_domain)
+        
+        print(f"\n📊 ESTADO GENERAL:")
+        print(f"   {'✅' if config_completa else '❌'} {'Configuración completa - Sistema operativo' if config_completa else 'Configuración incompleta'}")
+        
+        # Verificar archivos disponibles
+        try:
+            from utils.file_utils import FileUtils
+            archivos = FileUtils.listar_archivos_input()
+            print(f"   📂 Archivos disponibles: {len(archivos)} archivos en data/input")
+            if archivos:
+                for archivo in archivos[:3]:  # Mostrar solo los primeros 3
+                    print(f"      • {archivo}")
+                if len(archivos) > 3:
+                    print(f"      ... y {len(archivos) - 3} más")
+        except:
+            print("   📂 No se pudo verificar archivos disponibles")
+        
+        print("\n──────────────────────────────────────────────────")
+        input("↩️  Presione Enter para volver...")
 
     def validar_configuracion(self):
         """Validar que la configuración de Freshdesk esté completa"""
         if not self.api_key or not self.freshdesk_domain:
-            print("⚠ Configuración de Freshdesk incompleta. Use el menú de configuración primero.")
+            print("❌ Configuración de Freshdesk incompleta.")
+            print("💡 Use la opción 1 del menú principal para configurar")
             return False
         return True
 
     def validar_configuracion_clarity(self):
         """Validar que la configuración de Clarity esté completa"""
         if not self.clarity_username or not self.clarity_password or not self.clarity_domain:
-            print("⚠ Configuración de Clarity incompleta. Use el menú de configuración.")
+            print("❌ Configuración de Clarity incompleta.")
+            print("💡 Use la opción 1 del menú principal para configurar")
             return False
         return True

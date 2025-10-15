@@ -3,10 +3,12 @@ import pandas as pd
 from requests.auth import HTTPBasicAuth
 from utils.api_utils import ApiUtils
 from datetime import datetime, timedelta
+from utils.logger import logger
 
 class FreshdeskService:
     def __init__(self, config_manager):
         self.config = config_manager
+        logger.log_info("FreshdeskService inicializado")
 
     def obtener_tickets_paginados(self, pagina=1, por_pagina=100, updated_since=None):
         """Obtener tickets paginados con filtro opcional por fecha"""
@@ -30,7 +32,7 @@ class FreshdeskService:
 
     def obtener_todos_tickets_freshdesk(self, updated_since=None):
         """Obtener todos los tickets de Freshdesk (con paginación)"""
-        print("📥 Obteniendo tickets de Freshdesk...")
+        logger.log_info("Obteniendo tickets de Freshdesk...", "📥 Obteniendo tickets de Freshdesk...")
         todos_tickets = []
         pagina = 1
         
@@ -38,14 +40,15 @@ class FreshdeskService:
             tickets = self.obtener_tickets_paginados(pagina=pagina, por_pagina=100, updated_since=updated_since)
             if not tickets:
                 break
+                
             todos_tickets.extend(tickets)
+            logger.log_debug(f"Página {pagina}: {len(tickets)} tickets obtenidos")
             pagina += 1
             
-            # Si la página tiene menos de 100 tickets, es la última
             if len(tickets) < 100:
                 break
         
-        print(f"✅ Obtenidos {len(todos_tickets)} tickets de Freshdesk")
+        logger.log_info(f"Obtenidos {len(todos_tickets)} tickets de Freshdesk", f"✅ Obtenidos {len(todos_tickets)} tickets de Freshdesk")
         return todos_tickets
 
     def obtener_empresas(self):

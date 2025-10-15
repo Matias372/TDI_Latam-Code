@@ -6,29 +6,35 @@ Sistema de Gestión Freshdesk
 import os
 import sys
 
+# Agregar el directorio src al path
+src_path = os.path.join(os.path.dirname(__file__), 'src')
+sys.path.insert(0, src_path)
+
+# Importar el logger
+from utils.logger import logger
+
 def main():
-    print("🚀 Iniciando Sistema de Gestión Freshdesk...")
-    print("📍 Versión Local")
+    logger.log_info("🚀 Iniciando Sistema de Gestión Freshdesk...", "🚀 Iniciando Sistema de Gestión Freshdesk...")
+    logger.log_info("📍 Versión Local", "📍 Versión Local")
     
     try:
         # Importar después de configurar el path
         from menus.main_menu import MainMenu
         
-        print("✅ Módulos importados correctamente")
+        logger.log_info("Módulos importados correctamente", "✅ Módulos importados correctamente")
         
         # Iniciar menú principal
         menu = MainMenu()
         menu.mostrar_menu()
         
     except ImportError as e:
-        print(f"❌ Error de importación: {e}")
-        import traceback
-        traceback.print_exc()
+        error_msg = f"Error de importación: {e}"
+        logger.log_error(error_msg, "❌ Error al importar módulos. Revise la instalación.")
         input("Presiona Enter para salir...")
+        
     except Exception as e:
-        print(f"❌ Error inesperado: {e}")
-        import traceback
-        traceback.print_exc()
+        error_msg = f"Error inesperado en main: {e}"
+        logger.log_error(error_msg, "❌ Error inesperado. Consulte el log para más detalles.")
         input("Presiona Enter para salir...")
 
 if __name__ == "__main__":
