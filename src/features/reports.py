@@ -47,64 +47,183 @@ class Reports:
             return FileUtils.guardar_excel(df, nombre_archivo)
 
     def reporte_tickets_sin_etiquetas(self):
-        """Generar reporte de tickets sin etiquetas"""
-        print("\n=== Generando reporte de tickets sin etiquetas ===")
+        """Generar reporte de tickets SIN la etiqueta 'CREATE CLARITY'"""
+        from utils.display_utils import display
+        
+        print("\n=== Generando reporte de tickets SIN etiqueta 'CREATE CLARITY' ===")
+        print("⚠️  Este proceso puede tomar varios minutos para 33,500+ tickets...")
 
-        tickets_sin_etiquetas = []
+        tickets_sin_create_clarity = []
         pagina = 1
+        total_tickets_procesados = 0
+        pausa_cada_paginas = 10
+        
+        stats = {
+            'con_etiqueta': 0,
+            'sin_etiqueta': 0,
+            'con_create_clarity': 0,
+            'sin_create_clarity': 0
+        }
 
-        while True:
-            tickets = self.service.obtener_tickets_paginados(pagina)
-            if not tickets:
-                break
+        try:
+            while True:
+                print(f"📄 Procesando página {pagina}...")
+                
+                # Obtener tickets con diagnóstico detallado
+                tickets = self.service.obtener_tickets_paginados(pagina, por_pagina=100)
+                
+                # Diagnóstico detallado de la respuesta
+                if tickets is None:
+                    print(f"❌ La página {pagina} devolvió None. Esto indica un error grave.")
+                    break
+                    
+                if not tickets:
+                    print(f"✅ No hay más tickets. Páginas procesadas: {pagina-1}, Total tickets: {total_tickets_procesados}")
+                    break
 
-            for ticket in tickets:
-                etiquetas = ticket.get("tags")
-                if not etiquetas:  # None o lista vacía
-                    tickets_sin_etiquetas.append({
-                        "ID": ticket.get("id"),
-                        "Asunto": ticket.get("subject"),
-                        "Estado": ticket.get("status"),
-                        "Prioridad": ticket.get("priority"),
-                        "URL": f"{self.service.config.freshdesk_domain}/a/tickets/{ticket.get('id')}"
-                    })
+                tickets_en_pagina = len(tickets)
+                total_tickets_procesados += tickets_en_pagina
+                
+                print(f"   🔍 Página {pagina}: {tickets_en_pagina} tickets recibidos")
+                
+                # Mostrar IDs del primer y último ticket para diagnóstico
+                if tickets:
+                    primer_id = tickets[0].get('id', 'N/A')
+                    ultimo_id = tickets[-1].get('id', 'N/A')
+                    print(f"   🔍 IDs: {primer_id} → {ultimo_id}")
 
-            pagina += 1
-            if len(tickets) < 100:  # Última página
-                break
+                tickets_sin_etiqueta_en_pagina = 0
 
-        if not tickets_sin_etiquetas:
-            print("✅ Todos los tickets tienen al menos una etiqueta.")
-            return
+                for ticket in tickets:
+                    etiquetas = ticket.get("tags", [])
+                    
+                    if etiquetas is None:
+                        etiquetas = []
+                        stats['sin_etiqueta'] += 1
+                    else:
+                        stats['con_etiqueta'] += 1
+                    
+                    tiene_create_clarity = any(
+                        tag.upper() == "CREATE CLARITY" 
+                        for tag in etiquetas 
+                        if tag is not None
+                    )
+                    
+                    if tiene_create_clarity:
+                        stats['con_create_clarity'] += 1
+                    else:
+                        stats['sin_create_clarity'] += 1
+                        tickets_sin_etiqueta_en_pagina += 1
+                        tickets_sin_create_clarity.append({
+                            "ID": ticket.get("id"),
+                            "Asunto": ticket.get("subject"),
+                            "Estado": ticket.get("status"),
+                            "Prioridad": ticket.get("priority"),
+                            "Etiquetas": ", ".join(etiquetas) if etiquetas else "Ninguna",
+                            "URL": f"{self.service.config.freshdesk_domain}/a/tickets/{ticket.get('id')}"
+                        })
 
-        # Crear DataFrame y guardar en Descargas
-        df = pd.DataFrame(tickets_sin_etiquetas)
-        nombre_archivo = f"Reporte_Tickets_Sin_Etiquetas_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
-        self._guardar_en_descargas(df, nombre_archivo)
-        print(f"✅ Reporte generado con {len(tickets_sin_etiquetas)} tickets sin etiquetas.")
+                print(f"   📊 Página {pagina}: {tickets_en_pagina} tickets | SIN 'CREATE CLARITY': {tickets_sin_etiqueta_en_pagina}")
+                print(f"   📈 Progreso total: {total_tickets_procesados} tickets | Total SIN etiqueta: {len(tickets_sin_create_clarity)}")
+
+                pagina += 1
+                
+                # Pausa estratégica
+                if pagina % pausa_cada_paginas == 0:
+                    print(f"⏸️  Pausa de 3 segundos...")
+                    import time
+                    time.sleep(3)
+                
+                # Condición de salida por última página
+                if tickets_en_pagina < 100:
+                    print(f"📭 Última página detectada. Tickets en página: {tickets_en_pagina}")
+                    break
+
+                # Límite de seguridad
+                if pagina > 400:  # 40,000 tickets máximo
+                    print(f"⚠️  Límite de páginas alcanzado: {pagina}")
+                    break
+
+        except KeyboardInterrupt:
+            print("\n⏹️  Proceso interrumpido por el usuario.")
+            
+        except Exception as e:
+            print(f"❌ Error inesperado: {e}")
+            import traceback
+            traceback.print_exc()
+
+        # Mostrar estadísticas finales
+        print(f"\n📈 ESTADÍSTICAS FINALES:")
+        print("─" * 50)
+        print(f"📊 Total tickets procesados: {total_tickets_procesados}")
+        print(f"📄 Total páginas procesadas: {pagina - 1}")
+        print(f"✅ Tickets CON etiquetas: {stats['con_etiqueta']}")
+        print(f"❌ Tickets SIN etiquetas: {stats['sin_etiqueta']}")
+        print(f"🔄 Tickets CON 'CREATE CLARITY': {stats['con_create_clarity']}")
+        print(f"🎯 Tickets SIN 'CREATE CLARITY': {stats['sin_create_clarity']}")
+        print("─" * 50)
+
+        if not tickets_sin_create_clarity:
+            print("🎉 Todos los tickets tienen la etiqueta 'CREATE CLARITY'.")
+        else:
+            # Crear y guardar reporte
+            df = pd.DataFrame(tickets_sin_create_clarity)
+            df = df.sort_values('ID')
+            
+            nombre_archivo = f"Reporte_Tickets_Sin_Create_Clarity_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+            ruta_guardado = self._guardar_en_descargas(df, nombre_archivo)
+            
+            if ruta_guardado:
+                print(f"✅ Reporte generado con {len(tickets_sin_create_clarity)} tickets SIN 'CREATE CLARITY'.")
+                print(f"📁 Archivo: {ruta_guardado}")
+                
+                # Mostrar muestra
+                print(f"\n📋 Muestra de tickets (primeros 5):")
+                print("─" * 80)
+                for i, ticket in enumerate(tickets_sin_create_clarity[:5]):
+                    print(f"   {i+1}. ID: {ticket['ID']} - {ticket['Asunto']}")
+
+        # Pausa final
+        print(f"\n💡 Presione Enter para volver al menú de reportes...")
+        input()
 
     def reporte_empresas(self):
         """Generar reporte de empresas"""
         print("\n=== Generando reporte de empresas ===")
         
-        empresas = self.service.obtener_empresas()
-        if not empresas:
-            print("❌ No se pudieron obtener las empresas.")
-            return
+        try:
+            empresas = self.service.obtener_empresas()
+            if not empresas:
+                print("❌ No se pudieron obtener las empresas.")
+                print("\n💡 Presione Enter para volver al menú de reportes...")
+                input()
+                return
 
-        datos_empresas = []
-        for empresa in empresas:
-            datos_empresas.append({
-                "ID": empresa.get("id"),
-                "Nombre": empresa.get("name"),
-                "Dominio": empresa.get("domains", [""])[0] if empresa.get("domains") else "",
-                "Creado": empresa.get("created_at")
-            })
+            datos_empresas = []
+            for empresa in empresas:
+                datos_empresas.append({
+                    "ID": empresa.get("id"),
+                    "Nombre": empresa.get("name"),
+                    "Dominio": empresa.get("domains", [""])[0] if empresa.get("domains") else "",
+                    "Creado": empresa.get("created_at")
+                })
 
-        df = pd.DataFrame(datos_empresas)
-        nombre_archivo = f"Reporte_Empresas_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
-        self._guardar_en_descargas(df, nombre_archivo)
-        print(f"✅ Reporte generado con {len(datos_empresas)} empresas.")
+            df = pd.DataFrame(datos_empresas)
+            nombre_archivo = f"Reporte_Empresas_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+            ruta_guardado = self._guardar_en_descargas(df, nombre_archivo)
+            
+            if ruta_guardado:
+                print(f"✅ Reporte generado con {len(datos_empresas)} empresas.")
+                print(f"📁 Archivo guardado en: {ruta_guardado}")
+            else:
+                print("❌ Error al guardar el reporte.")
+
+        except Exception as e:
+            print(f"❌ Error inesperado durante la generación del reporte: {str(e)}")
+        
+        # Pausa final para confirmación
+        print(f"\n💡 Presione Enter para volver al menú de reportes...")
+        input()
     
     def reporte_productos_diferentes(self):
         """Generar reporte de tickets con productos diferentes entre Freshdesk y Clarity"""
@@ -112,66 +231,75 @@ class Reports:
         
         print("\n=== Generando reporte de productos diferentes ===")
         
-        # Cargar archivo de Freshdesk
-        print("\n📁 Seleccione el archivo de Freshdesk (Excel):")
-        from utils.file_utils import FileUtils
-        ruta_freshdesk = FileUtils.seleccionar_archivo(
-            "Seleccione archivo Freshdesk", 
-            [("Excel files", "*.xlsx *.xls")]
-        )
+        try:
+            # Cargar archivo de Freshdesk
+            print("\n📁 Seleccione el archivo de Freshdesk (Excel):")
+            from utils.file_utils import FileUtils
+            ruta_freshdesk = FileUtils.seleccionar_archivo(
+                "Seleccione archivo Freshdesk", 
+                [("Excel files", "*.xlsx *.xls")]
+            )
+            
+            if not ruta_freshdesk:
+                print("❌ No se seleccionó archivo de Freshdesk.")
+                print("\n💡 Presione Enter para volver al menú de reportes...")
+                input()
+                return
+
+            df_freshdesk = FileUtils.cargar_excel(ruta_freshdesk)
+            if df_freshdesk is None or df_freshdesk.empty:
+                print("❌ No se pudo cargar el archivo de Freshdesk.")
+                print("\n💡 Presione Enter para volver al menú de reportes...")
+                input()
+                return
+
+            # Cargar archivo de Clarity
+            print("\n📁 Seleccione el archivo de Clarity (CSV):")
+            ruta_clarity = FileUtils.seleccionar_archivo(
+                "Seleccione archivo Clarity", 
+                [("CSV files", "*.csv")]
+            )
+            
+            if not ruta_clarity:
+                print("❌ No se seleccionó archivo de Clarity.")
+                print("\n💡 Presione Enter para volver al menú de reportes...")
+                input()
+                return
+
+            df_clarity = FileUtils.cargar_csv(ruta_clarity)
+            if df_clarity is None or df_clarity.empty:
+                print("🔄 La carga automática falló, intentando carga manual...")
+                df_clarity = FileUtils.cargar_csv_manual(ruta_clarity)
+            
+            if df_clarity is None or df_clarity.empty:
+                print("❌ No se pudo cargar el archivo de Clarity.")
+                print("\n💡 Presione Enter para volver al menú de reportes...")
+                input()
+                return
+
+            # Verificar estructura de archivos
+            if not self._verificar_estructura_productos(df_freshdesk, df_clarity):
+                print("\n💡 Presione Enter para volver al menú de reportes...")
+                input()
+                return
+
+            # Procesar y comparar productos
+            productos_diferentes = self._comparar_productos(df_freshdesk, df_clarity)
+            
+            if not productos_diferentes:
+                print("🎉 No se encontraron tickets con productos diferentes.")
+                print("\n💡 Presione Enter para volver al menú de reportes...")
+                input()
+                return
+
+            # Crear y guardar reporte
+            self._guardar_reporte_productos(productos_diferentes)
+            
+        except Exception as e:
+            print(f"❌ Error inesperado durante la generación del reporte: {str(e)}")
         
-        if not ruta_freshdesk:
-            print("❌ No se seleccionó archivo de Freshdesk.")
-            display.press_enter_to_continue()
-            return
-
-        df_freshdesk = FileUtils.cargar_excel(ruta_freshdesk)
-        if df_freshdesk is None or df_freshdesk.empty:
-            print("❌ No se pudo cargar el archivo de Freshdesk.")
-            display.press_enter_to_continue()
-            return
-
-        # Cargar archivo de Clarity
-        print("\n📁 Seleccione el archivo de Clarity (CSV):")
-        ruta_clarity = FileUtils.seleccionar_archivo(
-            "Seleccione archivo Clarity", 
-            [("CSV files", "*.csv")]
-        )
-        
-        if not ruta_clarity:
-            print("❌ No se seleccionó archivo de Clarity.")
-            display.press_enter_to_continue()
-            return
-
-        df_clarity = FileUtils.cargar_csv(ruta_clarity)
-        if df_clarity is None or df_clarity.empty:
-            print("🔄 La carga automática falló, intentando carga manual...")
-            df_clarity = FileUtils.cargar_csv_manual(ruta_clarity)
-        
-        if df_clarity is None or df_clarity.empty:
-            print("❌ No se pudo cargar el archivo de Clarity.")
-            display.press_enter_to_continue()
-            return
-
-        # Verificar estructura de archivos
-        if not self._verificar_estructura_productos(df_freshdesk, df_clarity):
-            display.press_enter_to_continue()
-            return
-
-        # Procesar y comparar productos
-        productos_diferentes = self._comparar_productos(df_freshdesk, df_clarity)
-        
-        if not productos_diferentes:
-            print("🎉 No se encontraron tickets con productos diferentes.")
-            display.press_enter_to_continue()
-            return
-
-        # Crear y guardar reporte
-        self._guardar_reporte_productos(productos_diferentes)
-        
-        # 🆕 NUEVO: Esperar confirmación del usuario antes de volver al menú
-        print(f"\n✅ Reporte generado exitosamente y guardado en la carpeta de Descargas")
-        print("💡 Presione Enter para volver al menú de reportes...")
+        # Pausa final para confirmación
+        print(f"\n💡 Presione Enter para volver al menú de reportes...")
         input()
 
     def _verificar_estructura_productos(self, df_freshdesk, df_clarity):

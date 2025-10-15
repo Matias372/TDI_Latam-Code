@@ -33,3 +33,27 @@ AttributeError: 'UserGuide' object has no attribute 'get_processes_guide'
 2025-10-15 12:08:57,226 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
 2025-10-15 12:08:57,226 - SyncDeskManager - INFO - FreshdeskService inicializado
 2025-10-15 12:10:11,850 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-15 12:24:02,029 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-15 12:24:03,683 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-15 12:24:03,683 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-15 12:24:03,706 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-15 12:24:03,706 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-15 12:24:03,707 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-15 12:44:36,105 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-15 12:44:37,107 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-15 12:44:37,107 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-15 12:44:37,151 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-15 12:44:37,152 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-15 12:44:37,153 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-15 13:11:57,929 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-15 13:11:58,982 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-15 13:11:58,983 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-15 13:11:59,025 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-15 13:11:59,026 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-15 13:11:59,026 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-15 13:50:15,530 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-15 13:50:16,482 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-15 13:50:16,483 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-15 13:50:16,545 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-15 13:50:16,545 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-15 13:50:16,546 - SyncDeskManager - INFO - FreshdeskService inicializado
