@@ -3,10 +3,10 @@
 ```markdown
 # 🚀 SyncDesk Manager
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20|%20Linux-lightgrey.svg)]()
-[![License](https://img.shields.io/badge/Licencia-MIT-green.svg)](LICENSE)
-[![Release](https://img.shields.io/badge/Release-v1.0.0-orange.svg)](https://github.com/tu-usuario/sync-desk-manager/releases)
+[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey.svg)]()
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Release](https://img.shields.io/badge/release-v1.0.0-orange.svg)](https://github.com/tu-usuario/sync-desk-manager/releases)
 
 **SyncDesk Manager** - Sistema integral para la gestión y sincronización de tickets entre **Freshdesk** y **Clarity**, diseñado para optimizar flujos de trabajo y mantener consistencia entre sistemas.
 
