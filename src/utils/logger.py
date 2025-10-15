@@ -40,7 +40,7 @@ class ProjectLogger:
                 ]
             )
             
-            self.logger = logging.getLogger('FreshdeskSystem')
+            self.logger = logging.getLogger('SyncDeskManager')
             self.log_info("Sistema de logging inicializado", "✅ Sistema de registro activado")
             
         except Exception as e:

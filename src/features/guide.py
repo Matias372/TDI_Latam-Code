@@ -17,11 +17,11 @@ class UserGuide:
     def get_introduction(self):
         return """
 ╔══════════════════════════════════════════════╗
-║             🚀 BIENVENIDO AL SISTEMA        ║
+║     🚀 BIENVENIDO A SYNC DESK MANAGER        ║
 ╚══════════════════════════════════════════════╝
 
 📋 DESCRIPCIÓN GENERAL:
-   Sistema de Gestión Freshdesk - Versión Local
+   SyncDesk Manager - Sistema de Gestión de Tickets
    Herramienta para sincronizar y gestionar tickets entre Freshdesk y Clarity
 
 🎯 FUNCIONALIDADES PRINCIPALES:
@@ -31,7 +31,7 @@ class UserGuide:
    • 🔍 Monitoreo de tickets inactivos
 
 🏗️  ARQUITECTURA:
-   • Freshdesk ←→ Sistema ←→ Clarity
+   • Freshdesk ←→ SyncDesk Manager ←→ Clarity
    • Procesamiento por lotes desde archivos Excel/CSV
    • Interfaz de consola amigable con menús intuitivos
 """
@@ -325,7 +325,7 @@ def get_troubleshooting_guide(self):
    Si los problemas persisten, contacte al soporte técnico:
 
       📧 Email: matiasruibal372@gmail.com
-      📝 Asunto: 🚨 INCIDENTE SISTEMA FRESHDESK - Asistencia Urgente Requerida
+      📝 Asunto: 🚨 INCIDENTE SyncDesk Manager - Asistencia Urgente Requerida
 
    Por favor, incluya en su mensaje:
 

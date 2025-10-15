@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
 """
-Sistema de Gestión Freshdesk
+Sistema SyncDesk Manager
 """
 
 import os
@@ -14,7 +13,7 @@ sys.path.insert(0, src_path)
 from utils.logger import logger
 
 def main():
-    logger.log_info("🚀 Iniciando Sistema de Gestión Freshdesk...", "🚀 Iniciando Sistema de Gestión Freshdesk...")
+    logger.log_info("🚀 Iniciando SyncDesk Manager...", "🚀 Iniciando SyncDesk Manager...")
     logger.log_info("📍 Versión Local", "📍 Versión Local")
     
     try:
