@@ -9,7 +9,7 @@ class GuideMenu:
         while True:
             display.clear_screen()
             print("\n╔══════════════════════════════════════════════╗")
-            print("║               📚 GUÍA DE USUARIO            ║")
+            print("║               📚 GUÍA DE USUARIO             ║")
             print("╚══════════════════════════════════════════════╝")
             
             # Listar secciones disponibles
@@ -29,7 +29,10 @@ class GuideMenu:
                 opcion_num = int(opcion)
                 if 1 <= opcion_num <= len(sections):
                     section_key = sections[opcion_num - 1][0]
-                    self.mostrar_seccion(section_key)
+                    # Aquí está el cambio: capturar el retorno de mostrar_seccion
+                    salir_al_menu_principal = self.mostrar_seccion(section_key)
+                    if salir_al_menu_principal:
+                        break  # Salir completamente y volver al menú principal
                 else:
                     print("❌ Opción inválida.")
                     display.press_enter_to_continue()

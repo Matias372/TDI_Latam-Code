@@ -1,0 +1,35 @@
+2025-10-15 11:40:15,728 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-15 11:42:21,454 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-15 11:42:25,729 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-15 11:42:25,729 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-15 11:42:25,766 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-15 11:42:25,767 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-15 11:42:25,768 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-15 11:42:25,768 - SyncDeskManager - ERROR - Error inesperado en main: 'UserGuide' object has no attribute 'get_processes_guide'
+Traceback (most recent call last):
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\main.py", line 26, in main
+    menu = MainMenu()
+           ^^^^^^^^^^
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\menus\main_menu.py", line 19, in __init__
+    self.guide_menu = GuideMenu()
+                      ^^^^^^^^^^^
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\menus\guide_menu.py", line 6, in __init__
+    self.guide = UserGuide()
+                 ^^^^^^^^^^^
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\features\guide.py", line 11, in __init__
+    "processes": self.get_processes_guide(),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'UserGuide' object has no attribute 'get_processes_guide'
+2025-10-15 11:59:20,787 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-15 11:59:21,975 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-15 11:59:21,975 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-15 11:59:22,014 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-15 11:59:22,014 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-15 11:59:22,014 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-15 12:08:56,268 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-15 12:08:57,147 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-15 12:08:57,147 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-15 12:08:57,225 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-15 12:08:57,226 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-15 12:08:57,226 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-15 12:10:11,850 - SyncDeskManager - INFO - Sistema de logging inicializado
