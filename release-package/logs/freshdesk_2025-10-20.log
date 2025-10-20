@@ -1,0 +1,34 @@
+2025-10-20 13:00:56,923 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-20 13:00:56,924 - SyncDeskManager - INFO - ============================================================
+2025-10-20 13:00:56,925 - SyncDeskManager - INFO - 🔍 DIAGNÓSTICO DEL SISTEMA
+2025-10-20 13:00:56,925 - SyncDeskManager - INFO - ============================================================
+2025-10-20 13:00:57,086 - SyncDeskManager - INFO - Sistema: Windows 11
+2025-10-20 13:00:57,086 - SyncDeskManager - INFO - Python: 3.12.4
+2025-10-20 13:00:57,086 - SyncDeskManager - INFO - Directorio: C:\xampp\htdocs\TDI_Task_Manager\release-package
+2025-10-20 13:00:57,087 - SyncDeskManager - INFO - Ejecutable: C:\xampp\htdocs\TDI_Task_Manager\release-package\SyncDeskManager.exe
+2025-10-20 13:00:57,087 - SyncDeskManager - INFO - Args: ['C:\\xampp\\htdocs\\TDI_Task_Manager\\release-package\\SyncDeskManager.exe']
+2025-10-20 13:00:57,087 - SyncDeskManager - INFO - Plataforma: win32
+2025-10-20 13:00:57,087 - SyncDeskManager - INFO - ============================================================
+2025-10-20 13:00:57,089 - SyncDeskManager - DEBUG - No se encontraron logs antiguos para eliminar
+2025-10-20 13:00:57,787 - SyncDeskManager - INFO - Iniciando aplicación
+2025-10-20 13:00:57,802 - SyncDeskManager - INFO - Módulos cargados correctamente
+2025-10-20 13:00:57,804 - SyncDeskManager - INFO - Configuración cargada desde: C:\xampp\htdocs\TDI_Task_Manager\release-package\_internal\data\config\freshdesk_config.json
+2025-10-20 13:00:57,804 - SyncDeskManager - INFO - Configuración cargada desde: C:\xampp\htdocs\TDI_Task_Manager\release-package\_internal\data\config\freshdesk_config.json
+2025-10-20 13:00:57,805 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-20 15:39:15,019 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-20 15:39:15,019 - SyncDeskManager - INFO - ============================================================
+2025-10-20 15:39:15,020 - SyncDeskManager - INFO - 🔍 DIAGNÓSTICO DEL SISTEMA
+2025-10-20 15:39:15,020 - SyncDeskManager - INFO - ============================================================
+2025-10-20 15:39:15,166 - SyncDeskManager - INFO - Sistema: Windows 11
+2025-10-20 15:39:15,167 - SyncDeskManager - INFO - Python: 3.12.4
+2025-10-20 15:39:15,167 - SyncDeskManager - INFO - Directorio: C:\xampp\htdocs\TDI_Task_Manager\release-package
+2025-10-20 15:39:15,167 - SyncDeskManager - INFO - Ejecutable: C:\xampp\htdocs\TDI_Task_Manager\release-package\SyncDeskManager.exe
+2025-10-20 15:39:15,168 - SyncDeskManager - INFO - Args: ['C:\\xampp\\htdocs\\TDI_Task_Manager\\release-package\\SyncDeskManager.exe']
+2025-10-20 15:39:15,168 - SyncDeskManager - INFO - Plataforma: win32
+2025-10-20 15:39:15,168 - SyncDeskManager - INFO - ============================================================
+2025-10-20 15:39:15,171 - SyncDeskManager - DEBUG - No se encontraron logs antiguos para eliminar
+2025-10-20 15:39:15,867 - SyncDeskManager - INFO - Iniciando aplicación
+2025-10-20 15:39:15,882 - SyncDeskManager - INFO - Módulos cargados correctamente
+2025-10-20 15:39:15,884 - SyncDeskManager - INFO - Configuración cargada desde: C:\xampp\htdocs\TDI_Task_Manager\release-package\_internal\data\config\freshdesk_config.json
+2025-10-20 15:39:15,885 - SyncDeskManager - INFO - Configuración cargada desde: C:\xampp\htdocs\TDI_Task_Manager\release-package\_internal\data\config\freshdesk_config.json
+2025-10-20 15:39:15,885 - SyncDeskManager - INFO - FreshdeskService inicializado

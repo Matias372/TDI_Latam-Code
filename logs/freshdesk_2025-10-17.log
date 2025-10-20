@@ -1,0 +1,479 @@
+2025-10-17 11:13:50,962 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-17 11:13:54,778 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-17 11:13:54,778 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-17 11:13:54,875 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-17 11:13:54,886 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-17 11:13:54,886 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-17 11:14:25,284 - SyncDeskManager - INFO - Solicitando ticket 11569...
+2025-10-17 11:14:26,383 - SyncDeskManager - INFO - Ticket 11569 obtenido exitosamente
+2025-10-17 11:14:34,355 - SyncDeskManager - INFO - INICIANDO ACTUALIZACIÓN EN 2 PASOS (ESTRATEGIA COMPROBADA)
+2025-10-17 11:14:34,356 - SyncDeskManager - INFO - EJECUTANDO PASO 1: Campos a NULL
+2025-10-17 11:14:34,356 - SyncDeskManager - INFO - Estableciendo campos a NULL...
+2025-10-17 11:14:34,954 - SyncDeskManager - INFO - Campos establecidos a NULL exitosamente
+2025-10-17 11:14:36,956 - SyncDeskManager - INFO - EJECUTANDO PASO 2: Restaurar desde Excel
+2025-10-17 11:14:36,956 - SyncDeskManager - INFO - Restaurando campos originales desde Excel...
+2025-10-17 11:14:37,553 - SyncDeskManager - INFO - Campos restaurados exitosamente
+2025-10-17 11:14:40,555 - SyncDeskManager - INFO - Solicitando ticket 11719...
+2025-10-17 11:14:41,934 - SyncDeskManager - INFO - Ticket 11719 obtenido exitosamente
+2025-10-17 11:15:14,343 - SyncDeskManager - INFO - INICIANDO ACTUALIZACIÓN EN 2 PASOS (ESTRATEGIA COMPROBADA)
+2025-10-17 11:15:14,343 - SyncDeskManager - INFO - EJECUTANDO PASO 1: Campos a NULL
+2025-10-17 11:15:14,344 - SyncDeskManager - INFO - Estableciendo campos a NULL...
+2025-10-17 11:15:14,952 - SyncDeskManager - INFO - Campos establecidos a NULL exitosamente
+2025-10-17 11:15:16,953 - SyncDeskManager - INFO - EJECUTANDO PASO 2: Restaurar desde Excel
+2025-10-17 11:15:16,953 - SyncDeskManager - INFO - Restaurando campos originales desde Excel...
+2025-10-17 11:15:17,609 - SyncDeskManager - INFO - Campos restaurados exitosamente
+2025-10-17 11:15:20,611 - SyncDeskManager - INFO - Solicitando ticket 11732...
+2025-10-17 11:15:21,131 - SyncDeskManager - INFO - Ticket 11732 obtenido exitosamente
+2025-10-17 11:33:05,755 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-17 11:33:06,606 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-17 11:33:06,607 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-17 11:33:06,645 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-17 11:33:06,646 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-17 11:33:06,646 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-17 11:33:30,204 - SyncDeskManager - INFO - Actualizando automáticamente ticket 11732
+2025-10-17 11:33:30,205 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 11732
+2025-10-17 11:33:33,416 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 11732
+2025-10-17 11:33:33,416 - SyncDeskManager - INFO - ✅ Ticket 11732 actualizado exitosamente
+2025-10-17 11:33:37,342 - SyncDeskManager - INFO - Actualizando automáticamente ticket 11943
+2025-10-17 11:33:37,342 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 11943
+2025-10-17 11:33:40,653 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 11943
+2025-10-17 11:33:40,653 - SyncDeskManager - INFO - ✅ Ticket 11943 actualizado exitosamente
+2025-10-17 11:33:45,034 - SyncDeskManager - INFO - Actualizando automáticamente ticket 12095
+2025-10-17 11:33:45,034 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 12095
+2025-10-17 11:33:48,379 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 12095
+2025-10-17 11:33:48,380 - SyncDeskManager - INFO - ✅ Ticket 12095 actualizado exitosamente
+2025-10-17 11:33:52,285 - SyncDeskManager - INFO - Actualizando automáticamente ticket 12177
+2025-10-17 11:33:52,286 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 12177
+2025-10-17 11:33:55,449 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 12177
+2025-10-17 11:33:55,450 - SyncDeskManager - INFO - ✅ Ticket 12177 actualizado exitosamente
+2025-10-17 11:33:59,389 - SyncDeskManager - INFO - Actualizando automáticamente ticket 12337
+2025-10-17 11:33:59,390 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 12337
+2025-10-17 11:34:02,484 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 12337
+2025-10-17 11:34:02,485 - SyncDeskManager - INFO - ✅ Ticket 12337 actualizado exitosamente
+2025-10-17 11:34:06,430 - SyncDeskManager - INFO - Actualizando automáticamente ticket 12521
+2025-10-17 11:34:06,430 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 12521
+2025-10-17 11:34:09,569 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 12521
+2025-10-17 11:34:09,569 - SyncDeskManager - INFO - ✅ Ticket 12521 actualizado exitosamente
+2025-10-17 11:34:13,626 - SyncDeskManager - INFO - Actualizando automáticamente ticket 12574
+2025-10-17 11:34:13,627 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 12574
+2025-10-17 11:34:16,816 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 12574
+2025-10-17 11:34:16,817 - SyncDeskManager - INFO - ✅ Ticket 12574 actualizado exitosamente
+2025-10-17 11:34:18,057 - SyncDeskManager - INFO - Resumen proceso regeneración etiquetas: Total=128, Actualizados=7, Salteados=1, Errores=0
+2025-10-17 11:44:01,163 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-17 11:44:01,991 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-17 11:44:01,991 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-17 11:44:02,040 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-17 11:44:02,040 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-17 11:44:02,041 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-17 11:44:32,007 - SyncDeskManager - INFO - Actualizando automáticamente ticket 13055
+2025-10-17 11:44:32,008 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 13055
+2025-10-17 11:44:35,076 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 13055
+2025-10-17 11:44:35,077 - SyncDeskManager - INFO - ✅ Ticket 13055 actualizado exitosamente
+2025-10-17 11:44:39,509 - SyncDeskManager - INFO - Actualizando automáticamente ticket 13250
+2025-10-17 11:44:39,511 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 13250
+2025-10-17 11:44:42,656 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 13250
+2025-10-17 11:44:42,656 - SyncDeskManager - INFO - ✅ Ticket 13250 actualizado exitosamente
+2025-10-17 11:44:46,576 - SyncDeskManager - INFO - Actualizando automáticamente ticket 13318
+2025-10-17 11:44:46,583 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 13318
+2025-10-17 11:44:50,314 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 13318
+2025-10-17 11:44:50,314 - SyncDeskManager - INFO - ✅ Ticket 13318 actualizado exitosamente
+2025-10-17 11:44:54,273 - SyncDeskManager - INFO - Actualizando automáticamente ticket 13471
+2025-10-17 11:44:54,290 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 13471
+2025-10-17 11:44:57,519 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 13471
+2025-10-17 11:44:57,520 - SyncDeskManager - INFO - ✅ Ticket 13471 actualizado exitosamente
+2025-10-17 11:45:03,644 - SyncDeskManager - INFO - Actualizando automáticamente ticket 14012
+2025-10-17 11:45:03,645 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 14012
+2025-10-17 11:45:06,910 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 14012
+2025-10-17 11:45:06,910 - SyncDeskManager - INFO - ✅ Ticket 14012 actualizado exitosamente
+2025-10-17 11:45:10,803 - SyncDeskManager - INFO - Actualizando automáticamente ticket 14064
+2025-10-17 11:45:10,805 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 14064
+2025-10-17 11:45:14,574 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 14064
+2025-10-17 11:45:14,574 - SyncDeskManager - INFO - ✅ Ticket 14064 actualizado exitosamente
+2025-10-17 11:45:18,904 - SyncDeskManager - INFO - Actualizando automáticamente ticket 14293
+2025-10-17 11:45:18,904 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 14293
+2025-10-17 11:45:22,035 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 14293
+2025-10-17 11:45:22,036 - SyncDeskManager - INFO - ✅ Ticket 14293 actualizado exitosamente
+2025-10-17 11:45:25,932 - SyncDeskManager - INFO - Actualizando automáticamente ticket 14529
+2025-10-17 11:45:25,933 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 14529
+2025-10-17 11:45:29,068 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 14529
+2025-10-17 11:45:29,068 - SyncDeskManager - INFO - ✅ Ticket 14529 actualizado exitosamente
+2025-10-17 11:45:33,045 - SyncDeskManager - INFO - Actualizando automáticamente ticket 14582
+2025-10-17 11:45:33,046 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 14582
+2025-10-17 11:45:36,278 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 14582
+2025-10-17 11:45:36,279 - SyncDeskManager - INFO - ✅ Ticket 14582 actualizado exitosamente
+2025-10-17 11:45:40,173 - SyncDeskManager - INFO - Actualizando automáticamente ticket 14635
+2025-10-17 11:45:40,173 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 14635
+2025-10-17 11:45:43,287 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 14635
+2025-10-17 11:45:43,287 - SyncDeskManager - INFO - ✅ Ticket 14635 actualizado exitosamente
+2025-10-17 11:45:47,208 - SyncDeskManager - INFO - Actualizando automáticamente ticket 14646
+2025-10-17 11:45:47,210 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 14646
+2025-10-17 11:45:50,256 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 14646
+2025-10-17 11:45:50,257 - SyncDeskManager - INFO - ✅ Ticket 14646 actualizado exitosamente
+2025-10-17 11:45:54,168 - SyncDeskManager - INFO - Actualizando automáticamente ticket 14668
+2025-10-17 11:45:54,169 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 14668
+2025-10-17 11:45:57,251 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 14668
+2025-10-17 11:45:57,252 - SyncDeskManager - INFO - ✅ Ticket 14668 actualizado exitosamente
+2025-10-17 11:46:01,261 - SyncDeskManager - INFO - Actualizando automáticamente ticket 14669
+2025-10-17 11:46:01,262 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 14669
+2025-10-17 11:46:04,376 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 14669
+2025-10-17 11:46:04,376 - SyncDeskManager - INFO - ✅ Ticket 14669 actualizado exitosamente
+2025-10-17 11:46:08,991 - SyncDeskManager - INFO - Actualizando automáticamente ticket 14784
+2025-10-17 11:46:08,993 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 14784
+2025-10-17 11:46:12,102 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 14784
+2025-10-17 11:46:12,102 - SyncDeskManager - INFO - ✅ Ticket 14784 actualizado exitosamente
+2025-10-17 11:46:16,039 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15028
+2025-10-17 11:46:16,041 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15028
+2025-10-17 11:46:19,192 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15028
+2025-10-17 11:46:19,192 - SyncDeskManager - INFO - ✅ Ticket 15028 actualizado exitosamente
+2025-10-17 11:46:23,765 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15176
+2025-10-17 11:46:23,766 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15176
+2025-10-17 11:46:26,850 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15176
+2025-10-17 11:46:26,851 - SyncDeskManager - INFO - ✅ Ticket 15176 actualizado exitosamente
+2025-10-17 11:46:30,751 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15178
+2025-10-17 11:46:30,752 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15178
+2025-10-17 11:46:33,854 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15178
+2025-10-17 11:46:33,854 - SyncDeskManager - INFO - ✅ Ticket 15178 actualizado exitosamente
+2025-10-17 11:46:37,754 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15194
+2025-10-17 11:46:37,755 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15194
+2025-10-17 11:46:40,892 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15194
+2025-10-17 11:46:40,892 - SyncDeskManager - INFO - ✅ Ticket 15194 actualizado exitosamente
+2025-10-17 11:46:44,799 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15327
+2025-10-17 11:46:44,800 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15327
+2025-10-17 11:46:47,969 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15327
+2025-10-17 11:46:47,969 - SyncDeskManager - INFO - ✅ Ticket 15327 actualizado exitosamente
+2025-10-17 11:46:51,866 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15410
+2025-10-17 11:46:51,868 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15410
+2025-10-17 11:46:55,050 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15410
+2025-10-17 11:46:55,050 - SyncDeskManager - INFO - ✅ Ticket 15410 actualizado exitosamente
+2025-10-17 11:46:58,956 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15461
+2025-10-17 11:46:58,957 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15461
+2025-10-17 11:47:02,050 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15461
+2025-10-17 11:47:02,051 - SyncDeskManager - INFO - ✅ Ticket 15461 actualizado exitosamente
+2025-10-17 11:47:05,947 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15484
+2025-10-17 11:47:05,948 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15484
+2025-10-17 11:47:09,013 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15484
+2025-10-17 11:47:09,013 - SyncDeskManager - INFO - ✅ Ticket 15484 actualizado exitosamente
+2025-10-17 11:47:12,903 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15493
+2025-10-17 11:47:12,904 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15493
+2025-10-17 11:47:15,965 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15493
+2025-10-17 11:47:15,966 - SyncDeskManager - INFO - ✅ Ticket 15493 actualizado exitosamente
+2025-10-17 11:47:19,904 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15679
+2025-10-17 11:47:19,905 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15679
+2025-10-17 11:47:23,009 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15679
+2025-10-17 11:47:23,010 - SyncDeskManager - INFO - ✅ Ticket 15679 actualizado exitosamente
+2025-10-17 11:47:26,911 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15835
+2025-10-17 11:47:26,912 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15835
+2025-10-17 11:47:30,038 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15835
+2025-10-17 11:47:30,038 - SyncDeskManager - INFO - ✅ Ticket 15835 actualizado exitosamente
+2025-10-17 11:47:34,415 - SyncDeskManager - INFO - Actualizando automáticamente ticket 15915
+2025-10-17 11:47:34,418 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 15915
+2025-10-17 11:47:37,631 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 15915
+2025-10-17 11:47:37,632 - SyncDeskManager - INFO - ✅ Ticket 15915 actualizado exitosamente
+2025-10-17 11:47:42,046 - SyncDeskManager - INFO - Actualizando automáticamente ticket 16082
+2025-10-17 11:47:42,047 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 16082
+2025-10-17 11:47:45,242 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 16082
+2025-10-17 11:47:45,242 - SyncDeskManager - INFO - ✅ Ticket 16082 actualizado exitosamente
+2025-10-17 11:47:49,364 - SyncDeskManager - INFO - Actualizando automáticamente ticket 16193
+2025-10-17 11:47:49,365 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 16193
+2025-10-17 11:47:52,489 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 16193
+2025-10-17 11:47:52,489 - SyncDeskManager - INFO - ✅ Ticket 16193 actualizado exitosamente
+2025-10-17 11:47:56,399 - SyncDeskManager - INFO - Actualizando automáticamente ticket 16354
+2025-10-17 11:47:56,401 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 16354
+2025-10-17 11:47:59,798 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 16354
+2025-10-17 11:47:59,798 - SyncDeskManager - INFO - ✅ Ticket 16354 actualizado exitosamente
+2025-10-17 11:48:04,134 - SyncDeskManager - INFO - Actualizando automáticamente ticket 17092
+2025-10-17 11:48:04,135 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 17092
+2025-10-17 11:48:07,287 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 17092
+2025-10-17 11:48:07,287 - SyncDeskManager - INFO - ✅ Ticket 17092 actualizado exitosamente
+2025-10-17 11:48:11,281 - SyncDeskManager - INFO - Actualizando automáticamente ticket 17329
+2025-10-17 11:48:11,283 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 17329
+2025-10-17 11:48:14,428 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 17329
+2025-10-17 11:48:14,428 - SyncDeskManager - INFO - ✅ Ticket 17329 actualizado exitosamente
+2025-10-17 11:48:18,299 - SyncDeskManager - INFO - Actualizando automáticamente ticket 17348
+2025-10-17 11:48:18,300 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 17348
+2025-10-17 11:48:21,434 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 17348
+2025-10-17 11:48:21,435 - SyncDeskManager - INFO - ✅ Ticket 17348 actualizado exitosamente
+2025-10-17 11:48:25,363 - SyncDeskManager - INFO - Actualizando automáticamente ticket 17799
+2025-10-17 11:48:25,364 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 17799
+2025-10-17 11:48:28,411 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 17799
+2025-10-17 11:48:28,411 - SyncDeskManager - INFO - ✅ Ticket 17799 actualizado exitosamente
+2025-10-17 11:48:32,355 - SyncDeskManager - INFO - Actualizando automáticamente ticket 17938
+2025-10-17 11:48:32,356 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 17938
+2025-10-17 11:48:36,010 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 17938
+2025-10-17 11:48:36,010 - SyncDeskManager - INFO - ✅ Ticket 17938 actualizado exitosamente
+2025-10-17 11:48:39,938 - SyncDeskManager - INFO - Actualizando automáticamente ticket 18081
+2025-10-17 11:48:39,939 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 18081
+2025-10-17 11:48:43,141 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 18081
+2025-10-17 11:48:43,142 - SyncDeskManager - INFO - ✅ Ticket 18081 actualizado exitosamente
+2025-10-17 11:48:47,025 - SyncDeskManager - INFO - Actualizando automáticamente ticket 18198
+2025-10-17 11:48:47,027 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 18198
+2025-10-17 11:48:50,139 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 18198
+2025-10-17 11:48:50,139 - SyncDeskManager - INFO - ✅ Ticket 18198 actualizado exitosamente
+2025-10-17 11:48:54,464 - SyncDeskManager - INFO - Actualizando automáticamente ticket 18459
+2025-10-17 11:48:54,465 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 18459
+2025-10-17 11:48:57,577 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 18459
+2025-10-17 11:48:57,578 - SyncDeskManager - INFO - ✅ Ticket 18459 actualizado exitosamente
+2025-10-17 11:49:01,500 - SyncDeskManager - INFO - Actualizando automáticamente ticket 18465
+2025-10-17 11:49:01,502 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 18465
+2025-10-17 11:49:04,649 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 18465
+2025-10-17 11:49:04,650 - SyncDeskManager - INFO - ✅ Ticket 18465 actualizado exitosamente
+2025-10-17 11:49:08,568 - SyncDeskManager - INFO - Actualizando automáticamente ticket 18468
+2025-10-17 11:49:08,569 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 18468
+2025-10-17 11:49:11,674 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 18468
+2025-10-17 11:49:11,675 - SyncDeskManager - INFO - ✅ Ticket 18468 actualizado exitosamente
+2025-10-17 11:49:16,118 - SyncDeskManager - INFO - Actualizando automáticamente ticket 18472
+2025-10-17 11:49:16,119 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 18472
+2025-10-17 11:49:19,316 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 18472
+2025-10-17 11:49:19,316 - SyncDeskManager - INFO - ✅ Ticket 18472 actualizado exitosamente
+2025-10-17 11:49:23,210 - SyncDeskManager - INFO - Actualizando automáticamente ticket 18560
+2025-10-17 11:49:23,212 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 18560
+2025-10-17 11:49:26,489 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 18560
+2025-10-17 11:49:26,490 - SyncDeskManager - INFO - ✅ Ticket 18560 actualizado exitosamente
+2025-10-17 11:49:30,431 - SyncDeskManager - INFO - Actualizando automáticamente ticket 18569
+2025-10-17 11:49:30,433 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 18569
+2025-10-17 11:49:33,624 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 18569
+2025-10-17 11:49:33,624 - SyncDeskManager - INFO - ✅ Ticket 18569 actualizado exitosamente
+2025-10-17 11:49:38,591 - SyncDeskManager - INFO - Actualizando automáticamente ticket 19897
+2025-10-17 11:49:38,592 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 19897
+2025-10-17 11:49:41,657 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 19897
+2025-10-17 11:49:41,657 - SyncDeskManager - INFO - ✅ Ticket 19897 actualizado exitosamente
+2025-10-17 11:49:45,899 - SyncDeskManager - INFO - Actualizando automáticamente ticket 19923
+2025-10-17 11:49:45,900 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 19923
+2025-10-17 11:49:49,078 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 19923
+2025-10-17 11:49:49,079 - SyncDeskManager - INFO - ✅ Ticket 19923 actualizado exitosamente
+2025-10-17 11:49:52,984 - SyncDeskManager - INFO - Actualizando automáticamente ticket 20426
+2025-10-17 11:49:52,985 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 20426
+2025-10-17 11:49:56,075 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 20426
+2025-10-17 11:49:56,075 - SyncDeskManager - INFO - ✅ Ticket 20426 actualizado exitosamente
+2025-10-17 11:49:59,970 - SyncDeskManager - INFO - Actualizando automáticamente ticket 20461
+2025-10-17 11:49:59,972 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 20461
+2025-10-17 11:50:03,152 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 20461
+2025-10-17 11:50:03,152 - SyncDeskManager - INFO - ✅ Ticket 20461 actualizado exitosamente
+2025-10-17 11:50:07,039 - SyncDeskManager - INFO - Actualizando automáticamente ticket 20868
+2025-10-17 11:50:07,040 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 20868
+2025-10-17 11:50:10,416 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 20868
+2025-10-17 11:50:10,416 - SyncDeskManager - INFO - ✅ Ticket 20868 actualizado exitosamente
+2025-10-17 11:50:14,324 - SyncDeskManager - INFO - Actualizando automáticamente ticket 20942
+2025-10-17 11:50:14,325 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 20942
+2025-10-17 11:50:17,480 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 20942
+2025-10-17 11:50:17,480 - SyncDeskManager - INFO - ✅ Ticket 20942 actualizado exitosamente
+2025-10-17 11:50:21,429 - SyncDeskManager - INFO - Actualizando automáticamente ticket 21107
+2025-10-17 11:50:21,430 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 21107
+2025-10-17 11:50:24,502 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 21107
+2025-10-17 11:50:24,502 - SyncDeskManager - INFO - ✅ Ticket 21107 actualizado exitosamente
+2025-10-17 11:50:28,358 - SyncDeskManager - INFO - Actualizando automáticamente ticket 21478
+2025-10-17 11:50:28,359 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 21478
+2025-10-17 11:50:31,415 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 21478
+2025-10-17 11:50:31,415 - SyncDeskManager - INFO - ✅ Ticket 21478 actualizado exitosamente
+2025-10-17 11:50:35,358 - SyncDeskManager - INFO - Actualizando automáticamente ticket 21836
+2025-10-17 11:50:35,359 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 21836
+2025-10-17 11:50:38,695 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 21836
+2025-10-17 11:50:38,696 - SyncDeskManager - INFO - ✅ Ticket 21836 actualizado exitosamente
+2025-10-17 11:50:42,614 - SyncDeskManager - INFO - Actualizando automáticamente ticket 22167
+2025-10-17 11:50:42,615 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 22167
+2025-10-17 11:50:45,807 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 22167
+2025-10-17 11:50:45,807 - SyncDeskManager - INFO - ✅ Ticket 22167 actualizado exitosamente
+2025-10-17 11:50:50,219 - SyncDeskManager - INFO - Actualizando automáticamente ticket 23544
+2025-10-17 11:50:50,220 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 23544
+2025-10-17 11:50:53,373 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 23544
+2025-10-17 11:50:53,373 - SyncDeskManager - INFO - ✅ Ticket 23544 actualizado exitosamente
+2025-10-17 11:50:57,257 - SyncDeskManager - INFO - Actualizando automáticamente ticket 23624
+2025-10-17 11:50:57,259 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 23624
+2025-10-17 11:51:00,528 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 23624
+2025-10-17 11:51:00,529 - SyncDeskManager - INFO - ✅ Ticket 23624 actualizado exitosamente
+2025-10-17 11:51:05,761 - SyncDeskManager - INFO - Actualizando automáticamente ticket 23806
+2025-10-17 11:51:05,762 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 23806
+2025-10-17 11:51:08,934 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 23806
+2025-10-17 11:51:08,935 - SyncDeskManager - INFO - ✅ Ticket 23806 actualizado exitosamente
+2025-10-17 11:51:12,811 - SyncDeskManager - INFO - Actualizando automáticamente ticket 23905
+2025-10-17 11:51:12,812 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 23905
+2025-10-17 11:51:15,955 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 23905
+2025-10-17 11:51:15,956 - SyncDeskManager - INFO - ✅ Ticket 23905 actualizado exitosamente
+2025-10-17 11:51:19,863 - SyncDeskManager - INFO - Actualizando automáticamente ticket 24610
+2025-10-17 11:51:19,865 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 24610
+2025-10-17 11:51:22,990 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 24610
+2025-10-17 11:51:22,990 - SyncDeskManager - INFO - ✅ Ticket 24610 actualizado exitosamente
+2025-10-17 11:51:27,410 - SyncDeskManager - INFO - Actualizando automáticamente ticket 24612
+2025-10-17 11:51:27,411 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 24612
+2025-10-17 11:51:30,810 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 24612
+2025-10-17 11:51:30,810 - SyncDeskManager - INFO - ✅ Ticket 24612 actualizado exitosamente
+2025-10-17 11:51:34,673 - SyncDeskManager - INFO - Actualizando automáticamente ticket 24613
+2025-10-17 11:51:34,674 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 24613
+2025-10-17 11:51:37,848 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 24613
+2025-10-17 11:51:37,848 - SyncDeskManager - INFO - ✅ Ticket 24613 actualizado exitosamente
+2025-10-17 11:51:41,718 - SyncDeskManager - INFO - Actualizando automáticamente ticket 24726
+2025-10-17 11:51:41,719 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 24726
+2025-10-17 11:51:44,894 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 24726
+2025-10-17 11:51:44,895 - SyncDeskManager - INFO - ✅ Ticket 24726 actualizado exitosamente
+2025-10-17 11:51:48,758 - SyncDeskManager - INFO - Actualizando automáticamente ticket 24727
+2025-10-17 11:51:48,760 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 24727
+2025-10-17 11:51:51,874 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 24727
+2025-10-17 11:51:51,874 - SyncDeskManager - INFO - ✅ Ticket 24727 actualizado exitosamente
+2025-10-17 11:51:55,749 - SyncDeskManager - INFO - Actualizando automáticamente ticket 24746
+2025-10-17 11:51:55,751 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 24746
+2025-10-17 11:51:58,869 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 24746
+2025-10-17 11:51:58,870 - SyncDeskManager - INFO - ✅ Ticket 24746 actualizado exitosamente
+2025-10-17 11:51:59,554 - SyncDeskManager - INFO - Resumen proceso regeneración etiquetas: Total=128, Actualizados=62, Salteados=23, Errores=0
+2025-10-17 12:02:54,645 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-17 12:02:55,591 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-17 12:02:55,591 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-17 12:02:55,636 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-17 12:02:55,636 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-17 12:02:55,637 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-17 12:03:54,628 - SyncDeskManager - INFO - Actualizando automáticamente ticket 24819
+2025-10-17 12:03:54,629 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 24819
+2025-10-17 12:03:54,629 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 24819
+2025-10-17 12:03:57,739 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 24819
+2025-10-17 12:03:57,740 - SyncDeskManager - INFO - ✅ Ticket 24819 actualizado exitosamente
+2025-10-17 12:04:01,664 - SyncDeskManager - INFO - Actualizando automáticamente ticket 25014
+2025-10-17 12:04:01,665 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25014
+2025-10-17 12:04:01,665 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25014
+2025-10-17 12:04:04,829 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 25014
+2025-10-17 12:04:04,830 - SyncDeskManager - INFO - ✅ Ticket 25014 actualizado exitosamente
+2025-10-17 12:04:08,750 - SyncDeskManager - INFO - Actualizando automáticamente ticket 25074
+2025-10-17 12:04:08,751 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25074
+2025-10-17 12:04:08,751 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25074
+2025-10-17 12:04:11,913 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 25074
+2025-10-17 12:04:11,913 - SyncDeskManager - INFO - ✅ Ticket 25074 actualizado exitosamente
+2025-10-17 12:04:15,849 - SyncDeskManager - INFO - Actualizando automáticamente ticket 25100
+2025-10-17 12:04:15,850 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25100
+2025-10-17 12:04:15,850 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25100
+2025-10-17 12:04:19,033 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 25100
+2025-10-17 12:04:19,034 - SyncDeskManager - INFO - ✅ Ticket 25100 actualizado exitosamente
+2025-10-17 12:04:24,335 - SyncDeskManager - INFO - Actualizando automáticamente ticket 25342
+2025-10-17 12:04:24,335 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25342
+2025-10-17 12:04:24,336 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25342
+2025-10-17 12:04:27,457 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 25342
+2025-10-17 12:04:27,458 - SyncDeskManager - INFO - ✅ Ticket 25342 actualizado exitosamente
+2025-10-17 12:04:31,867 - SyncDeskManager - INFO - Actualizando automáticamente ticket 25716
+2025-10-17 12:04:31,867 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25716
+2025-10-17 12:04:31,868 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25716
+2025-10-17 12:04:35,267 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 25716
+2025-10-17 12:04:35,268 - SyncDeskManager - INFO - ✅ Ticket 25716 actualizado exitosamente
+2025-10-17 12:04:39,649 - SyncDeskManager - INFO - Actualizando automáticamente ticket 25889
+2025-10-17 12:04:39,650 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25889
+2025-10-17 12:04:39,651 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25889
+2025-10-17 12:04:42,868 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 25889
+2025-10-17 12:04:42,869 - SyncDeskManager - INFO - ✅ Ticket 25889 actualizado exitosamente
+2025-10-17 12:04:46,785 - SyncDeskManager - INFO - Actualizando automáticamente ticket 25906
+2025-10-17 12:04:46,786 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25906
+2025-10-17 12:04:46,786 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 25906
+2025-10-17 12:04:49,978 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 25906
+2025-10-17 12:04:49,980 - SyncDeskManager - INFO - ✅ Ticket 25906 actualizado exitosamente
+2025-10-17 12:04:53,889 - SyncDeskManager - INFO - Actualizando automáticamente ticket 26216
+2025-10-17 12:04:53,890 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26216
+2025-10-17 12:04:53,890 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26216
+2025-10-17 12:04:57,045 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 26216
+2025-10-17 12:04:57,045 - SyncDeskManager - INFO - ✅ Ticket 26216 actualizado exitosamente
+2025-10-17 12:05:00,954 - SyncDeskManager - INFO - Actualizando automáticamente ticket 26323
+2025-10-17 12:05:00,954 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26323
+2025-10-17 12:05:00,955 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26323
+2025-10-17 12:05:04,500 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 26323
+2025-10-17 12:05:04,501 - SyncDeskManager - INFO - ✅ Ticket 26323 actualizado exitosamente
+2025-10-17 12:05:08,439 - SyncDeskManager - INFO - Actualizando automáticamente ticket 26422
+2025-10-17 12:05:08,440 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26422
+2025-10-17 12:05:08,440 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26422
+2025-10-17 12:05:11,636 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 26422
+2025-10-17 12:05:11,637 - SyncDeskManager - INFO - ✅ Ticket 26422 actualizado exitosamente
+2025-10-17 12:05:15,561 - SyncDeskManager - INFO - Actualizando automáticamente ticket 26471
+2025-10-17 12:05:15,561 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26471
+2025-10-17 12:05:15,562 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26471
+2025-10-17 12:05:18,759 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 26471
+2025-10-17 12:05:18,760 - SyncDeskManager - INFO - ✅ Ticket 26471 actualizado exitosamente
+2025-10-17 12:05:22,650 - SyncDeskManager - INFO - Actualizando automáticamente ticket 26559
+2025-10-17 12:05:22,651 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26559
+2025-10-17 12:05:22,651 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26559
+2025-10-17 12:05:25,854 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 26559
+2025-10-17 12:05:25,855 - SyncDeskManager - INFO - ✅ Ticket 26559 actualizado exitosamente
+2025-10-17 12:05:29,724 - SyncDeskManager - INFO - Actualizando automáticamente ticket 26567
+2025-10-17 12:05:29,724 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26567
+2025-10-17 12:05:29,724 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26567
+2025-10-17 12:05:32,910 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 26567
+2025-10-17 12:05:32,911 - SyncDeskManager - INFO - ✅ Ticket 26567 actualizado exitosamente
+2025-10-17 12:05:36,810 - SyncDeskManager - INFO - Actualizando automáticamente ticket 26571
+2025-10-17 12:05:36,810 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26571
+2025-10-17 12:05:36,811 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26571
+2025-10-17 12:05:39,974 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 26571
+2025-10-17 12:05:39,975 - SyncDeskManager - INFO - ✅ Ticket 26571 actualizado exitosamente
+2025-10-17 12:05:46,543 - SyncDeskManager - INFO - Actualizando automáticamente ticket 26967
+2025-10-17 12:05:46,543 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26967
+2025-10-17 12:05:46,543 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 26967
+2025-10-17 12:05:49,593 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 26967
+2025-10-17 12:05:49,594 - SyncDeskManager - INFO - ✅ Ticket 26967 actualizado exitosamente
+2025-10-17 12:05:53,484 - SyncDeskManager - INFO - Actualizando automáticamente ticket 27208
+2025-10-17 12:05:53,485 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27208
+2025-10-17 12:05:53,485 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27208
+2025-10-17 12:05:57,109 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 27208
+2025-10-17 12:05:57,110 - SyncDeskManager - INFO - ✅ Ticket 27208 actualizado exitosamente
+2025-10-17 12:06:01,535 - SyncDeskManager - INFO - Actualizando automáticamente ticket 27731
+2025-10-17 12:06:01,536 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27731
+2025-10-17 12:06:01,536 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27731
+2025-10-17 12:06:04,670 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 27731
+2025-10-17 12:06:04,671 - SyncDeskManager - INFO - ✅ Ticket 27731 actualizado exitosamente
+2025-10-17 12:06:08,590 - SyncDeskManager - INFO - Actualizando automáticamente ticket 27732
+2025-10-17 12:06:08,591 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27732
+2025-10-17 12:06:08,591 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27732
+2025-10-17 12:06:11,722 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 27732
+2025-10-17 12:06:11,723 - SyncDeskManager - INFO - ✅ Ticket 27732 actualizado exitosamente
+2025-10-17 12:06:15,629 - SyncDeskManager - INFO - Actualizando automáticamente ticket 27733
+2025-10-17 12:06:15,629 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27733
+2025-10-17 12:06:15,630 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27733
+2025-10-17 12:06:18,821 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 27733
+2025-10-17 12:06:18,822 - SyncDeskManager - INFO - ✅ Ticket 27733 actualizado exitosamente
+2025-10-17 12:06:22,691 - SyncDeskManager - INFO - Actualizando automáticamente ticket 27734
+2025-10-17 12:06:22,692 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27734
+2025-10-17 12:06:22,692 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27734
+2025-10-17 12:06:25,934 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 27734
+2025-10-17 12:06:25,935 - SyncDeskManager - INFO - ✅ Ticket 27734 actualizado exitosamente
+2025-10-17 12:06:29,832 - SyncDeskManager - INFO - Actualizando automáticamente ticket 27750
+2025-10-17 12:06:29,832 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27750
+2025-10-17 12:06:29,833 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27750
+2025-10-17 12:06:33,250 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 27750
+2025-10-17 12:06:33,251 - SyncDeskManager - INFO - ✅ Ticket 27750 actualizado exitosamente
+2025-10-17 12:06:37,162 - SyncDeskManager - INFO - Actualizando automáticamente ticket 27899
+2025-10-17 12:06:37,163 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27899
+2025-10-17 12:06:37,163 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 27899
+2025-10-17 12:06:40,291 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 27899
+2025-10-17 12:06:40,292 - SyncDeskManager - INFO - ✅ Ticket 27899 actualizado exitosamente
+2025-10-17 12:06:44,688 - SyncDeskManager - INFO - Actualizando automáticamente ticket 28007
+2025-10-17 12:06:44,690 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28007
+2025-10-17 12:06:44,690 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28007
+2025-10-17 12:06:47,764 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 28007
+2025-10-17 12:06:47,765 - SyncDeskManager - INFO - ✅ Ticket 28007 actualizado exitosamente
+2025-10-17 12:06:51,685 - SyncDeskManager - INFO - Actualizando automáticamente ticket 28017
+2025-10-17 12:06:51,685 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28017
+2025-10-17 12:06:51,686 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28017
+2025-10-17 12:06:54,773 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 28017
+2025-10-17 12:06:54,774 - SyncDeskManager - INFO - ✅ Ticket 28017 actualizado exitosamente
+2025-10-17 12:06:58,682 - SyncDeskManager - INFO - Actualizando automáticamente ticket 28024
+2025-10-17 12:06:58,683 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28024
+2025-10-17 12:06:58,683 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28024
+2025-10-17 12:07:01,823 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 28024
+2025-10-17 12:07:01,824 - SyncDeskManager - INFO - ✅ Ticket 28024 actualizado exitosamente
+2025-10-17 12:07:05,788 - SyncDeskManager - INFO - Actualizando automáticamente ticket 28069
+2025-10-17 12:07:05,788 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28069
+2025-10-17 12:07:05,788 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28069
+2025-10-17 12:07:09,013 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 28069
+2025-10-17 12:07:09,014 - SyncDeskManager - INFO - ✅ Ticket 28069 actualizado exitosamente
+2025-10-17 12:07:12,904 - SyncDeskManager - INFO - Actualizando automáticamente ticket 28175
+2025-10-17 12:07:12,904 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28175
+2025-10-17 12:07:12,904 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28175
+2025-10-17 12:07:16,202 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 28175
+2025-10-17 12:07:16,203 - SyncDeskManager - INFO - ✅ Ticket 28175 actualizado exitosamente
+2025-10-17 12:07:20,307 - SyncDeskManager - INFO - Actualizando automáticamente ticket 28493
+2025-10-17 12:07:20,308 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28493
+2025-10-17 12:07:20,308 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 28493
+2025-10-17 12:07:23,407 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 28493
+2025-10-17 12:07:23,408 - SyncDeskManager - INFO - ✅ Ticket 28493 actualizado exitosamente
+2025-10-17 12:07:27,323 - SyncDeskManager - INFO - Actualizando automáticamente ticket 29206
+2025-10-17 12:07:27,324 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 29206
+2025-10-17 12:07:27,324 - SyncDeskManager - INFO - Iniciando actualización en 2 pasos para ticket 29206
+2025-10-17 12:07:30,442 - SyncDeskManager - INFO - Actualización completa exitosa para ticket 29206
+2025-10-17 12:07:30,443 - SyncDeskManager - INFO - ✅ Ticket 29206 actualizado exitosamente
+2025-10-17 12:07:33,940 - SyncDeskManager - INFO - Resumen proceso regeneración etiquetas: Total=128, Actualizados=30, Salteados=98, Errores=0
+2025-10-17 12:55:52,376 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-17 12:55:53,336 - SyncDeskManager - INFO - 🚀 Iniciando SyncDesk Manager...
+2025-10-17 12:55:53,336 - SyncDeskManager - INFO - 📍 Versión Local
+2025-10-17 12:55:53,406 - SyncDeskManager - INFO - Módulos importados correctamente
+2025-10-17 12:55:53,407 - SyncDeskManager - INFO - Configuración cargada desde: c:\xampp\htdocs\TDI_Task_Manager\data\config\freshdesk_config.json
+2025-10-17 12:55:53,407 - SyncDeskManager - INFO - FreshdeskService inicializado
