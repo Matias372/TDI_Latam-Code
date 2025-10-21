@@ -1,0 +1,156 @@
+2025-10-21 09:57:42,982 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-21 09:57:43,005 - SyncDeskManager - INFO - ============================================================
+2025-10-21 09:57:43,005 - SyncDeskManager - INFO - 🔍 DIAGNÓSTICO DEL SISTEMA
+2025-10-21 09:57:43,005 - SyncDeskManager - INFO - ============================================================
+2025-10-21 09:57:43,172 - SyncDeskManager - INFO - Sistema: Windows 11
+2025-10-21 09:57:43,173 - SyncDeskManager - INFO - Python: 3.12.4
+2025-10-21 09:57:43,173 - SyncDeskManager - INFO - Directorio: C:\xampp\htdocs\TDI_Task_Manager
+2025-10-21 09:57:43,174 - SyncDeskManager - INFO - Ejecutable: C:\xampp\htdocs\TDI_Task_Manager\.venv\Scripts\python.exe
+2025-10-21 09:57:43,175 - SyncDeskManager - INFO - Args: ['c:/xampp/htdocs/TDI_Task_Manager/run.py']
+2025-10-21 09:57:43,176 - SyncDeskManager - INFO - Plataforma: win32
+2025-10-21 09:57:43,176 - SyncDeskManager - INFO - ============================================================
+2025-10-21 09:57:43,185 - SyncDeskManager - DEBUG - No se encontraron logs antiguos para eliminar
+2025-10-21 09:57:47,523 - SyncDeskManager - INFO - ConfigManager inicializado - Modo volátil en memoria
+2025-10-21 09:57:47,526 - SyncDeskManager - INFO - Iniciando aplicación
+2025-10-21 09:57:47,757 - SyncDeskManager - INFO - Módulos cargados correctamente
+2025-10-21 09:57:47,758 - SyncDeskManager - INFO - ConfigManager inicializado - Modo volátil en memoria
+2025-10-21 09:57:47,758 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-21 10:18:41,814 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-21 10:18:41,823 - SyncDeskManager - INFO - ============================================================
+2025-10-21 10:18:41,823 - SyncDeskManager - INFO - 🔍 DIAGNÓSTICO DEL SISTEMA
+2025-10-21 10:18:41,823 - SyncDeskManager - INFO - ============================================================
+2025-10-21 10:18:41,968 - SyncDeskManager - INFO - Sistema: Windows 11
+2025-10-21 10:18:41,969 - SyncDeskManager - INFO - Python: 3.12.4
+2025-10-21 10:18:41,969 - SyncDeskManager - INFO - Directorio: C:\xampp\htdocs\TDI_Task_Manager
+2025-10-21 10:18:41,969 - SyncDeskManager - INFO - Ejecutable: C:\xampp\htdocs\TDI_Task_Manager\.venv\Scripts\python.exe
+2025-10-21 10:18:41,969 - SyncDeskManager - INFO - Args: ['c:/xampp/htdocs/TDI_Task_Manager/run.py']
+2025-10-21 10:18:41,970 - SyncDeskManager - INFO - Plataforma: win32
+2025-10-21 10:18:41,970 - SyncDeskManager - INFO - ============================================================
+2025-10-21 10:18:41,976 - SyncDeskManager - DEBUG - No se encontraron logs antiguos para eliminar
+2025-10-21 10:18:43,197 - SyncDeskManager - INFO - ConfigManager inicializado - Modo volátil en memoria
+2025-10-21 10:18:43,199 - SyncDeskManager - INFO - Iniciando aplicación
+2025-10-21 10:18:43,243 - SyncDeskManager - INFO - Módulos cargados correctamente
+2025-10-21 10:18:43,244 - SyncDeskManager - INFO - ConfigManager inicializado - Modo volátil en memoria
+2025-10-21 10:18:43,245 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-21 10:18:45,869 - SyncDeskManager - INFO - Datos sensibles limpiados de la memoria
+2025-10-21 10:33:15,156 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-21 10:33:15,164 - SyncDeskManager - INFO - ============================================================
+2025-10-21 10:33:15,165 - SyncDeskManager - INFO - 🔍 DIAGNÓSTICO DEL SISTEMA
+2025-10-21 10:33:15,165 - SyncDeskManager - INFO - ============================================================
+2025-10-21 10:33:15,276 - SyncDeskManager - INFO - Sistema: Windows 11
+2025-10-21 10:33:15,277 - SyncDeskManager - INFO - Python: 3.12.4
+2025-10-21 10:33:15,277 - SyncDeskManager - INFO - Directorio: C:\xampp\htdocs\TDI_Task_Manager
+2025-10-21 10:33:15,278 - SyncDeskManager - INFO - Ejecutable: C:\xampp\htdocs\TDI_Task_Manager\.venv\Scripts\python.exe
+2025-10-21 10:33:15,278 - SyncDeskManager - INFO - Args: ['c:/xampp/htdocs/TDI_Task_Manager/run.py']
+2025-10-21 10:33:15,279 - SyncDeskManager - INFO - Plataforma: win32
+2025-10-21 10:33:15,279 - SyncDeskManager - INFO - ============================================================
+2025-10-21 10:33:15,289 - SyncDeskManager - DEBUG - No se encontraron logs antiguos para eliminar
+2025-10-21 10:33:16,620 - SyncDeskManager - INFO - ConfigManager inicializado - Modo volátil en memoria
+2025-10-21 10:33:16,622 - SyncDeskManager - INFO - Iniciando aplicación
+2025-10-21 10:33:16,645 - SyncDeskManager - INFO - Módulos cargados correctamente
+2025-10-21 10:33:16,646 - SyncDeskManager - INFO - ConfigManager inicializado - Modo volátil en memoria
+2025-10-21 10:33:16,647 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-21 10:33:48,779 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:33:49,837 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33667 HTTP/1.1" 200 None
+2025-10-21 10:33:49,839 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:33:50,811 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33565 HTTP/1.1" 200 None
+2025-10-21 10:33:50,814 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:33:52,101 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33563 HTTP/1.1" 200 None
+2025-10-21 10:33:52,106 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:33:52,932 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33552 HTTP/1.1" 200 None
+2025-10-21 10:33:52,937 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:33:53,878 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33517 HTTP/1.1" 200 None
+2025-10-21 10:33:53,883 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:33:54,835 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33494 HTTP/1.1" 200 None
+2025-10-21 10:33:54,839 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:33:55,783 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33491 HTTP/1.1" 200 None
+2025-10-21 10:33:55,787 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:33:56,705 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33346 HTTP/1.1" 200 None
+2025-10-21 10:33:56,709 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:33:57,667 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33314 HTTP/1.1" 200 None
+2025-10-21 10:33:57,671 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:33:58,589 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33297 HTTP/1.1" 200 None
+2025-10-21 10:33:58,593 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:33:59,604 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33139 HTTP/1.1" 200 None
+2025-10-21 10:33:59,609 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:00,498 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33083 HTTP/1.1" 200 None
+2025-10-21 10:34:00,502 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:01,316 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33065 HTTP/1.1" 200 None
+2025-10-21 10:34:06,819 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:07,755 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33027 HTTP/1.1" 200 None
+2025-10-21 10:34:07,759 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:08,717 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32912 HTTP/1.1" 200 None
+2025-10-21 10:34:08,723 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:09,764 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32856 HTTP/1.1" 200 None
+2025-10-21 10:34:09,770 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:10,649 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32844 HTTP/1.1" 200 None
+2025-10-21 10:34:10,653 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:11,568 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32836 HTTP/1.1" 200 None
+2025-10-21 10:34:11,572 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:12,536 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32785 HTTP/1.1" 200 None
+2025-10-21 10:34:12,540 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:13,545 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32778 HTTP/1.1" 200 None
+2025-10-21 10:34:13,549 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:14,450 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32728 HTTP/1.1" 200 None
+2025-10-21 10:34:14,456 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:15,414 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32455 HTTP/1.1" 200 None
+2025-10-21 10:34:15,419 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:16,276 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32399 HTTP/1.1" 200 None
+2025-10-21 10:34:16,280 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:17,150 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32341 HTTP/1.1" 200 None
+2025-10-21 10:34:17,155 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:18,073 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32263 HTTP/1.1" 200 None
+2025-10-21 10:34:18,077 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:18,975 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32174 HTTP/1.1" 200 None
+2025-10-21 10:34:18,979 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:19,882 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32112 HTTP/1.1" 200 None
+2025-10-21 10:34:19,887 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:20,670 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/32084 HTTP/1.1" 200 None
+2025-10-21 10:34:20,673 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:21,760 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/31898 HTTP/1.1" 200 None
+2025-10-21 10:34:21,764 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:22,707 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/31897 HTTP/1.1" 200 None
+2025-10-21 10:34:22,710 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:23,653 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/31871 HTTP/1.1" 200 None
+2025-10-21 10:34:23,658 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:24,796 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/31851 HTTP/1.1" 200 None
+2025-10-21 10:34:24,801 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:25,737 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/31846 HTTP/1.1" 200 None
+2025-10-21 10:34:25,742 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:26,664 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/31699 HTTP/1.1" 200 None
+2025-10-21 10:34:26,669 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:27,585 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/31695 HTTP/1.1" 200 None
+2025-10-21 10:34:27,589 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:29,026 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/31657 HTTP/1.1" 200 None
+2025-10-21 10:34:29,030 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:34:29,965 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/31420 HTTP/1.1" 200 None
+2025-10-21 10:34:29,970 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:50:35,977 - SyncDeskManager - INFO - Datos sensibles limpiados de la memoria
+2025-10-21 10:50:43,780 - SyncDeskManager - INFO - Sistema de logging inicializado
+2025-10-21 10:50:43,781 - SyncDeskManager - INFO - Modo: DEBUG en archivo, INFO en consola
+2025-10-21 10:50:43,788 - SyncDeskManager - INFO - ============================================================
+2025-10-21 10:50:43,788 - SyncDeskManager - INFO - 🔍 DIAGNÓSTICO DEL SISTEMA
+2025-10-21 10:50:43,789 - SyncDeskManager - INFO - ============================================================
+2025-10-21 10:50:43,963 - SyncDeskManager - INFO - Sistema: Windows 11
+2025-10-21 10:50:43,964 - SyncDeskManager - INFO - Python: 3.12.4
+2025-10-21 10:50:43,964 - SyncDeskManager - INFO - Directorio: C:\xampp\htdocs\TDI_Task_Manager
+2025-10-21 10:50:43,965 - SyncDeskManager - INFO - Ejecutable: C:\xampp\htdocs\TDI_Task_Manager\.venv\Scripts\python.exe
+2025-10-21 10:50:43,965 - SyncDeskManager - INFO - Args: ['c:/xampp/htdocs/TDI_Task_Manager/run.py']
+2025-10-21 10:50:43,965 - SyncDeskManager - INFO - Plataforma: win32
+2025-10-21 10:50:43,965 - SyncDeskManager - INFO - ============================================================
+2025-10-21 10:50:43,975 - SyncDeskManager - DEBUG - No se encontraron logs antiguos para eliminar
+2025-10-21 10:50:45,083 - SyncDeskManager - INFO - ConfigManager inicializado - Modo volátil en memoria
+2025-10-21 10:50:45,084 - SyncDeskManager - INFO - Iniciando aplicación
+2025-10-21 10:50:45,105 - SyncDeskManager - INFO - Módulos cargados correctamente
+2025-10-21 10:50:45,108 - SyncDeskManager - INFO - ConfigManager inicializado - Modo volátil en memoria
+2025-10-21 10:50:45,108 - SyncDeskManager - INFO - FreshdeskService inicializado
+2025-10-21 10:51:11,171 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:51:12,048 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33667 HTTP/1.1" 200 None
+2025-10-21 10:51:12,050 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:51:12,959 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33565 HTTP/1.1" 200 None
+2025-10-21 10:51:12,962 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:51:13,874 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33563 HTTP/1.1" 200 None
+2025-10-21 10:51:13,879 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:51:14,754 - urllib3.connectionpool - DEBUG - https://tdilatam.freshdesk.com:443 "GET /api/v2/tickets/33552 HTTP/1.1" 200 None
+2025-10-21 10:51:14,759 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): tdilatam.freshdesk.com:443
+2025-10-21 10:51:19,380 - SyncDeskManager - INFO - Datos sensibles limpiados de la memoria

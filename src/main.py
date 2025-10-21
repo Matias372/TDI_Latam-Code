@@ -1,10 +1,7 @@
-"""
-Sistema SyncDesk Manager
-"""
-
 import os
 import sys
 import traceback
+import atexit  # 🆕 Importar atexit
 
 def setup_paths():
     """Configurar paths - DEBE SER IDÉNTICA A run.py"""
@@ -40,10 +37,22 @@ def main():
     print("🚀 Iniciando SyncDesk Manager...")
     emergency_log("Iniciando main()")
     
+    # 🆕 Inicializar ConfigManager temprano para poder registrar la limpieza
+    from config.config_manager import ConfigManager
+    config_manager = ConfigManager()
+    
+    # 🆕 Registrar limpieza al salir
+    def cleanup_on_exit():
+        emergency_log("Limpiando datos sensibles antes de cerrar...")
+        config_manager.clear_sensitive_data()
+        emergency_log("Aplicación cerrada - datos sensibles eliminados")
+    
+    atexit.register(cleanup_on_exit)
+    
     try:
         # Intentar importar módulos en orden
         emergency_log("Importando logger...")
-        from utils.logger import logger
+        from utils.logging import logger
         
         emergency_log("Logger importado, configurando...")
         logger.log_info("Iniciando aplicación", "🚀 Iniciando SyncDesk Manager...")
@@ -51,14 +60,12 @@ def main():
         # Verificar otros módulos importantes
         emergency_log("Verificando imports críticos...")
         from menus.main_menu import MainMenu
-        from config.config_manager import ConfigManager
         
         logger.log_info("Módulos cargados correctamente", "✅ Sistema listo")
         
         # Iniciar aplicación
         emergency_log("Creando menú principal...")
-        config_manager = ConfigManager()
-        menu = MainMenu()
+        menu = MainMenu()  # MainMenu ya usa ConfigManager internamente
         
         emergency_log("Mostrando menú...")
         menu.mostrar_menu()
@@ -68,6 +75,12 @@ def main():
     except Exception as e:
         error_msg = f"Error en main: {str(e)}\n{traceback.format_exc()}"
         emergency_log(f"❌ ERROR: {error_msg}")
+        
+        # 🆕 Limpiar datos sensibles incluso en error
+        try:
+            config_manager.clear_sensitive_data()
+        except:
+            pass
         
         # Mostrar error al usuario
         print(f"\n💥 ERROR INESPERADO:")

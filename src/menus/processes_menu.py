@@ -1,5 +1,5 @@
 # src/menus/processes_menu.py
-from features.sync_processes import SyncProcess
+from features.sync import SyncOrchestrator as SyncProcess
 from features.freshdesk_updater import FreshdeskDirectUpdater
 from utils.display_utils import display
 
