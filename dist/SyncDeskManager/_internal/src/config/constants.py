@@ -11,5 +11,6 @@ os.makedirs(TEMPLATES_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 os.makedirs(CONFIG_DIR, exist_ok=True)
 
-CONFIG_FILE = os.path.join(CONFIG_DIR, "freshdesk_config.json")
+# 🆕 ARCHIVO SOLO PARA CONFIGURACIÓN NO SENSIBLE
+CONFIG_FILE = os.path.join(CONFIG_DIR, "app_preferences.json")
 AGENTES_TEMPLATE = os.path.join(TEMPLATES_DIR, "AGENTES_FD.xlsx")
