@@ -14,6 +14,7 @@
 [2025-10-21 10:50:43] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
 [2025-10-21 10:50:43] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
 [2025-10-21 10:50:43] ✅ SRC_DIR existe: ['config', 'features', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+<<<<<<< HEAD
 [2025-10-22 15:05:18] Iniciando run.py
 [2025-10-22 15:05:18] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
 [2025-10-22 15:05:18] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
@@ -60,3 +61,5 @@ NameError: name 'sys' is not defined. Did you forget to import 'sys'
 [2025-10-22 15:19:37] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
 [2025-10-22 15:19:37] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
 [2025-10-22 15:19:37] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+=======
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0

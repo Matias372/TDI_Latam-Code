@@ -6,14 +6,23 @@ from typing import Dict, Optional, List
 from utils.logging import logger
 from utils.display_utils import display
 
+<<<<<<< HEAD
 # 🚨 COMENTADO POR SEGURIDAD
+=======
+# 🚨 ELIMINAR O COMENTAR ESTA LÍNEA - ES UN RIESGO DE SEGURIDAD
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
 # urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class ClarityService:
     def __init__(self, config_manager):
         self.config = config_manager
         self.session = requests.Session()
+<<<<<<< HEAD
         self.session.verify = True  # ✅ SEGURIDAD HABILITADA
+=======
+        # 🆕 HABILITAR SSL VERIFICATION - CRÍTICO PARA SEGURIDAD
+        self.session.verify = True  # Cambiar de False a True
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
         self.session.headers.update({
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -21,6 +30,10 @@ class ClarityService:
 
     def _get_auth(self):
         """Obtener autenticación Basic Auth"""
+<<<<<<< HEAD
+=======
+        # 🆕 VERIFICAR QUE LAS CREDENCIALES ESTÁN EN MEMORIA
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
         if not self.config.clarity_username or not self.config.clarity_password:
             logger.log_error("Credenciales de Clarity no disponibles en memoria")
             return None
@@ -30,11 +43,18 @@ class ClarityService:
         """Buscar ticket específico - INTERFAZ LIMPIA"""
         logger.log_debug(f"Buscando ticket {codigo_ticket} directamente en Clarity...")
         
+        # 🆕 VERIFICACIÓN MEJORADA DE CONFIGURACIÓN
         if not self.config.validar_configuracion_clarity():
             return None
 
+<<<<<<< HEAD
         if not self.config.clarity_username or not self.config.clarity_password:
             display.show_message("Credenciales de Clarity no configuradas en memoria", "error")
+=======
+        # 🆕 VERIFICACIÓN EXPLÍCITA DE CREDENCIALES EN MEMORIA
+        if not self.config.clarity_username or not self.config.clarity_password:
+            print("❌ Credenciales de Clarity no configuradas en memoria.")
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
             return None
 
         endpoint = "/tasks"
@@ -51,6 +71,10 @@ class ClarityService:
             if auth is None:
                 return None
                 
+<<<<<<< HEAD
+=======
+            # 🆕 AGREGAR TIMEOUT
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
             response = self.session.get(url, params=params, auth=auth, timeout=30)
             
             if response.status_code == 200:
@@ -67,6 +91,7 @@ class ClarityService:
                     display.show_message(f"Ticket {codigo_ticket} no encontrado en Clarity", "warning")
                     return None
             else:
+<<<<<<< HEAD
                 # 🆕 MANEJO MEJORADO DE ERRORES
                 if response.status_code == 401:
                     display.show_message("Error de autenticación en Clarity. Verifique usuario y contraseña", "error")
@@ -78,6 +103,19 @@ class ClarityService:
 
         except requests.exceptions.Timeout:
             display.show_message(f"Timeout al buscar ticket {codigo_ticket} en Clarity", "error")
+=======
+                # 🆕 MEJOR MANEJO DE ERRORES DE AUTENTICACIÓN
+                if response.status_code == 401:
+                    print("❌ Error de autenticación en Clarity. Verifique usuario y contraseña.")
+                    # 🆕 LIMPIAR CREDENCIALES INVÁLIDAS
+                    self.config.clear_sensitive_data()
+                else:
+                    logger.log_error(f"Error HTTP {response.status_code} buscando ticket: {response.text}")
+                return None
+
+        except requests.exceptions.Timeout:
+            print(f"⏰ Timeout al buscar ticket {codigo_ticket} en Clarity.")
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
             return None
         except Exception as e:
             logger.log_error(f"Error buscando ticket {codigo_ticket}: {str(e)}")
@@ -88,11 +126,18 @@ class ClarityService:
         """Obtener todos los tickets de Clarity - INTERFAZ LIMPIA"""
         display.show_message("Obteniendo todos los tickets de Clarity...", "info")
         
+        # 🆕 VERIFICACIÓN MEJORADA
         if not self.config.validar_configuracion_clarity():
             return {}
 
+<<<<<<< HEAD
         if not self.config.clarity_username or not self.config.clarity_password:
             display.show_message("Credenciales de Clarity no configuradas en memoria", "error")
+=======
+        # 🆕 VERIFICACIÓN EXPLÍCITA ADICIONAL
+        if not self.config.clarity_username or not self.config.clarity_password:
+            print("❌ Credenciales de Clarity no configuradas en memoria.")
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
             return {}
 
         todos_tickets = {}
@@ -100,9 +145,12 @@ class ClarityService:
         limit = 100
         total_tickets = 0
         MAX_TICKETS = 5000
+<<<<<<< HEAD
         
         # 🆕 BARRA DE PROGRESO PARA OPERACIÓN LARGA
         display.show_message("Esta operación puede tomar varios minutos...", "warning")
+=======
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
         
         while True:
             endpoint = "/tasks"
@@ -119,6 +167,10 @@ class ClarityService:
                 if auth is None:
                     break
 
+<<<<<<< HEAD
+=======
+                # 🆕 AGREGAR TIMEOUT
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
                 response = self.session.get(url, params=params, auth=auth, timeout=30)
                 
                 if response.status_code == 200:
@@ -137,6 +189,7 @@ class ClarityService:
                     
                     total_tickets += len(tasks)
                     
+<<<<<<< HEAD
                     # 🆕 ACTUALIZAR PROGRESO
                     if offset % 500 == 0:  # Mostrar cada 500 tickets
                         display.show_message(f"Procesados {total_tickets} tickets...", "info")
@@ -164,6 +217,31 @@ class ClarityService:
 
             except requests.exceptions.Timeout:
                 display.show_message("Timeout al obtener tickets de Clarity", "error")
+=======
+                    offset += len(tasks)
+                    
+                    if len(tasks) < limit:
+                        break
+                    
+                    if total_tickets >= MAX_TICKETS:
+                        print(f"⚠️  Se alcanzó el límite máximo de {MAX_TICKETS} tickets")
+                        break
+                    
+                    time.sleep(0.1)
+                    
+                else:
+                    # 🆕 MEJOR MANEJO DE ERRORES
+                    if response.status_code == 401:
+                        print("❌ Error de autenticación en Clarity. Verifique usuario y contraseña.")
+                        self.config.clear_sensitive_data()
+                        break
+                    else:
+                        print(f"❌ Error HTTP {response.status_code} obteniendo tickets Clarity: {response.text}")
+                        break
+
+            except requests.exceptions.Timeout:
+                print("⏰ Timeout al obtener tickets de Clarity.")
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
                 break
             except Exception as e:
                 display.show_message(f"Error obteniendo tickets Clarity: {str(e)}", "error")
@@ -174,12 +252,23 @@ class ClarityService:
         return todos_tickets
 
     def actualizar_estado_ticket(self, investment_id: str, ticket_id: str, nuevo_estado: str) -> bool:
+<<<<<<< HEAD
         """Actualizar estado de ticket en Clarity - INTERFAZ LIMPIA"""
         if not self.config.validar_configuracion_clarity():
             return False
 
         if not self.config.clarity_username or not self.config.clarity_password:
             display.show_message("Credenciales de Clarity no configuradas en memoria", "error")
+=======
+        """Actualizar estado de ticket en Clarity"""
+        # 🆕 VERIFICACIÓN MEJORADA
+        if not self.config.validar_configuracion_clarity():
+            return False
+
+        # 🆕 VERIFICACIÓN EXPLÍCITA
+        if not self.config.clarity_username or not self.config.clarity_password:
+            print("❌ Credenciales de Clarity no configuradas en memoria.")
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
             return False
 
         endpoint = f"/custTdiInvBacklogs/{investment_id}/tasks/{ticket_id}"
@@ -197,6 +286,10 @@ class ClarityService:
             if auth is None:
                 return False
 
+<<<<<<< HEAD
+=======
+            # 🆕 AGREGAR TIMEOUTS
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
             # Intentar PATCH primero
             response = self.session.patch(url, json=datos_actualizacion, auth=auth, timeout=30)
             
@@ -206,6 +299,7 @@ class ClarityService:
             else:
                 # Fallback a PUT
                 response = self.session.put(url, json=datos_actualizacion, auth=auth, timeout=30)
+<<<<<<< HEAD
                 if response.status_code == 200:
                     display.show_message(f"Ticket {ticket_id} actualizado exitosamente (vía PUT)", "success")
                     return True
@@ -215,6 +309,12 @@ class ClarityService:
                 
         except requests.exceptions.Timeout:
             display.show_message(f"Timeout al actualizar ticket {ticket_id} en Clarity", "error")
+=======
+                return response.status_code == 200
+                
+        except requests.exceptions.Timeout:
+            print(f"⏰ Timeout al actualizar ticket {ticket_id} en Clarity.")
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
             return False
         except Exception as e:
             display.show_message(f"Error actualizando ticket {ticket_id}: {str(e)}", "error")
@@ -233,10 +333,16 @@ class ClarityService:
             return estado_field
         return None
 
+<<<<<<< HEAD
     def verificar_conexion(self):
         """Verificar conexión a Clarity - INTERFAZ LIMPIA"""
         display.show_message("Verificando conexión a Clarity...", "info")
         
+=======
+    # 🆕 AGREGAR MÉTODO DE VERIFICACIÓN DE CONEXIÓN
+    def verificar_conexion(self):
+        """Verificar que la conexión a Clarity funciona con las credenciales actuales"""
+>>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
         if not self.config.validar_configuracion_clarity():
             return False, "Configuración incompleta en memoria"
 
