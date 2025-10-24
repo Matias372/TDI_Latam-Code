@@ -6,7 +6,9 @@ from utils.validation_utils import ValidationUtils
 from utils.api_utils import ApiUtils
 from config.state_mapping import MAPEO_ESTADOS_FD_API_A_CLARITY, mapear_estado_desde_api
 from utils.display_utils import display
-from utils.logger import logger
+from utils.logging import logger
+# O para funcionalidades específicas:
+from utils.logging import logger, TransactionLogger
 
 class Processes:
     def __init__(self, freshdesk_service):

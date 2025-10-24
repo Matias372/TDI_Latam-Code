@@ -1,8 +1,4 @@
-[2025-10-21 10:24:16] Iniciando run.py
-[2025-10-21 10:24:16] BASE_DIR: C:\xampp\htdocs\TDI_Task_Manager\release-package\_internal
-[2025-10-21 10:24:16] SRC_DIR: C:\xampp\htdocs\TDI_Task_Manager\release-package\_internal\src
-[2025-10-21 10:24:16] ✅ SRC_DIR existe: ['config', 'features', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-[2025-10-21 10:39:35] Iniciando run.py
-[2025-10-21 10:39:35] BASE_DIR: C:\xampp\htdocs\TDI_Task_Manager\release-package\_internal
-[2025-10-21 10:39:35] SRC_DIR: C:\xampp\htdocs\TDI_Task_Manager\release-package\_internal\src
-[2025-10-21 10:39:35] ✅ SRC_DIR existe: ['config', 'features', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-24 08:35:11] Iniciando run.py
+[2025-10-24 08:35:11] BASE_DIR: C:\xampp\htdocs\TDI_Task_Manager\release-package\_internal
+[2025-10-24 08:35:11] SRC_DIR: C:\xampp\htdocs\TDI_Task_Manager\release-package\_internal\src
+[2025-10-24 08:35:11] ✅ SRC_DIR existe: ['config', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']

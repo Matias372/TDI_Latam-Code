@@ -23,25 +23,48 @@ class ProjectLogger:
         return logs_dir
     
     def setup_logging(self):
-        """Configurar el sistema de logging"""
+        """Configurar el sistema de logging - DEBUG en archivo, INFO en consola"""
         try:
             # Crear directorio de logs si no existe
             os.makedirs(self.logs_dir, exist_ok=True)
             
-            # Configurar logging
             log_file = self._get_log_file_path()
             
-            logging.basicConfig(
-                level=logging.DEBUG,  # Cambiado a DEBUG para más detalles
-                format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                handlers=[
-                    logging.FileHandler(log_file, encoding='utf-8'),
-                    logging.StreamHandler(sys.stdout)
-                ]
-            )
-            
+            # 🆕 CONFIGURACIÓN SEPARADA: DEBUG para archivo, INFO para consola
             self.logger = logging.getLogger('SyncDeskManager')
+            self.logger.setLevel(logging.DEBUG)  # Nivel más bajo para capturar todo
+            
+            # Formateador común
+            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+            
+            # 🆕 HANDLER PARA ARCHIVO (DEBUG - captura todo)
+            file_handler = logging.FileHandler(log_file, encoding='utf-8')
+            file_handler.setLevel(logging.DEBUG)  # Captura desde DEBUG hacia arriba
+            file_handler.setFormatter(formatter)
+            
+            # 🆕 HANDLER PARA CONSOLA (INFO - solo mensajes importantes)
+            console_handler = logging.StreamHandler(sys.stdout)
+            console_handler.setLevel(logging.INFO)  # Solo muestra INFO, WARNING, ERROR
+            console_handler.setFormatter(formatter)
+            
+            # Agregar handlers al logger
+            self.logger.addHandler(file_handler)
+            self.logger.addHandler(console_handler)
+            
+            # 🆕 CONFIGURAR ESPECÍFICAMENTE URLLIB3 PARA ARCHIVO SOLO
+            # Los logs de urllib3 irán al archivo pero NO a la consola
+            urllib3_logger = logging.getLogger("urllib3")
+            urllib3_logger.setLevel(logging.DEBUG)  # Captura debug en archivo
+            urllib3_logger.addHandler(file_handler)  # Solo archivo
+            urllib3_logger.propagate = False  # Evita que se propague al root logger
+            
+            urllib3_connection_logger = logging.getLogger("urllib3.connectionpool")
+            urllib3_connection_logger.setLevel(logging.DEBUG)
+            urllib3_connection_logger.addHandler(file_handler)
+            urllib3_connection_logger.propagate = False
+            
             self.log_info("Sistema de logging inicializado", "✅ Sistema de registro activado")
+            self.log_info("Modo: DEBUG en archivo, INFO en consola", "📁 Logs detallados guardados en archivo")
             
             # Ejecutar diagnóstico
             self.log_system_diagnostics()

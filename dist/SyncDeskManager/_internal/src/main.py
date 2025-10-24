@@ -52,7 +52,7 @@ def main():
     try:
         # Intentar importar módulos en orden
         emergency_log("Importando logger...")
-        from utils.logger import logger
+        from utils.logging import logger
         
         emergency_log("Logger importado, configurando...")
         logger.log_info("Iniciando aplicación", "🚀 Iniciando SyncDesk Manager...")

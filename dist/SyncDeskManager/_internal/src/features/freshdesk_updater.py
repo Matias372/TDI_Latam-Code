@@ -7,7 +7,9 @@ from typing import Dict, List, Optional, Tuple
 import json
 from utils.file_utils import FileUtils
 from utils.display_utils import display
-from utils.logger import logger
+from utils.logging import logger
+# O para funcionalidades específicas:
+from utils.logging import logger, TransactionLogger
 
 class FreshdeskDirectUpdater:
     def __init__(self, freshdesk_domain: str, api_key: str):

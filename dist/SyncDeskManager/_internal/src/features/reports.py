@@ -171,12 +171,12 @@ class Reports:
         
         columna_producto_fd = None
         for col in df_freshdesk.columns:
-            if 'seleccione el producto' in col.lower():
+            if 'producto' in col.lower():
                 columna_producto_fd = col
                 break
         
         if not columna_producto_fd:
-            errores.append("❌ No se encontró columna 'Seleccione el producto' en Freshdesk")
+            errores.append("❌ No se encontró columna 'Producto' en Freshdesk")
         else:
             print(f"✅ Columna producto Freshdesk: '{columna_producto_fd}'")
 

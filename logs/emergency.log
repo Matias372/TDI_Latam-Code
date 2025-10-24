@@ -71,3 +71,56 @@ ModuleNotFoundError: No module named 'utils.logger'
 [2025-10-22 15:21:49] Aplicación cerrada - datos sensibles eliminados
 =======
 >>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
+[2025-10-22 16:54:33] Iniciando main()
+[2025-10-22 16:54:34] Importando logger...
+[2025-10-22 16:54:34] Logger importado, configurando...
+[2025-10-22 16:54:34] Verificando imports críticos...
+[2025-10-22 16:54:34] ❌ ERROR: Error en main: invalid decimal literal (freshdesk_service.py, line 35)
+Traceback (most recent call last):
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\main.py", line 62, in main
+    from menus.main_menu import MainMenu
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\menus\__init__.py", line 1, in <module>
+    from .main_menu import MainMenu
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\menus\main_menu.py", line 2, in <module>
+    from services.freshdesk_service import FreshdeskService
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\services\__init__.py", line 1, in <module>
+    from .freshdesk_service import FreshdeskService
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\services\freshdesk_service.py", line 35
+    >>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
+              ^
+SyntaxError: invalid decimal literal
+
+[2025-10-24 08:25:31] Iniciando main()
+[2025-10-24 08:25:34] Importando logger...
+[2025-10-24 08:25:34] Logger importado, configurando...
+[2025-10-24 08:25:34] Verificando imports críticos...
+[2025-10-24 08:25:34] ❌ ERROR: Error en main: invalid decimal literal (clarity_service.py, line 13)
+Traceback (most recent call last):
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\main.py", line 62, in main
+    from menus.main_menu import MainMenu
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\menus\__init__.py", line 1, in <module>
+    from .main_menu import MainMenu
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\menus\main_menu.py", line 3, in <module>
+    from features.processes import Processes
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\features\__init__.py", line 3, in <module>
+    from features.sync import SyncOrchestrator
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\features\sync\__init__.py", line 1, in <module>
+    from .sync_orchestrator import SyncOrchestrator
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\features\sync\sync_orchestrator.py", line 3, in <module>
+    from services.clarity_service import ClarityService
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\services\clarity_service.py", line 13
+    >>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
+              ^
+SyntaxError: invalid decimal literal
+
+[2025-10-24 08:31:14] Limpiando datos sensibles antes de cerrar...
+[2025-10-24 08:31:14] Aplicación cerrada - datos sensibles eliminados
+[2025-10-24 08:31:22] Iniciando main()
+[2025-10-24 08:31:23] Importando logger...
+[2025-10-24 08:31:23] Logger importado, configurando...
+[2025-10-24 08:31:23] Verificando imports críticos...
+[2025-10-24 08:31:23] Creando menú principal...
+[2025-10-24 08:31:23] Mostrando menú...
+[2025-10-24 08:31:25] Aplicación finalizada normalmente
+[2025-10-24 08:31:25] Limpiando datos sensibles antes de cerrar...
+[2025-10-24 08:31:25] Aplicación cerrada - datos sensibles eliminados
