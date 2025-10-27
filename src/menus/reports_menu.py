@@ -15,6 +15,7 @@ class ReportsMenu:
             
             print("   🏢 1. Lista de empresas") 
             print("   🔄 2. Productos diferentes (FD vs Clarity)")
+            print("   🧠 3. Ir a Sistema de Clasificación")
             print("   ↩️  0. Volver al menú principal")
             
             opcion = input("\n👉 Seleccione una opción: ").strip()
@@ -23,6 +24,11 @@ class ReportsMenu:
                 self.reports.reporte_empresas()
             elif opcion == "2":
                 self.reports.reporte_productos_diferentes()
+            elif opcion == "3":
+                # Redirigir al menú de clasificación
+                from menus.classification_menu import ClassificationMenu
+                classification_menu = ClassificationMenu()
+                classification_menu.mostrar_menu_principal()
             elif opcion == "0":
                 break
             else:

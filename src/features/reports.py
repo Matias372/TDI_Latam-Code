@@ -170,17 +170,45 @@ class Reports:
             errores.append("❌ Freshdesk debe contener 'Ticket ID'")
         
         columna_producto_fd = None
-        for col in df_freshdesk.columns:
-            if 'producto' in col.lower():
-                columna_producto_fd = col
+        
+        # ESTRATEGIA MEJORADA PARA DETECTAR LA COLUMNA CORRECTA
+        # Priorizar columnas específicas en orden de preferencia
+        posibles_nombres = ['Producto', 'producto']  # Nombres preferidos
+        
+        for nombre_preferido in posibles_nombres:
+            if nombre_preferido in df_freshdesk.columns:
+                columna_producto_fd = nombre_preferido
+                print(f"✅ Encontrada columna preferida: '{columna_producto_fd}'")
                 break
         
+        # Si no encontramos las preferidas, buscar columnas que contengan "producto"
+        # pero excluyendo "seleccione"
+        if not columna_producto_fd:
+            for col in df_freshdesk.columns:
+                col_lower = col.lower()
+                if 'producto' in col_lower and 'seleccione' not in col_lower:
+                    columna_producto_fd = col
+                    print(f"✅ Encontrada columna alternativa: '{columna_producto_fd}'")
+                    break
+        
+        # Último recurso: cualquier columna con "producto"
+        if not columna_producto_fd:
+            for col in df_freshdesk.columns:
+                if 'producto' in col.lower():
+                    columna_producto_fd = col
+                    print(f"⚠️  Usando columna menos ideal: '{columna_producto_fd}'")
+                    break
+
         if not columna_producto_fd:
             errores.append("❌ No se encontró columna 'Producto' en Freshdesk")
+            # Mostrar columnas disponibles para ayudar en diagnóstico
+            print("📋 Columnas disponibles en Freshdesk:")
+            for col in df_freshdesk.columns:
+                print(f"   - {col}")
         else:
-            print(f"✅ Columna producto Freshdesk: '{columna_producto_fd}'")
+            print(f"✅ Columna producto Freshdesk seleccionada: '{columna_producto_fd}'")
 
-        # Verificar Clarity
+        # Verificar Clarity (mantener lógica original mejorada)
         columna_id_clarity = None
         columna_producto_clarity = None
         

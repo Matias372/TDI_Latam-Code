@@ -1,77 +1,48 @@
-[2025-10-21 09:57:42] Iniciando run.py
-[2025-10-21 09:57:42] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-21 09:57:42] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-21 09:57:42] ✅ SRC_DIR existe: ['config', 'features', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-[2025-10-21 10:18:41] Iniciando run.py
-[2025-10-21 10:18:41] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-21 10:18:41] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-21 10:18:41] ✅ SRC_DIR existe: ['config', 'features', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-[2025-10-21 10:33:15] Iniciando run.py
-[2025-10-21 10:33:15] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-21 10:33:15] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-21 10:33:15] ✅ SRC_DIR existe: ['config', 'features', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-[2025-10-21 10:50:43] Iniciando run.py
-[2025-10-21 10:50:43] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-21 10:50:43] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-21 10:50:43] ✅ SRC_DIR existe: ['config', 'features', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-<<<<<<< HEAD
-[2025-10-22 15:05:18] Iniciando run.py
-[2025-10-22 15:05:18] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-22 15:05:18] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-22 15:05:18] ✅ SRC_DIR existe: ['config', 'features', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-[2025-10-22 15:05:18] ❌ Error inesperado en run.py: name 'sys' is not defined
-[2025-10-22 15:05:18] Traceback: Traceback (most recent call last):
-  File "c:\xampp\htdocs\TDI_Task_Manager\run.py", line 69, in <module>
-    main()
-  File "c:\xampp\htdocs\TDI_Task_Manager\src\main.py", line 41, in main
-    from config.config_manager import ConfigManager
-  File "c:\xampp\htdocs\TDI_Task_Manager\src\config\__init__.py", line 1, in <module>
-    from .config_manager import ConfigManager
-  File "c:\xampp\htdocs\TDI_Task_Manager\src\config\config_manager.py", line 1, in <module>
-    from utils.logging import logger
-  File "c:\xampp\htdocs\TDI_Task_Manager\src\utils\__init__.py", line 5, in <module>
-    from utils.logging import logger
-  File "c:\xampp\htdocs\TDI_Task_Manager\src\utils\logging\__init__.py", line 11, in <module>
-    logger = ProjectLogger()
-             ^^^^^^^^^^^^^^^
-  File "c:\xampp\htdocs\TDI_Task_Manager\src\utils\logging\base_logger.py", line 55, in __init__
-    self.file_logger = FileLogger(self)
-                       ^^^^^^^^^^^^^^^^
-  File "c:\xampp\htdocs\TDI_Task_Manager\src\utils\logging\file_logger.py", line 11, in __init__
-    self.logs_dir = self._get_logs_directory()
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\xampp\htdocs\TDI_Task_Manager\src\utils\logging\file_logger.py", line 15, in _get_logs_directory
-    if getattr(sys, 'frozen', False):
-               ^^^
-NameError: name 'sys' is not defined. Did you forget to import 'sys'
-
-[2025-10-22 15:10:17] Iniciando run.py
-[2025-10-22 15:10:17] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-22 15:10:17] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-22 15:10:17] ✅ SRC_DIR existe: ['config', 'features', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-[2025-10-22 15:13:25] Iniciando run.py
-[2025-10-22 15:13:25] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-22 15:13:25] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-22 15:13:25] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-[2025-10-22 15:18:53] Iniciando run.py
-[2025-10-22 15:18:53] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-22 15:18:53] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-22 15:18:53] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-[2025-10-22 15:19:37] Iniciando run.py
-[2025-10-22 15:19:37] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-22 15:19:37] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-22 15:19:37] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-=======
->>>>>>> 363eba8bb7704637f1e96bf744b87f66bd15fcc0
-[2025-10-22 16:54:33] Iniciando run.py
-[2025-10-22 16:54:33] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-22 16:54:33] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-22 16:54:33] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-[2025-10-24 08:25:31] Iniciando run.py
-[2025-10-24 08:25:31] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-24 08:25:31] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-24 08:25:31] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
-[2025-10-24 08:31:22] Iniciando run.py
-[2025-10-24 08:31:22] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
-[2025-10-24 08:31:22] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
-[2025-10-24 08:31:22] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 12:56:53] Iniciando run.py
+[2025-10-27 12:56:53] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 12:56:53] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 12:56:53] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 13:02:54] Iniciando run.py
+[2025-10-27 13:02:54] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 13:02:54] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 13:02:54] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 13:12:54] Iniciando run.py
+[2025-10-27 13:12:54] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 13:12:54] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 13:12:54] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 13:18:46] Iniciando run.py
+[2025-10-27 13:18:46] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 13:18:46] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 13:18:46] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 13:32:07] Iniciando run.py
+[2025-10-27 13:32:07] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 13:32:07] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 13:32:07] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 13:43:26] Iniciando run.py
+[2025-10-27 13:43:26] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 13:43:26] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 13:43:26] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 13:58:28] Iniciando run.py
+[2025-10-27 13:58:28] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 13:58:28] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 13:58:28] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 14:07:13] Iniciando run.py
+[2025-10-27 14:07:13] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 14:07:13] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 14:07:13] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 14:16:56] Iniciando run.py
+[2025-10-27 14:16:56] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 14:16:56] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 14:16:56] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 15:16:17] Iniciando run.py
+[2025-10-27 15:16:17] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 15:16:17] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 15:16:17] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 16:00:28] Iniciando run.py
+[2025-10-27 16:00:28] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 16:00:28] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 16:00:28] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']
+[2025-10-27 16:04:05] Iniciando run.py
+[2025-10-27 16:04:05] BASE_DIR: c:\xampp\htdocs\TDI_Task_Manager
+[2025-10-27 16:04:05] SRC_DIR: c:\xampp\htdocs\TDI_Task_Manager\src
+[2025-10-27 16:04:05] ✅ SRC_DIR existe: ['config', 'data', 'features', 'logs', 'main.py', 'menus', 'services', 'utils', '__init__.py', '__pycache__']

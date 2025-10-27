@@ -1,0 +1,1248 @@
+{
+  "metadata": {
+    "fecha_generacion": "2025-10-24 16:27:06",
+    "archivo_origen": "generado_desde_excel",
+    "total_tickets_analizados": 1818,
+    "total_patrones_encontrados": 37,
+    "version": "1.0"
+  },
+  "patrones_clasificacion": {
+    "Tipo de Ticket": {
+      "Requerimiento": {
+        "total_tickets": 3513,
+        "palabras_clave": {
+          "cmpc": 3579,
+          "requerimiento": 3388,
+          "telefonica": 1420,
+          "chile": 1292,
+          "productos": 1085,
+          "entel": 1038,
+          "equipos": 985,
+          "requerimientos": 907,
+          "usuario": 822,
+          "acceso": 765,
+          "soporte": 726,
+          "scarlett": 723,
+          "reporte": 538,
+          "helix": 366,
+          "asignado": 356,
+          "trabajo": 331,
+          "eliminación": 327,
+          "requiere": 298,
+          "orden": 291,
+          "rmdy": 137
+        },
+        "ejemplos_asuntos": [
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB  Kyocera Taskalfa 6003I RMU1702146",
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB Kyocera Taskalfa 6003I RMU1702142",
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB Kyocera Taskalfa 6003I RMU1702155"
+        ],
+        "frecuencia_palabras": 19374
+      },
+      "Soporte": {
+        "total_tickets": 1588,
+        "palabras_clave": {
+          "icbc": 946,
+          "versión": 636,
+          "usuario": 389,
+          "tabla": 354,
+          "tracelog": 344,
+          "unix": 331,
+          "cese": 322,
+          "remedy": 322,
+          "linux": 279,
+          "server": 262,
+          "cuenta": 217,
+          "actualiza": 210,
+          "windows": 209,
+          "empleado": 204,
+          "grupo": 170,
+          "identificar": 146,
+          "baja": 143,
+          "autorizador": 139,
+          "único": 138,
+          "bpba": 97
+        },
+        "ejemplos_asuntos": [
+          "Lentidão no Sistema - BMC Remedy",
+          "INC - DX O2: Error al intentar borrar alarmas Dynatrace",
+          "Problemas na visualização de alterações no chamado -TDI"
+        ],
+        "frecuencia_palabras": 5858
+      }
+    },
+    "Segmento": {
+      "AIOPS": {
+        "total_tickets": 172,
+        "palabras_clave": {
+          "teco": 60,
+          "alarmas": 49,
+          "datadog": 41,
+          "root": 26,
+          "aplicación": 24,
+          "spectrum": 23,
+          "desde": 21,
+          "marcelo": 19,
+          "accesstt": 18,
+          "drwxr": 16,
+          "implementación": 15,
+          "center": 14,
+          "jteller": 14,
+          "luis": 12,
+          "netops": 12,
+          "cons": 11,
+          "configuración": 9,
+          "error": 7,
+          "dxo2": 6,
+          "otel": 6
+        },
+        "ejemplos_asuntos": [
+          "INC - DX O2: Error al intentar borrar alarmas Dynatrace",
+          "REQ - Datadog: Modificación de notificaciones de monitores [FT]",
+          "REQ - Datadog: Monitoreo de demonios AR9CMPGNCRD y AR9CMPGNLDR [AM]"
+        ],
+        "frecuencia_palabras": 403
+      },
+      "Automation": {
+        "total_tickets": 33,
+        "palabras_clave": {
+          "control": 21,
+          "error": 19,
+          "productivo": 12,
+          "assessment": 10,
+          "buenas": 9,
+          "contenido": 8,
+          "correo": 8,
+          "controlm": 8,
+          "información": 8,
+          "necesariamente": 6,
+          "cualquier": 6,
+          "electrónico": 6,
+          "remitente": 6,
+          "responsabilidad": 6,
+          "workload": 5,
+          "mantenimiento": 5,
+          "ambientes": 5,
+          "preventivo": 4,
+          "prácticas": 4,
+          "server": 3
+        },
+        "ejemplos_asuntos": [
+          "REQ: Assessment Control-M Ambientes No Productivo",
+          "REQ: Assessment Control-M Ambiente Productivo",
+          "RE: Consulta sobre agente control-m"
+        ],
+        "frecuencia_palabras": 159
+      },
+      "Business Management": {
+        "total_tickets": 298,
+        "palabras_clave": {
+          "error": 203,
+          "clarity": 102,
+          "ayuda": 100,
+          "datos": 94,
+          "probe": 82,
+          "service": 63,
+          "nimbus": 58,
+          "consulta": 58,
+          "nimsoft": 56,
+          "solicitud": 49,
+          "wasp": 45,
+          "femsasalud": 44,
+          "main": 42,
+          "proyecto": 40,
+          "entel": 36,
+          "problemas": 34,
+          "java": 28,
+          "problema": 27,
+          "proyectos": 24,
+          "cuenta": 20
+        },
+        "ejemplos_asuntos": [
+          "Campos Clarity",
+          "RE: [USO CONFIDENCIAL] Acta de Cierre Firmada Proyecto BCI - Nueva Red DWDM - ESC 205266 y 221553 - GO/SFA/USV 245009",
+          "RE: Nueva integrante Equipo Pega"
+        ],
+        "frecuencia_palabras": 1205
+      },
+      "Data Transport": {
+        "total_tickets": 24,
+        "palabras_clave": {
+          "xcom": 20,
+          "integer": 10,
+          "migración": 7,
+          "prueba": 7,
+          "gestión": 6,
+          "banco": 5,
+          "actualización": 4,
+          "base": 4,
+          "disponibilidad": 4,
+          "archivos": 4,
+          "operación": 4,
+          "alarma": 4,
+          "ciudad": 3,
+          "naranjax": 3,
+          "relevamiento": 3,
+          "migraciones": 3,
+          "consultas": 3,
+          "galicia": 3,
+          "sitios": 2,
+          "agosto": 2
+        },
+        "ejemplos_asuntos": [
+          "Consulta Software XCom - Gestión de identidades y Logs de seguridad",
+          "Banco Ciudad - Migración XCOM",
+          "NaranjaX - Relevamiento Migraciones XCOM"
+        ],
+        "frecuencia_palabras": 101
+      },
+      "Operaciones": {
+        "total_tickets": 833,
+        "palabras_clave": {
+          "icbc": 862,
+          "versión": 636,
+          "version": 348,
+          "tracelog": 344,
+          "unix": 333,
+          "linux": 284,
+          "cmpc": 259,
+          "server": 257,
+          "soporte": 220,
+          "requerimiento": 197,
+          "windows": 192,
+          "equipos": 164,
+          "productos": 146,
+          "agent": 106,
+          "requerimientos": 104,
+          "softys": 97,
+          "bpba": 91,
+          "appserver": 86,
+          "gabriel": 73,
+          "eliminación": 67
+        },
+        "ejemplos_asuntos": [
+          "Tareas de Reuniones de Discovery y modelado de Aplicaciones Nom billable",
+          "Soporte Productos BMC",
+          "[ICBC] SI sin versión: LinuxCertificates.IPsecCerts - Unix/Linux"
+        ],
+        "frecuencia_palabras": 4866
+      },
+      "SecOPs": {
+        "total_tickets": 132,
+        "palabras_clave": {
+          "reporte": 62,
+          "tssa": 38,
+          "upgrade": 31,
+          "problema": 28,
+          "generar": 24,
+          "tssr": 22,
+          "configuración": 17,
+          "prod": 17,
+          "tsac": 15,
+          "incidente": 15,
+          "path": 10,
+          "luego": 9,
+          "login": 8,
+          "windows": 7,
+          "instalacion": 7,
+          "unix": 5,
+          "problemas": 5,
+          "rscd": 4,
+          "2025": 4,
+          "parcheo": 4
+        },
+        "ejemplos_asuntos": [
+          "Remediación Automática Completada - Alarma de evento Fork en app server TSSA. Task: 13295",
+          "Remediación Automática Completada - Alarma de evento Fork en app server TSSA. Task: 13361",
+          "Error en Job"
+        ],
+        "frecuencia_palabras": 332
+      },
+      "Service Management": {
+        "total_tickets": 3864,
+        "palabras_clave": {
+          "cmpc": 3339,
+          "requerimiento": 3181,
+          "telefonica": 1420,
+          "chile": 1291,
+          "usuario": 1177,
+          "productos": 1010,
+          "entel": 907,
+          "requerimientos": 798,
+          "soporte": 768,
+          "acceso": 749,
+          "remedy": 696,
+          "asignado": 581,
+          "cuenta": 534,
+          "grupo": 484,
+          "helix": 365,
+          "tabla": 360,
+          "trabajo": 328,
+          "orden": 290,
+          "baja": 257,
+          "actualiza": 212
+        },
+        "ejemplos_asuntos": [
+          "Lentidão no Sistema - BMC Remedy",
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB  Kyocera Taskalfa 6003I RMU1702146",
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB Kyocera Taskalfa 6003I RMU1702142"
+        ],
+        "frecuencia_palabras": 18747
+      }
+    },
+    "Fabricante": {
+      "BMC": {
+        "total_tickets": 4539,
+        "palabras_clave": {
+          "cmpc": 3598,
+          "requerimiento": 3381,
+          "telefonica": 1420,
+          "chile": 1292,
+          "usuario": 1205,
+          "productos": 1156,
+          "equipos": 993,
+          "soporte": 991,
+          "icbc": 970,
+          "entel": 906,
+          "requerimientos": 902,
+          "acceso": 765,
+          "remedy": 701,
+          "versión": 638,
+          "cuenta": 539,
+          "grupo": 492,
+          "tabla": 360,
+          "unix": 354,
+          "tracelog": 344,
+          "linux": 285
+        },
+        "ejemplos_asuntos": [
+          "Lentidão no Sistema - BMC Remedy",
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB  Kyocera Taskalfa 6003I RMU1702146",
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB Kyocera Taskalfa 6003I RMU1702142"
+        ],
+        "frecuencia_palabras": 21292
+      },
+      "Broadcom": {
+        "total_tickets": 574,
+        "palabras_clave": {
+          "error": 274,
+          "datos": 111,
+          "reporte": 110,
+          "ayuda": 109,
+          "clarity": 105,
+          "teco": 95,
+          "entel": 86,
+          "consulta": 84,
+          "probe": 82,
+          "service": 82,
+          "alarmas": 66,
+          "solicitud": 64,
+          "nimbus": 58,
+          "nimsoft": 56,
+          "proyecto": 49,
+          "wasp": 46,
+          "problemas": 46,
+          "main": 42,
+          "cuenta": 20,
+          "aprobación": 18
+        },
+        "ejemplos_asuntos": [
+          "INC - DX O2: Error al intentar borrar alarmas Dynatrace",
+          "Campos Clarity",
+          "Consulta Software XCom - Gestión de identidades y Logs de seguridad"
+        ],
+        "frecuencia_palabras": 1603
+      },
+      "Datadog": {
+        "total_tickets": 100,
+        "palabras_clave": {
+          "aplicación": 39,
+          "datadog": 38,
+          "modelado": 27,
+          "teco": 25,
+          "problema": 20,
+          "configuración": 17,
+          "windows": 17,
+          "upgrade": 14,
+          "jteller": 14,
+          "desde": 14,
+          "implementación": 12,
+          "integración": 12,
+          "siebel": 10,
+          "concensus": 10,
+          "cloud": 7,
+          "otel": 6,
+          "través": 5,
+          "envío": 4,
+          "error": 4,
+          "ticket": 4
+        },
+        "ejemplos_asuntos": [
+          "REQ - Datadog: Modificación de notificaciones de monitores [FT]",
+          "REQ - Datadog: Monitoreo de demonios AR9CMPGNCRD y AR9CMPGNLDR [AM]",
+          "REQ - Datadog: Integración de Datadog con Azure APIM [FG]"
+        ],
+        "frecuencia_palabras": 299
+      }
+    },
+    "Producto": {
+      "BMC Client Management": {
+        "total_tickets": 432,
+        "palabras_clave": {
+          "cmpc": 1450,
+          "equipos": 633,
+          "tdilatam": 388,
+          "requerimiento": 380,
+          "softys": 365,
+          "reporte": 344,
+          "filiales": 300,
+          "gabriel": 291,
+          "gutierrez": 278,
+          "lunes": 202,
+          "productos": 201,
+          "requerimientos": 189,
+          "chile": 180,
+          "fecha": 180,
+          "xlsx": 180,
+          "reportes": 161,
+          "eliminación": 158,
+          "latam": 91,
+          "argentina": 84,
+          "eduardo": 84
+        },
+        "ejemplos_asuntos": [
+          "Soporte Productos BMC",
+          "REQUERIMIENTO CMPC: Acesso ao Portal BMC",
+          "REQUERIMIENTO CMPC: Requerimientos Productos BMC- Eliminación de equipos"
+        ],
+        "frecuencia_palabras": 6139
+      },
+      "BMC Discovery": {
+        "total_tickets": 598,
+        "palabras_clave": {
+          "icbc": 813,
+          "versión": 636,
+          "version": 348,
+          "tracelog": 344,
+          "unix": 333,
+          "linux": 280,
+          "server": 257,
+          "windows": 203,
+          "tdilatam": 196,
+          "mailto": 163,
+          "bpba": 146,
+          "agent": 106,
+          "database": 102,
+          "appserver": 86,
+          "tuya": 82,
+          "derby": 66,
+          "monitoring": 55,
+          "apache": 50,
+          "blueprint": 47,
+          "probe": 43
+        },
+        "ejemplos_asuntos": [
+          "Tareas de Reuniones de Discovery y modelado de Aplicaciones Nom billable",
+          "[ICBC] SI sin versión: LinuxCertificates.IPsecCerts - Unix/Linux",
+          "[ICBC] SI sin versión: McAfee VirusScan - Unix/Linux"
+        ],
+        "frecuencia_palabras": 4356
+      },
+      "BMC Remedy": {
+        "total_tickets": 1569,
+        "palabras_clave": {
+          "telefonica": 1418,
+          "chile": 1098,
+          "requerimiento": 1047,
+          "entel": 894,
+          "scarlett": 742,
+          "vargas": 620,
+          "servicio": 522,
+          "remedy": 503,
+          "mailto": 492,
+          "asignado": 392,
+          "sonda": 356,
+          "trabajo": 305,
+          "orden": 285,
+          "requiere": 271,
+          "tdilatam": 173,
+          "rmdy": 138,
+          "mibanco": 84,
+          "vigente": 72,
+          "rodrigo": 67,
+          "residente": 64
+        },
+        "ejemplos_asuntos": [
+          "Lentidão no Sistema - BMC Remedy",
+          "TELEFONICA TI CHILE - WO0000000592162 - REQUERIMIENTO",
+          "TELEFONICA TI CHILE - WO0000000592082 - REQUERIMIENTO"
+        ],
+        "frecuencia_palabras": 9543
+      },
+      "BMC Remedy Helix": {
+        "total_tickets": 2241,
+        "palabras_clave": {
+          "cmpc": 2145,
+          "requerimiento": 1948,
+          "productos": 939,
+          "usuario": 810,
+          "requerimientos": 703,
+          "acceso": 667,
+          "grupo": 424,
+          "cuenta": 384,
+          "helix": 364,
+          "tabla": 355,
+          "cese": 322,
+          "actualiza": 212,
+          "empleado": 205,
+          "remedy": 193,
+          "resolutor": 180,
+          "baja": 144,
+          "parte": 143,
+          "identificar": 140,
+          "autorizador": 140,
+          "único": 138
+        },
+        "ejemplos_asuntos": [
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB  Kyocera Taskalfa 6003I RMU1702146",
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB Kyocera Taskalfa 6003I RMU1702142",
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB Kyocera Taskalfa 6003I RMU1702155"
+        ],
+        "frecuencia_palabras": 10556
+      },
+      "BMC Truesight Server Automation": {
+        "total_tickets": 65,
+        "palabras_clave": {
+          "tssa": 44,
+          "upgrade": 29,
+          "generar": 23,
+          "problema": 23,
+          "catálogo": 15,
+          "network": 8,
+          "rscd": 8,
+          "soporte": 8,
+          "windows": 7,
+          "tssr": 7,
+          "agentes": 7,
+          "confluence": 6,
+          "connection": 6,
+          "failed": 6,
+          "profile": 6,
+          "problemas": 5,
+          "2025": 4,
+          "parcheo": 4,
+          "instalacion": 3,
+          "remediación": 2
+        },
+        "ejemplos_asuntos": [
+          "Remediación Automática Completada - Alarma de evento Fork en app server TSSA. Task: 13295",
+          "Remediación Automática Completada - Alarma de evento Fork en app server TSSA. Task: 13361",
+          "Error en Job"
+        ],
+        "frecuencia_palabras": 221
+      },
+      "CA Service Desk Manager": {
+        "total_tickets": 56,
+        "palabras_clave": {
+          "datos": 51,
+          "ayuda": 39,
+          "sabana": 30,
+          "maicao": 16,
+          "información": 16,
+          "servi": 14,
+          "sabanas": 13,
+          "agosto": 10,
+          "incidente": 10,
+          "plataforma": 10,
+          "periodo": 8,
+          "femsasalud": 8,
+          "serviayuda": 7,
+          "septiembre": 5,
+          "prioridad": 5,
+          "mailto": 5,
+          "teco": 5,
+          "reporte": 4,
+          "login": 4,
+          "monitoreo": 4
+        },
+        "ejemplos_asuntos": [
+          "Modificaciones en ServiAyuda",
+          "BI fuera de servicio",
+          "RV: Reporte de Tickets Cerrados"
+        ],
+        "frecuencia_palabras": 264
+      },
+      "CA XCOM": {
+        "total_tickets": 22,
+        "palabras_clave": {
+          "xcom": 16,
+          "base": 8,
+          "actualización": 8,
+          "migración": 6,
+          "prueba": 6,
+          "banco": 5,
+          "netops": 5,
+          "sitios": 4,
+          "agosto": 4,
+          "monitoreo": 4,
+          "certificado": 4,
+          "ciudad": 3,
+          "archivos": 2,
+          "naranjax": 2,
+          "relevamiento": 2,
+          "migraciones": 2,
+          "disponibilidad": 2,
+          "preventivo": 2,
+          "servicios": 2,
+          "consulta": 1
+        },
+        "ejemplos_asuntos": [
+          "Consulta Software XCom - Gestión de identidades y Logs de seguridad",
+          "Banco Ciudad - Migración XCOM",
+          "NaranjaX - Relevamiento Migraciones XCOM"
+        ],
+        "frecuencia_palabras": 88
+      },
+      "CLARITY PPM": {
+        "total_tickets": 210,
+        "palabras_clave": {
+          "clarity": 115,
+          "entel": 63,
+          "error": 53,
+          "consulta": 44,
+          "proyecto": 42,
+          "solicitud": 37,
+          "proyectos": 32,
+          "problemas": 31,
+          "cuenta": 22,
+          "producción": 22,
+          "ayuda": 21,
+          "acceso": 20,
+          "integer": 20,
+          "fecha": 14,
+          "usuario": 14,
+          "aprobación": 13,
+          "cambiar": 13,
+          "andres": 12,
+          "base": 10,
+          "javiera": 8
+        },
+        "ejemplos_asuntos": [
+          "Campos Clarity",
+          "RE: [USO CONFIDENCIAL] Acta de Cierre Firmada Proyecto BCI - Nueva Red DWDM - ESC 205266 y 221553 - GO/SFA/USV 245009",
+          "RE: Nueva integrante Equipo Pega"
+        ],
+        "frecuencia_palabras": 606
+      },
+      "DATADOG": {
+        "total_tickets": 44,
+        "palabras_clave": {
+          "datadog": 38,
+          "configuración": 13,
+          "implementación": 11,
+          "desde": 9,
+          "otel": 6,
+          "aplicación": 6,
+          "través": 5,
+          "envío": 4,
+          "desplegada": 3,
+          "cloud": 3,
+          "estandarización": 3,
+          "corrección": 3,
+          "integración": 2,
+          "hallazgos": 2,
+          "2025": 2,
+          "logs": 2,
+          "grupo": 2,
+          "coril": 2,
+          "bantotal": 2,
+          "angular": 2
+        },
+        "ejemplos_asuntos": [
+          "REQ - Datadog: Modificación de notificaciones de monitores [FT]",
+          "REQ - Datadog: Monitoreo de demonios AR9CMPGNCRD y AR9CMPGNLDR [AM]",
+          "REQ - Datadog: Integración de Datadog con Azure APIM [FG]"
+        ],
+        "frecuencia_palabras": 120
+      },
+      "DX IM (UIM)": {
+        "total_tickets": 65,
+        "palabras_clave": {
+          "string": 40,
+          "root": 37,
+          "network": 36,
+          "accesstt": 26,
+          "drwxr": 23,
+          "alarmas": 19,
+          "base": 16,
+          "mellanox": 12,
+          "adapter": 12,
+          "cons": 12,
+          "aplicacion": 12,
+          "adptr": 8,
+          "espacio": 8,
+          "alarma": 6,
+          "servidor": 6,
+          "certificacion": 4,
+          "cisco": 4,
+          "actualizacion": 4,
+          "dxo2": 3,
+          "memoria": 2
+        },
+        "ejemplos_asuntos": [
+          "INC - DX O2: Recepcion de alarmas en DXO2",
+          "REQ - DX UIM: Enriquecimiento de los mensajes de alarma de Cisco UCS",
+          "CONS - DX UIM: Uso de memoria CDM"
+        ],
+        "frecuencia_palabras": 290
+      },
+      "DX OI": {
+        "total_tickets": 11,
+        "palabras_clave": {
+          "dxo2": 3,
+          "alarmas": 2,
+          "dynatrace": 2,
+          "site": 2,
+          "error": 1,
+          "intentar": 1,
+          "borrar": 1,
+          "registrar": 1,
+          "referente": 1,
+          "dispositivos": 1,
+          "cmdb": 1,
+          "relevamiento": 1,
+          "perfiles": 1,
+          "migración": 1,
+          "integración": 1,
+          "onpremise": 1,
+          "cloud": 1,
+          "integracion": 1,
+          "perfil": 1,
+          "actualización": 1
+        },
+        "ejemplos_asuntos": [
+          "INC - DX O2: Error al intentar borrar alarmas Dynatrace",
+          "REQ - DX O2: Registrar el referente de los dispositivos de la CMDB en DX O2",
+          "REQ - DX O2: Relevamiento de perfiles de DX O2"
+        ],
+        "frecuencia_palabras": 25
+      }
+    },
+    "Nombre del grupo": {
+      "AIOPS DX IM (UIM)": {
+        "total_tickets": 41,
+        "palabras_clave": {
+          "cons": 7,
+          "alarmas": 5,
+          "dxo2": 3,
+          "alarma": 2,
+          "cisco": 2,
+          "memoria": 2,
+          "certificacion": 2,
+          "plcaecoapp1": 2,
+          "espacio": 2,
+          "acceso": 2,
+          "lentitud": 2,
+          "error": 2,
+          "baja": 2,
+          "consulta": 2,
+          "inventario": 2,
+          "recepcion": 1,
+          "enriquecimiento": 1,
+          "mensajes": 1,
+          "generaron": 1,
+          "incidentes": 1
+        },
+        "ejemplos_asuntos": [
+          "INC - DX O2: Recepcion de alarmas en DXO2",
+          "REQ - DX UIM: Enriquecimiento de los mensajes de alarma de Cisco UCS",
+          "CONS - DX UIM: Uso de memoria CDM"
+        ],
+        "frecuencia_palabras": 44
+      },
+      "BMC Client Management CHILE": {
+        "total_tickets": 238,
+        "palabras_clave": {
+          "cmpc": 217,
+          "requerimiento": 204,
+          "productos": 146,
+          "requerimientos": 140,
+          "equipos": 131,
+          "eliminación": 66,
+          "incorporación": 47,
+          "softys": 17,
+          "acceso": 14,
+          "reporte": 14,
+          "latam": 12,
+          "consolas": 12,
+          "client": 11,
+          "actualizar": 11,
+          "renovación": 11,
+          "management": 10,
+          "soporte": 9,
+          "usuario": 8,
+          "laptop": 7,
+          "falha": 7
+        },
+        "ejemplos_asuntos": [
+          "REQUERIMIENTO CMPC: Requerimientos Productos BMC- Acceso",
+          "REQUERIMIENTO CMPC: Requerimientos Productos BMC- Integracion",
+          "Soporte Productos BMC"
+        ],
+        "frecuencia_palabras": 1094
+      },
+      "BMC Discovery": {
+        "total_tickets": 147,
+        "palabras_clave": {
+          "icbc": 115,
+          "versión": 104,
+          "unix": 85,
+          "linux": 84,
+          "server": 34,
+          "windows": 23,
+          "agent": 16,
+          "blueprint": 16,
+          "modelado": 13,
+          "discovery": 12,
+          "monitoring": 11,
+          "apache": 10,
+          "tivoli": 9,
+          "oracle": 8,
+          "manager": 8,
+          "management": 6,
+          "microsoft": 6,
+          "database": 5,
+          "application": 5,
+          "data": 4
+        },
+        "ejemplos_asuntos": [
+          "Tareas de Reuniones de Discovery y modelado de Aplicaciones Nom billable",
+          "[ICBC] SI sin versión: LinuxCertificates.IPsecCerts - Unix/Linux",
+          "[ICBC] SI sin versión: McAfee VirusScan - Unix/Linux"
+        ],
+        "frecuencia_palabras": 574
+      },
+      "BMC Helix ITSM Chile": {
+        "total_tickets": 335,
+        "palabras_clave": {
+          "requerimiento": 249,
+          "telefonica": 216,
+          "chile": 216,
+          "cmpc": 42,
+          "productos": 32,
+          "requerimientos": 25,
+          "remedy": 17,
+          "servicio": 14,
+          "acceso": 12,
+          "soporte": 9,
+          "monitoreo": 8,
+          "usuario": 7,
+          "solicitud": 7,
+          "agregar": 6,
+          "integracion": 6,
+          "capa": 6,
+          "cloud": 6,
+          "servicios": 6,
+          "evaluacion": 6,
+          "funcionalidad": 6
+        },
+        "ejemplos_asuntos": [
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB  Kyocera Taskalfa 6003I RMU1702146",
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB Kyocera Taskalfa 6003I RMU1702155",
+          "TELEFONICA TI CHILE - WO0000000592162 - REQUERIMIENTO"
+        ],
+        "frecuencia_palabras": 896
+      },
+      "BMC Remedy": {
+        "total_tickets": 106,
+        "palabras_clave": {
+          "rmdy": 46,
+          "requiere": 36,
+          "remedy": 35,
+          "servicio": 10,
+          "carga": 8,
+          "consulta": 7,
+          "flujos": 7,
+          "incidencias": 7,
+          "aicc": 6,
+          "helix": 6,
+          "usuario": 5,
+          "modificar": 5,
+          "agregar": 5,
+          "formulario": 5,
+          "tareas": 5,
+          "incidencia": 5,
+          "autin": 5,
+          "campo": 4,
+          "ipcc": 4,
+          "problemas": 4
+        },
+        "ejemplos_asuntos": [
+          "Reabrir incidente INC000004565445",
+          "INC REMEDY - INC000009163217 - (ARERR 9201)",
+          "Pasaje a producción Objetivos de Servicio para Panificación y Control de Cambios."
+        ],
+        "frecuencia_palabras": 215
+      },
+      "BMC Remedy Helix Telefonica Peru B2B y RED": {
+        "total_tickets": 301,
+        "palabras_clave": {
+          "actualiza": 67,
+          "tabla": 67,
+          "empleado": 67,
+          "remedy": 62,
+          "cuenta": 60,
+          "usuario": 54,
+          "cese": 46,
+          "identificar": 46,
+          "baja": 46,
+          "autorizador": 46,
+          "único": 46,
+          "parte": 46,
+          "grupo": 46,
+          "resolutor": 46,
+          "crea": 32,
+          "genera": 27,
+          "gestión": 26,
+          "reporte": 24,
+          "actualizar": 12,
+          "modificar": 11
+        },
+        "ejemplos_asuntos": [
+          "WO0000004412320 - TAS - Crea Cuenta Remedy DWP",
+          "WO0000004412493 - TAS - Actualizar Usuario Seguridad de Red",
+          "WO0000004412578 - TAS - Crea Cuenta Remedy DWP"
+        ],
+        "frecuencia_palabras": 877
+      },
+      "BMC Truesight Server Automation": {
+        "total_tickets": 43,
+        "palabras_clave": {
+          "tssa": 20,
+          "windows": 7,
+          "upgrade": 5,
+          "generar": 4,
+          "rscd": 4,
+          "2025": 4,
+          "parcheo": 4,
+          "problema": 3,
+          "problemas": 3,
+          "instalacion": 3,
+          "agentes": 3,
+          "soporte": 3,
+          "catálogo": 3,
+          "remediación": 2,
+          "automática": 2,
+          "completada": 2,
+          "alarma": 2,
+          "evento": 2,
+          "fork": 2,
+          "server": 2
+        },
+        "ejemplos_asuntos": [
+          "Remediación Automática Completada - Alarma de evento Fork en app server TSSA. Task: 13295",
+          "Remediación Automática Completada - Alarma de evento Fork en app server TSSA. Task: 13361",
+          "Error en Job"
+        ],
+        "frecuencia_palabras": 80
+      },
+      "CA SDM Service Desk Manager": {
+        "total_tickets": 33,
+        "palabras_clave": {
+          "datos": 8,
+          "serviayuda": 6,
+          "sabana": 5,
+          "maicao": 5,
+          "reporte": 4,
+          "plataforma": 4,
+          "ayuda": 4,
+          "sabanas": 3,
+          "fuera": 2,
+          "servicio": 2,
+          "solicitud": 2,
+          "error": 2,
+          "urgente": 2,
+          "están": 2,
+          "generando": 2,
+          "reportes": 2,
+          "automático": 2,
+          "problemas": 2,
+          "lanzamiento": 2,
+          "boxi": 2
+        },
+        "ejemplos_asuntos": [
+          "Modificaciones en ServiAyuda",
+          "BI fuera de servicio",
+          "RV: Reporte de Tickets Cerrados"
+        ],
+        "frecuencia_palabras": 63
+      },
+      "CA XCOM": {
+        "total_tickets": 11,
+        "palabras_clave": {
+          "xcom": 8,
+          "banco": 3,
+          "archivos": 2,
+          "prueba": 2,
+          "actualización": 2,
+          "consulta": 1,
+          "software": 1,
+          "gestión": 1,
+          "identidades": 1,
+          "logs": 1,
+          "seguridad": 1,
+          "ciudad": 1,
+          "migración": 1,
+          "naranjax": 1,
+          "relevamiento": 1,
+          "migraciones": 1,
+          "consultas": 1,
+          "galicia": 1,
+          "problemas": 1,
+          "transferencias": 1
+        },
+        "ejemplos_asuntos": [
+          "Consulta Software XCom - Gestión de identidades y Logs de seguridad",
+          "Banco Ciudad - Migración XCOM",
+          "NaranjaX - Relevamiento Migraciones XCOM"
+        ],
+        "frecuencia_palabras": 32
+      },
+      "CLARITY PPM": {
+        "total_tickets": 126,
+        "palabras_clave": {
+          "clarity": 55,
+          "solicitud": 17,
+          "cuenta": 15,
+          "proyecto": 12,
+          "aprobación": 8,
+          "facturación": 7,
+          "proceso": 7,
+          "ayuda": 6,
+          "gantt": 6,
+          "cambiar": 6,
+          "acceso": 6,
+          "problemas": 6,
+          "consulta": 6,
+          "proyectos": 6,
+          "cierre": 5,
+          "agregar": 5,
+          "error": 5,
+          "problema": 5,
+          "campos": 4,
+          "nueva": 4
+        },
+        "ejemplos_asuntos": [
+          "Campos Clarity",
+          "RE: [USO CONFIDENCIAL] Acta de Cierre Firmada Proyecto BCI - Nueva Red DWDM - ESC 205266 y 221553 - GO/SFA/USV 245009",
+          "RE: Nueva integrante Equipo Pega"
+        ],
+        "frecuencia_palabras": 191
+      },
+      "COLABORADOR BMC DISCOVERY": {
+        "total_tickets": 22,
+        "palabras_clave": {
+          "icbc": 22,
+          "versión": 22,
+          "windows": 22,
+          "server": 9,
+          "citrix": 3,
+          "genesys": 3,
+          "listener": 2,
+          "jboss": 2,
+          "service": 2,
+          "control": 2,
+          "agent": 2,
+          "xcom": 1,
+          "data": 1,
+          "transport": 1,
+          "flexera": 1,
+          "flexnet": 1,
+          "publisher": 1,
+          "license": 1,
+          "manager": 1,
+          "elasticsearch": 1
+        },
+        "ejemplos_asuntos": [
+          "[ICBC] SI sin versión: CA XCOM Data Transport - WINDOWS",
+          "[ICBC] SI sin versión: Flexera FLEXnet Publisher License Server Manager - WINDOWS",
+          "[ICBC] SI sin versión: Elasticsearch Node - WINDOWS"
+        ],
+        "frecuencia_palabras": 100
+      },
+      "DX OI": {
+        "total_tickets": 11,
+        "palabras_clave": {
+          "dxo2": 3,
+          "alarmas": 2,
+          "dynatrace": 2,
+          "site": 2,
+          "error": 1,
+          "intentar": 1,
+          "borrar": 1,
+          "registrar": 1,
+          "referente": 1,
+          "dispositivos": 1,
+          "cmdb": 1,
+          "relevamiento": 1,
+          "perfiles": 1,
+          "migración": 1,
+          "integración": 1,
+          "onpremise": 1,
+          "cloud": 1,
+          "integracion": 1,
+          "perfil": 1,
+          "actualización": 1
+        },
+        "ejemplos_asuntos": [
+          "INC - DX O2: Error al intentar borrar alarmas Dynatrace",
+          "REQ - DX O2: Registrar el referente de los dispositivos de la CMDB en DX O2",
+          "REQ - DX O2: Relevamiento de perfiles de DX O2"
+        ],
+        "frecuencia_palabras": 25
+      },
+      "Datadog": {
+        "total_tickets": 26,
+        "palabras_clave": {
+          "datadog": 31,
+          "implementación": 8,
+          "otel": 6,
+          "aplicación": 6,
+          "envío": 4,
+          "través": 3,
+          "desde": 3,
+          "desplegada": 3,
+          "cloud": 3,
+          "integración": 2,
+          "hallazgos": 2,
+          "2025": 2,
+          "configuración": 2,
+          "logs": 2,
+          "grupo": 2,
+          "coril": 2,
+          "bantotal": 2,
+          "angular": 2,
+          "creación": 2,
+          "session": 2
+        },
+        "ejemplos_asuntos": [
+          "REQ - Datadog: Modificación de notificaciones de monitores [FT]",
+          "REQ - Datadog: Monitoreo de demonios AR9CMPGNCRD y AR9CMPGNLDR [AM]",
+          "REQ - Datadog: Integración de Datadog con Azure APIM [FG]"
+        ],
+        "frecuencia_palabras": 89
+      },
+      "TRIAGE CHILE": {
+        "total_tickets": 321,
+        "palabras_clave": {
+          "cmpc": 219,
+          "requerimiento": 185,
+          "productos": 98,
+          "requerimientos": 64,
+          "trabajo": 54,
+          "orden": 52,
+          "asignado": 50,
+          "soporte": 50,
+          "helix": 45,
+          "acceso": 43,
+          "incidente": 33,
+          "grupo": 28,
+          "ticket": 19,
+          "softys": 18,
+          "usuario": 18,
+          "creación": 16,
+          "agregar": 13,
+          "cuenta": 12,
+          "portal": 11,
+          "conta": 11
+        },
+        "ejemplos_asuntos": [
+          "REQUERIMIENTO CMPC: Agregar Equipo a CMDB Kyocera Taskalfa 6003I RMU1702142",
+          "Se ha resuelto el ticket INC000000262595 que ha notificado. Prueba de ticket Padre/Hijo",
+          "Se ha resuelto el ticket INC000000262596 que ha notificado. Prueba de ticket Padre/Hijo"
+        ],
+        "frecuencia_palabras": 1039
+      }
+    }
+  },
+  "estadisticas": {
+    "general": {
+      "total_tickets": 1818,
+      "tickets_con_asunto": 1818,
+      "asuntos_unicos": 1469
+    },
+    "Tipo de Ticket": {
+      "valores_unicos": 2,
+      "distribucion": {
+        "Requerimiento": 1144,
+        "Soporte": 674
+      }
+    },
+    "Segmento": {
+      "valores_unicos": 7,
+      "distribucion": {
+        "AIOPS": 102,
+        "Automation": 11,
+        "Business Management": 126,
+        "Data Transport": 11,
+        "Operaciones": 410,
+        "SecOPs": 57,
+        "Service Management": 1082
+      }
+    },
+    "Fabricante": {
+      "valores_unicos": 3,
+      "distribucion": {
+        "BMC": 1523,
+        "Broadcom": 247,
+        "Datadog": 26
+      }
+    },
+    "Producto": {
+      "valores_unicos": 11,
+      "distribucion": {
+        "BMC Client Management": 236,
+        "BMC Discovery": 174,
+        "BMC Remedy": 415,
+        "BMC Remedy Helix": 631,
+        "BMC Truesight Server Automation": 43,
+        "CA Service Desk Manager": 34,
+        "CA XCOM": 11,
+        "CLARITY PPM": 126,
+        "DATADOG": 26,
+        "DX IM (UIM)": 43,
+        "DX OI": 11
+      }
+    },
+    "Nombre del grupo": {
+      "valores_unicos": 14,
+      "distribucion": {
+        "AIOPS DX IM (UIM)": 41,
+        "BMC Client Management CHILE": 238,
+        "BMC Discovery": 147,
+        "BMC Helix ITSM Chile": 335,
+        "BMC Remedy": 106,
+        "BMC Remedy Helix Telefonica Peru B2B y RED": 301,
+        "BMC Truesight Server Automation": 43,
+        "CA SDM Service Desk Manager": 33,
+        "CA XCOM": 11,
+        "CLARITY PPM": 126,
+        "COLABORADOR BMC DISCOVERY": 22,
+        "DX OI": 11,
+        "Datadog": 26,
+        "TRIAGE CHILE": 321
+      }
+    }
+  },
+  "configuracion_recomendaciones": {
+    "campos_sugeridos": [
+      "Tipo de Ticket",
+      "Segmento",
+      "Fabricante",
+      "Producto",
+      "Nombre del grupo"
+    ],
+    "umbral_confianza_minima": 2,
+    "max_recomendaciones_por_campo": 3
+  }
+}

@@ -1,0 +1,40 @@
+{
+    "library_path": "data/classification/biblioteca_clasificacion_tickets.json",
+    "confidence_thresholds": {
+        "high": 100,
+        "medium": 50,
+        "low": 10,
+        "minimal": 2
+    },
+    "max_recommendations": 3,
+    "supported_fields": [
+        "Tipo de Ticket",
+        "Segmento",
+        "Fabricante",
+        "Producto",
+        "Nombre del grupo"
+    ],
+    "siglas_additional": {
+        "APM": "apm",
+        "CMDB": "cmdb",
+        "ITSM": "itsm"
+    },
+    "variable_patterns": {
+        "enabled": true,
+        "server_patterns": [
+            "pwcauimapp\\d+",
+            "appserver\\d+",
+            "dbserver\\d+",
+            "webapp\\d+",
+            "srv\\d+"
+        ],
+        "normalized_to": {
+            "pwcauimapp": "servidor aplicacion uim",
+            "appserver": "servidor aplicaciones",
+            "dbserver": "servidor base datos",
+            "webapp": "aplicacion web",
+            "srv": "servidor"
+        },
+        "custom_patterns": {}
+    }
+}
