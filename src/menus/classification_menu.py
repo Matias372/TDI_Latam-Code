@@ -1,7 +1,8 @@
 # 📁 src/menus/classification_menu.py
 
 import os
-import sys
+import pandas as pd
+import json
 from utils.display_utils import display
 from utils.file_utils import FileUtils
 from utils.validation_utils import ValidationUtils
@@ -49,16 +50,15 @@ class ClassificationMenu:
                 display.press_enter_to_continue()
 
     def mostrar_menu_clasificacion(self):
-        """Submenú para clasificación de tickets - SIMPLIFICADO"""
+        """Submenú para clasificación de tickets - ACTUALIZADO"""
         while True:
             display.clear_screen()
             display.show_header("CLASIFICAR TICKETS")
             
             opciones = [
                 "🆔 1. Clasificar ticket por ID (Freshdesk)",
-                "🧪 2. Probar precisión desde Excel",
-                "📝 3. Clasificar ticket manual", 
-                "📦 4. Clasificar múltiples tickets manual",
+                "📝 2. Clasificar ticket manual", 
+                "📦 3. Clasificar múltiples tickets manual",
                 "↩️  0. Volver al menú anterior"
             ]
             display.show_bullet_list(opciones)
@@ -68,11 +68,44 @@ class ClassificationMenu:
             if opcion == "1":
                 self.clasificar_ticket_por_id()
             elif opcion == "2":
-                self.probar_precision_desde_excel()
-            elif opcion == "3":
                 self.clasificar_ticket_manual()
-            elif opcion == "4":
+            elif opcion == "3":
                 self.clasificar_tickets_multiples_manual()
+            elif opcion == "0":
+                break
+            else:
+                display.show_message("Opción inválida", "error")
+                display.press_enter_to_continue()
+
+
+    def mostrar_menu_biblioteca(self):
+        """Submenú para gestión de biblioteca - REORGANIZADO"""
+        while True:
+            display.clear_screen()
+            display.show_header("GESTIÓN DE BIBLIOTECA")
+            
+            opciones = [
+                "📚 1. Generar biblioteca desde Excel",
+                "🔄 2. Actualizar biblioteca existente", 
+                "🧪 3. Probar precisión desde Excel",
+                "🎯 4. Calibrar biblioteca desde reporte",
+                "🗑️  5. Eliminar biblioteca actual",
+                "↩️  0. Volver al menú anterior"
+            ]
+            display.show_bullet_list(opciones)
+            
+            opcion = input("\n👉 Seleccione una opción: ").strip()
+
+            if opcion == "1":
+                self.generar_biblioteca_desde_excel()
+            elif opcion == "2":
+                self.actualizar_biblioteca_existente()
+            elif opcion == "3":
+                self.probar_precision_desde_excel() 
+            elif opcion == "4":
+                self.calibrar_biblioteca_desde_reporte()
+            elif opcion == "5":
+                self.eliminar_biblioteca_actual()
             elif opcion == "0":
                 break
             else:
@@ -127,15 +160,20 @@ class ClassificationMenu:
         display.press_enter_to_continue()
 
     def actualizar_biblioteca_existente(self):
-        """Actualiza biblioteca existente con nuevos datos"""
+        """Actualiza biblioteca existente con nuevos datos - MEJORADO"""
         display.show_header("ACTUALIZAR BIBLIOTECA EXISTENTE")
         
         try:
-            excel_path = input("Ingrese la ruta del archivo Excel: ").strip()
+            display.show_message("Seleccione el archivo Excel con los nuevos tickets:", "file")
+            excel_path = FileUtils.seleccionar_archivo(
+                "Seleccione archivo Excel con tickets", 
+                [("Excel files", "*.xlsx *.xls")]
+            )
             
             if not excel_path:
-                excel_path = "data/input/tickets_nuevos.xlsx"
-                display.show_message(f"Usando ruta predeterminada: {excel_path}", "info")
+                display.show_message("No se seleccionó ningún archivo", "warning")
+                display.press_enter_to_continue()
+                return
             
             display.show_message("Actualizando biblioteca...", "info")
             success, result = self.library_generator.update_existing_library(excel_path)
@@ -146,51 +184,13 @@ class ClassificationMenu:
                 display.show_key_value("Tickets agregados", str(result['new_tickets']))
                 display.show_key_value("Archivo", result['library_path'])
                 
+                # Recargar el motor de clasificación
                 self.classification_engine = ClassificationEngine()
             else:
                 display.show_message(f"Error: {result}", "error")
                 
         except Exception as e:
             display.show_message(f"Error durante la actualización: {e}", "error")
-        
-        display.press_enter_to_continue()
-
-    def mostrar_estadisticas_biblioteca(self):
-        """Muestra estadísticas de la biblioteca actual"""
-        display.show_header("ESTADÍSTICAS DE BIBLIOTECA")
-        
-        stats = self.library_generator.get_library_statistics()
-        
-        if stats:
-            display.show_key_value("Fecha generación", stats['metadata']['fecha_generacion'])
-            display.show_key_value("Total tickets", str(stats['metadata']['total_tickets_analizados']))
-            display.show_key_value("Patrones", str(stats['metadata']['total_patrones_encontrados']))
-            
-            display.show_section("DISTRIBUCIÓN")
-            for campo, distribucion in stats['estadisticas'].items():
-                if isinstance(distribucion, dict) and 'distribucion' in distribucion:
-                    display.show_subsection(campo)
-                    for categoria, cantidad in list(distribucion['distribucion'].items())[:5]:
-                        display.show_key_value(categoria, f"{cantidad} tickets")
-                    if len(distribucion['distribucion']) > 5:
-                        display.show_message(f"... y {len(distribucion['distribucion']) - 5} más", "info")
-        else:
-            display.show_message("No se encontró biblioteca cargada", "warning")
-        
-        display.press_enter_to_continue()
-
-    def mostrar_ubicacion_biblioteca(self):
-        """Muestra dónde se guarda la biblioteca"""
-        library_path = self.library_generator.get_library_path()
-        display.show_header("UBICACIÓN DE BIBLIOTECA")
-        display.show_key_value("Ruta", library_path)
-        
-        if os.path.exists(library_path):
-            file_size = os.path.getsize(library_path) / 1024
-            display.show_key_value("Tamaño", f"{file_size:.2f} KB")
-            display.show_message("Archivo existe", "success")
-        else:
-            display.show_message("Archivo no encontrado", "error")
         
         display.press_enter_to_continue()
 
@@ -226,9 +226,11 @@ class ClassificationMenu:
         display.show_header("CLASIFICAR TICKET POR ID")
         
         if not self._verificar_biblioteca_cargada():
+            print("DEBUG: Biblioteca no cargada, saliendo")  # 🐛 Depuración
             return
         
         if not self.freshdesk_service:
+            print("DEBUG: Freshdesk service no disponible")  # 🐛 Depuración
             display.show_message("Servicio Freshdesk no disponible", "error")
             display.press_enter_to_continue()
             return
@@ -275,9 +277,11 @@ class ClassificationMenu:
         display.show_header("PROBAR PRECISIÓN DESDE EXCEL")
         
         if not self._verificar_biblioteca_cargada():
+            print("DEBUG: Biblioteca no cargada, saliendo")  # 🐛 Depuración
             return
         
         if not self.freshdesk_service:
+            print("DEBUG: Freshdesk service no disponible")  # 🐛 Depuración
             display.show_message("Servicio Freshdesk no disponible", "error")
             display.press_enter_to_continue()
             return
@@ -445,41 +449,61 @@ class ClassificationMenu:
                 )
 
     def _guardar_resultado_individual(self, resultado: dict):
-        """Guarda resultado individual en archivo"""
+        """Guarda resultado individual en archivo usando FileUtils"""
         try:
-            output_dir = os.path.join('data', 'output', 'classification')
-            os.makedirs(output_dir, exist_ok=True)
-            
+            # Usar FileUtils para obtener la carpeta de reportes
+            reports_folder = FileUtils.get_classification_reports_folder()
             timestamp = pd.Timestamp.now().strftime("%Y%m%d_%H%M%S")
-            archivo = os.path.join(output_dir, f'clasificacion_individual_{timestamp}.xlsx')
+            archivo = os.path.join(reports_folder, f'clasificacion_individual_{timestamp}.xlsx')
             
             df = pd.DataFrame([resultado])
             df.to_excel(archivo, index=False)
             
-            display.show_message(f"Resultado guardado en: {archivo}", "success")
+            display.show_message(f"✅ Resultado guardado en: {archivo}", "success")
+            display.show_message(f"📁 Carpeta: {reports_folder}", "info")
             
         except Exception as e:
-            display.show_message(f"Error guardando resultado: {e}", "error")
+            display.show_message(f"❌ Error guardando resultado: {e}", "error")
 
     def _verificar_biblioteca_cargada(self):
-        """Verifica si hay una biblioteca cargada"""
-        if self.classification_engine is None:
-            self.classification_engine = ClassificationEngine()
-        
-        if not self.classification_engine.patterns:
-            display.show_message("No hay biblioteca de clasificación cargada.", "error")
-            display.show_message("Use la opción 'Generar biblioteca desde Excel' primero.", "info")
+        """Verifica si hay una biblioteca cargada - MEJORADA"""
+        try:
+            if self.classification_engine is None:
+                self.classification_engine = initialize_classification_system()
             
-            generar = input("\n¿Desea generar una biblioteca básica ahora? (s/n): ").strip().lower()
-            if generar == 's':
-                from features.classification.classification_engine import generar_biblioteca_clasificacion
-                generar_biblioteca_clasificacion()
-                self.classification_engine = ClassificationEngine()
-                return True
-            else:
-                display.press_enter_to_continue()
-                return False
-        return True
+            # Verificar si la biblioteca tiene patrones
+            if not self.classification_engine.patterns:
+                display.show_message("❌ No hay biblioteca de clasificación cargada.", "error")
+                display.show_message("💡 Use la opción 'Gestión de Biblioteca' para generar una.", "info")
+                
+                # Preguntar si quiere generar una básica
+                generar = input("\n¿Desea generar una biblioteca básica ahora? (s/n): ").strip().lower()
+                if generar == 's':
+                    from features.classification.classification_engine import generar_biblioteca_clasificacion
+                    generar_biblioteca_clasificacion()
+                    self.classification_engine = initialize_classification_system()
+                    
+                    # Verificar si se creó correctamente
+                    if self.classification_engine.patterns:
+                        display.show_message("✅ Biblioteca básica creada exitosamente", "success")
+                        return True
+                    else:
+                        display.show_message("❌ No se pudo crear la biblioteca básica", "error")
+                        return False
+                else:
+                    display.press_enter_to_continue()
+                    return False
+            
+            # Si llegamos aquí, la biblioteca está cargada
+            total_campos = len(self.classification_engine.patterns)
+            total_categorias = sum(len(categorias) for categorias in self.classification_engine.patterns.values())
+            
+            display.show_message(f"✅ Biblioteca cargada: {total_campos} campos, {total_categorias} categorías", "success")
+            return True
+            
+        except Exception as e:
+            display.show_message(f"❌ Error verificando biblioteca: {e}", "error")
+            return False
 
     def _mostrar_resultados_lote(self, resultados):
         """Muestra resultados de clasificación por lote"""
@@ -574,6 +598,203 @@ class ClassificationMenu:
             else:
                 display.show_message("Opción inválida", "error")
                 display.press_enter_to_continue()
+    
+    def calibrar_biblioteca_desde_reporte(self):
+        """Calibra la biblioteca usando un reporte de precisión para mejorar la clasificación"""
+        display.show_header("CALIBRAR BIBLIOTECA DESDE REPORTE")
+        
+        if not self._verificar_biblioteca_cargada():
+            return
+        
+        if not self.freshdesk_service:
+            display.show_message("Servicio Freshdesk no disponible", "error")
+            display.press_enter_to_continue()
+            return
+
+        try:
+            # Seleccionar archivo de reporte
+            display.show_message("Seleccione el archivo Excel de reporte de precisión", "file")
+            reporte_path = FileUtils.seleccionar_archivo(
+                "Seleccione archivo de reporte de precisión", 
+                [("Excel files", "*.xlsx *.xls")]
+            )
+            
+            if not reporte_path:
+                display.show_message("No se seleccionó ningún archivo", "warning")
+                display.press_enter_to_continue()
+                return
+
+            # Cargar el reporte
+            df_reporte = pd.read_excel(reporte_path)
+            
+            # Verificar que tenga las columnas necesarias
+            columnas_necesarias = ['id', 'precision_general', 'producto_original', 'segmento_original', 
+                                'fabricante_original', 'motivo_original']
+            if not all(col in df_reporte.columns for col in columnas_necesarias):
+                display.show_message("El archivo no tiene las columnas necesarias", "error")
+                display.press_enter_to_continue()
+                return
+
+            # Filtrar tickets con baja precisión (por ejemplo, menos de 100%)
+            df_baja_precision = df_reporte[df_reporte['precision_general'] < 100]
+            
+            if df_baja_precision.empty:
+                display.show_message("No hay tickets con baja precisión en el reporte", "info")
+                display.press_enter_to_continue()
+                return
+
+            # 🆕 CORRECCIÓN: Resetear índice para evitar problemas
+            df_baja_precision = df_baja_precision.reset_index(drop=True)
+            
+            # 🆕 VERIFICACIÓN ADICIONAL: Mostrar información del DataFrame
+            display.show_message(f"Encontrados {len(df_baja_precision)} tickets con baja precisión", "info")
+            display.show_message(f"Rango de IDs en el reporte: {df_baja_precision['id'].min()} a {df_baja_precision['id'].max()}", "info")
+            
+            # Preguntar al usuario si desea continuar
+            if not ValidationUtils.confirmar_accion("¿Desea calibrar la biblioteca con estos tickets?"):
+                display.show_message("Calibración cancelada", "info")
+                return
+
+            # 🆕 CORRECCIÓN: Usar contador propio en lugar del índice del DataFrame
+            total = len(df_baja_precision)
+            exitosos = 0
+            procesados = 0
+            
+            # 🆕 CORRECCIÓN: Iterar con enumerate para tener control del índice
+            for idx, row in df_baja_precision.iterrows():
+                ticket_id = row['id']
+                procesados += 1
+                
+                # 🆕 VERIFICACIÓN: Mostrar información del ticket actual
+                display.show_processing_message(f"#{ticket_id}", procesados, total, "Calibrando")
+                
+                # 🆕 VERIFICACIÓN: Limitar el número de tickets para pruebas
+                if procesados > 1000:  # Límite de seguridad
+                    display.show_message("⚠️  Límite de seguridad alcanzado (1000 tickets)", "warning")
+                    break
+                
+                try:
+                    # Obtener ticket desde Freshdesk
+                    resultado = self.classification_engine.clasificar_ticket_individual(ticket_id, self.freshdesk_service)
+                    
+                    if 'error' in resultado:
+                        display.show_message(f"❌ Error al obtener ticket #{ticket_id}: {resultado['error']}", "error")
+                        continue
+
+                    # Extraer los valores originales (correctos) del reporte
+                    valores_correctos = {
+                        'Producto': row['producto_original'],
+                        'Segmento': row['segmento_original'],
+                        'Fabricante': row['fabricante_original'],
+                        'Tipo de Ticket': row['motivo_original']
+                    }
+
+                    # Actualizar la biblioteca con los valores correctos
+                    if self._actualizar_biblioteca_con_valores_correctos(resultado, valores_correctos):
+                        exitosos += 1
+                        
+                except Exception as ticket_error:
+                    display.show_message(f"❌ Error procesando ticket #{ticket_id}: {ticket_error}", "error")
+                    continue
+
+            display.clear_line()
+            display.show_message(f"✅ Calibración completada: {exitosos}/{procesados} tickets procesados exitosamente", "success")
+            
+            # Recargar la biblioteca para reflejar los cambios
+            if exitosos > 0:
+                self.classification_engine.load_library()
+                display.show_message("✅ Biblioteca recargada con los nuevos patrones", "success")
+            
+        except Exception as e:
+            display.show_message(f"❌ Error durante la calibración: {e}", "error")
+        
+        display.press_enter_to_continue()
+
+    def _actualizar_biblioteca_con_valores_correctos(self, resultado_ticket: dict, valores_correctos: dict):
+        """
+        Actualiza la biblioteca con las palabras clave del ticket asociadas a los valores correctos.
+        """
+        try:
+            # Obtener el asunto y descripción del ticket
+            asunto = resultado_ticket.get('asunto', '')
+            descripcion = resultado_ticket.get('descripcion', '')
+            
+            # Combinar texto para análisis
+            texto_completo = f"{asunto} {descripcion}"
+            
+            # 🆕 VERIFICACIÓN: Asegurarse de que el método existe
+            if not hasattr(self.classification_engine, 'extraer_palabras_clave_avanzado'):
+                display.show_message("❌ Error: Método 'extraer_palabras_clave_avanzado' no encontrado", "error")
+                return False
+            
+            # Extraer palabras clave - MÉTODO PÚBLICO
+            palabras_clave = self.classification_engine.extraer_palabras_clave_avanzado(texto_completo)
+            
+            if not palabras_clave:
+                return False
+
+            # Cargar la biblioteca actual
+            library_path = self.classification_engine.library_path
+            
+            # 🆕 VERIFICACIÓN: Asegurarse de que el archivo existe
+            if not os.path.exists(library_path):
+                display.show_message(f"❌ Biblioteca no encontrada en: {library_path}", "error")
+                return False
+                
+            with open(library_path, 'r', encoding='utf-8') as f:
+                biblioteca = json.load(f)
+
+            # Actualizar cada campo con los valores correctos
+            for campo, valor_correcto in valores_correctos.items():
+                if valor_correcto and valor_correcto != 'No especificado':
+                    if campo not in biblioteca['patrones_clasificacion']:
+                        biblioteca['patrones_clasificacion'][campo] = {}
+                    
+                    if valor_correcto not in biblioteca['patrones_clasificacion'][campo]:
+                        # Crear nueva categoría
+                        biblioteca['patrones_clasificacion'][campo][valor_correcto] = {
+                            'total_tickets': 1,
+                            'palabras_clave': palabras_clave,
+                            'ejemplos_asuntos': [asunto],
+                            'frecuencia_palabras': sum(palabras_clave.values())
+                        }
+                    else:
+                        # Actualizar categoría existente
+                        categoria = biblioteca['patrones_clasificacion'][campo][valor_correcto]
+                        
+                        # Combinar palabras clave
+                        palabras_existentes = categoria.get('palabras_clave', {})
+                        for palabra, frecuencia in palabras_clave.items():
+                            if palabra in palabras_existentes:
+                                palabras_existentes[palabra] += frecuencia
+                            else:
+                                palabras_existentes[palabra] = frecuencia
+                        
+                        # Ordenar y limitar palabras clave
+                        palabras_combinadas = dict(
+                            sorted(palabras_existentes.items(), key=lambda x: x[1], reverse=True)[:20]
+                        )
+                        
+                        categoria['palabras_clave'] = palabras_combinadas
+                        categoria['total_tickets'] += 1
+                        categoria['frecuencia_palabras'] = sum(palabras_combinadas.values())
+                        
+                        # Agregar asunto a ejemplos si no está
+                        if asunto not in categoria['ejemplos_asuntos']:
+                            categoria['ejemplos_asuntos'].append(asunto)
+                            # Mantener solo los últimos 10 ejemplos
+                            if len(categoria['ejemplos_asuntos']) > 10:
+                                categoria['ejemplos_asuntos'] = categoria['ejemplos_asuntos'][-10:]
+
+            # Guardar biblioteca actualizada
+            with open(library_path, 'w', encoding='utf-8') as f:
+                json.dump(biblioteca, f, indent=2, ensure_ascii=False)
+            
+            return True
+                
+        except Exception as e:
+            display.show_message(f"❌ Error actualizando biblioteca: {e}", "error")
+            return False
 
     # Métodos de reportes y configuración (placeholders)
     def generar_resumen_clasificaciones(self):

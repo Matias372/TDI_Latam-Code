@@ -156,3 +156,44 @@ class FileUtils:
         dataframe.to_excel(ruta_completa, index=False)
         print(f"✅ Archivo guardado: {ruta_completa}")
         return ruta_completa
+    
+    @staticmethod
+    def get_downloads_folder():
+        """Obtiene la ruta de la carpeta Downloads del usuario"""
+        try:
+            import platform
+            
+            # Para Windows
+            if os.name == 'nt':
+                import winreg
+                sub_key = r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders'
+                downloads_guid = '{374DE290-123F-4565-9164-39C4925E467B}'
+                with winreg.OpenKey(winreg.HKEY_CURRENT_USER, sub_key) as key:
+                    downloads_path = winreg.QueryValueEx(key, downloads_guid)[0]
+            
+            # Para macOS
+            elif platform.system() == 'Darwin':
+                downloads_path = os.path.join(os.path.expanduser('~'), 'Downloads')
+            
+            # Para Linux y otros sistemas Unix
+            else:
+                downloads_path = os.path.join(os.path.expanduser('~'), 'Downloads')
+            
+            # Verificar que la carpeta existe, si no, crear
+            if not os.path.exists(downloads_path):
+                os.makedirs(downloads_path)
+                
+            return downloads_path
+            
+        except Exception as e:
+            # Fallback a la carpeta actual si no se puede determinar Downloads
+            print(f"⚠️ No se pudo detectar carpeta Downloads: {e}")
+            return os.getcwd()
+
+    @staticmethod
+    def get_classification_reports_folder():
+        """Obtiene la carpeta específica para reportes de clasificación"""
+        downloads_path = FileUtils.get_downloads_folder()
+        reports_folder = os.path.join(downloads_path, 'TDI_Classification_Reports')
+        os.makedirs(reports_folder, exist_ok=True)
+        return reports_folder

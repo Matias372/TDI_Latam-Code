@@ -297,3 +297,103 @@ class PatternManager:
                 
         except Exception as e:
             display.show_message(f"❌ Error guardando configuración: {e}", "error")
+    
+    def modificar_patron_existente(self):
+        """Modifica un patrón personalizado existente"""
+        print("\n✏️  MODIFICAR PATRÓN EXISTENTE")
+        print("=" * 50)
+        
+        custom_patterns = self.get('variable_patterns.custom_patterns', {})
+        if not custom_patterns:
+            print("🤷 No hay patrones personalizados para modificar")
+            display.press_enter_to_continue()
+            return
+        
+        # Mostrar patrones existentes
+        print("Patrones personalizados actuales:")
+        for i, (patron, significado) in enumerate(custom_patterns.items(), 1):
+            print(f"   {i}. {patron} -> '{significado}'")
+        
+        try:
+            seleccion = int(input("\n🔢 Número del patrón a modificar: ").strip())
+            if seleccion < 1 or seleccion > len(custom_patterns):
+                print("❌ Número inválido")
+                return
+            
+            patron_actual = list(custom_patterns.keys())[seleccion-1]
+            significado_actual = custom_patterns[patron_actual]
+            
+            print(f"\n📝 Patrón actual: {patron_actual}")
+            print(f"🎯 Significado actual: {significado_actual}")
+            
+            nuevo_patron = input(f"\n🔍 Nuevo patrón (Enter para mantener actual): ").strip()
+            nuevo_significado = input(f"🎯 Nuevo significado (Enter para mantener actual): ").strip()
+            
+            # Si no se ingresa nada, mantener el valor actual
+            if not nuevo_patron:
+                nuevo_patron = patron_actual
+            if not nuevo_significado:
+                nuevo_significado = significado_actual
+            
+            # Validar el nuevo patrón
+            try:
+                re.compile(nuevo_patron)
+            except re.error as e:
+                print(f"❌ Error en el patrón regex: {e}")
+                display.press_enter_to_continue()
+                return
+            
+            # Si el patrón cambió, eliminar el antiguo y agregar el nuevo
+            if nuevo_patron != patron_actual:
+                del custom_patterns[patron_actual]
+            
+            custom_patterns[nuevo_patron] = nuevo_significado
+            self.set('variable_patterns.custom_patterns', custom_patterns)
+            
+            print("✅ Patrón modificado exitosamente")
+            
+        except ValueError:
+            print("❌ Debe ingresar un número válido")
+        except Exception as e:
+            print(f"❌ Error modificando patrón: {e}")
+        
+        display.press_enter_to_continue()
+
+    def eliminar_patron(self):
+        """Elimina un patrón personalizado"""
+        print("\n🗑️  ELIMINAR PATRÓN PERSONALIZADO")
+        print("=" * 50)
+        
+        custom_patterns = self.get('variable_patterns.custom_patterns', {})
+        if not custom_patterns:
+            print("🤷 No hay patrones personalizados para eliminar")
+            display.press_enter_to_continue()
+            return
+        
+        # Mostrar patrones existentes
+        print("Patrones personalizados actuales:")
+        for i, (patron, significado) in enumerate(custom_patterns.items(), 1):
+            print(f"   {i}. {patron} -> '{significado}'")
+        
+        try:
+            seleccion = int(input("\n🔢 Número del patrón a eliminar: ").strip())
+            if seleccion < 1 or seleccion > len(custom_patterns):
+                print("❌ Número inválido")
+                return
+            
+            patron_a_eliminar = list(custom_patterns.keys())[seleccion-1]
+            
+            confirmar = input(f"¿Está seguro de eliminar el patrón '{patron_a_eliminar}'? (s/n): ").strip().lower()
+            if confirmar == 's':
+                del custom_patterns[patron_a_eliminar]
+                self.set('variable_patterns.custom_patterns', custom_patterns)
+                print("✅ Patrón eliminado exitosamente")
+            else:
+                print("❌ Eliminación cancelada")
+                
+        except ValueError:
+            print("❌ Debe ingresar un número válido")
+        except Exception as e:
+            print(f"❌ Error eliminando patrón: {e}")
+        
+        display.press_enter_to_continue()

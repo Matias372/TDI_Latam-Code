@@ -5,6 +5,7 @@ import os
 import re
 import pandas as pd
 import time 
+import platform
 from collections import defaultdict, Counter
 from typing import Dict, List, Any, Tuple
 from datetime import datetime
@@ -383,8 +384,8 @@ class ClassificationEngine:
             texto_completo = f"{subject} {description}"
             texto_procesado = self.preprocess_text(texto_completo)
             
-            # Extraer palabras clave del texto
-            palabras_clave = self._extraer_palabras_clave_avanzado(texto_procesado)
+            # Extraer palabras clave del texto - CORREGIDO: usar método público
+            palabras_clave = self.extraer_palabras_clave_avanzado(texto_procesado)
             
             # 🆕 VERIFICAR SI SE EXTRAJERON PALABRAS CLAVE
             if not palabras_clave:
@@ -409,16 +410,10 @@ class ClassificationEngine:
             display.show_message(f"❌ Error actualizando biblioteca: {e}", "error")
             return False
 
-    def _extraer_palabras_clave_avanzado(self, texto: str, limit: int = 15) -> Dict[str, int]:
+    def extraer_palabras_clave_avanzado(self, texto: str, limit: int = 15) -> Dict[str, int]:
         """
         Extrae palabras clave más relevantes del texto, enfocándose en términos técnicos.
-        
-        Args:
-            texto (str): Texto procesado
-            limit (int): Límite de palabras clave a extraer
-        
-        Returns:
-            Dict[str, int]: Diccionario de palabra -> frecuencia
+        (Método público para que pueda ser usado desde el menú)
         """
         # Palabras comunes a excluir
         stop_words = {
@@ -557,7 +552,7 @@ class ClassificationEngine:
         Clasifica un ticket individual por ID desde Freshdesk y actualiza la biblioteca
         """
         try:
-            # 🆕 VERIFICACIÓN MEJORADA DEL SERVICIO FRESHDESK
+            # VERIFICACIÓN MEJORADA DEL SERVICIO FRESHDESK
             if freshdesk_service is None:
                 display.show_message("❌ Servicio Freshdesk no disponible", "error")
                 return {
@@ -565,7 +560,7 @@ class ClassificationEngine:
                     'error': 'Servicio Freshdesk no disponible'
                 }
             
-            # 🆕 VERIFICAR SI EL SERVICIO TIENE CONFIGURACIÓN VÁLIDA
+            # VERIFICAR SI EL SERVICIO TIENE CONFIGURACIÓN VÁLIDA
             try:
                 if not hasattr(freshdesk_service, 'config'):
                     display.show_message("❌ Configuración de Freshdesk no encontrada", "error")
@@ -593,9 +588,6 @@ class ClassificationEngine:
 
             display.show_message(f"Obteniendo ticket #{ticket_id} desde Freshdesk...", "info")
             
-            # 🆕 CORRECCIÓN: USAR ApiUtils.get_ticket EN LUGAR DE freshdesk_service.get_ticket
-            from utils.api_utils import ApiUtils  # 🆕 Importar aquí o al inicio del archivo
-            
             # Obtener configuración del servicio
             domain = freshdesk_service.config.freshdesk_domain
             api_key = freshdesk_service.config.api_key
@@ -607,12 +599,18 @@ class ClassificationEngine:
                     'error': 'Dominio o API Key no configurados'
                 }
             
-            # 🆕 LLAMAR CORRECTAMENTE A ApiUtils.get_ticket
+            # LLAMAR CORRECTAMENTE A ApiUtils.get_ticket
             response = ApiUtils.get_ticket(domain, api_key, ticket_id)
             
-            # 🆕 VERIFICAR LA RESPUESTA
+            # VERIFICAR LA RESPUESTA
             if response.status_code != 200:
                 display.show_message(f"❌ Error al obtener ticket #{ticket_id}: {response.status_code}", "error")
+                # Intentar obtener más detalles del error
+                try:
+                    error_details = response.json()
+                    display.show_message(f"📄 Detalles del error: {error_details}", "error")
+                except:
+                    display.show_message(f"📄 Detalles del error: {response.text}", "error")
                 return {
                     'id': ticket_id,
                     'error': f'Error {response.status_code} al obtener ticket'
@@ -620,7 +618,7 @@ class ClassificationEngine:
             
             ticket_data = response.json()
             
-            # 🆕 EXTRAER DATOS CORRECTAMENTE - USAR description_text QUE ES MÁS LIMPIO
+            # EXTRAER DATOS CORRECTAMENTE
             subject = ticket_data.get('subject', '')
             description = ticket_data.get('description', '')
             description_text = ticket_data.get('description_text', '')
@@ -628,7 +626,7 @@ class ClassificationEngine:
             # Preferir description_text sobre description (sin HTML)
             texto_descripcion = description_text if description_text else description
             
-            # 🆕 VERIFICAR QUE EL TICKET TENGA DATOS VÁLIDOS
+            # VERIFICAR QUE EL TICKET TENGA DATOS VÁLIDOS
             if not subject and not texto_descripcion:
                 display.show_message(f"⚠️  Ticket #{ticket_id} no tiene asunto ni descripción", "warning")
             
@@ -643,7 +641,7 @@ class ClassificationEngine:
             # Clasificar el ticket
             classification_result = self.classify_ticket(subject, texto_descripcion)
             
-            # 🆕 VERIFICAR SI LA CLASIFICACIÓN FUE EXITOSA
+            # VERIFICAR SI LA CLASIFICACIÓN FUE EXITOSA
             if 'error' in classification_result:
                 display.show_message(f"❌ Error en clasificación: {classification_result['error']}", "error")
                 return {
@@ -651,7 +649,7 @@ class ClassificationEngine:
                     'error': classification_result['error']
                 }
             
-            # 🆕 ACTUALIZAR BIBLIOTECA con las palabras clave de este ticket
+            # ACTUALIZAR BIBLIOTECA con las palabras clave de este ticket
             display.show_message("📚 Actualizando biblioteca con palabras clave del ticket...", "info")
             actualizacion_exitosa = self.actualizar_biblioteca_desde_ticket(subject, texto_descripcion, classification_result)
             
@@ -921,46 +919,52 @@ class ClassificationEngine:
 
     def guardar_resultados_excel(self, resultados: List[Dict], output_path: str = None) -> str:
         """
-        Guarda los resultados comparativos en Excel
+        Guarda los resultados comparativos en Excel usando FileUtils
         """
-        if not output_path:
-            output_dir = os.path.join('data', 'output', 'classification')
-            os.makedirs(output_dir, exist_ok=True)
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            output_path = os.path.join(output_dir, f'resultado_comparacion_{timestamp}.xlsx')
-        
-        df_resultados = pd.DataFrame(resultados)
-        
-        # Crear Excel con múltiples hojas
-        with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
-            # Hoja principal con todos los resultados
-            df_resultados.to_excel(writer, sheet_name='Resultados Completos', index=False)
+        try:
+            if not output_path:
+                # Usar FileUtils para obtener la carpeta de reportes
+                reports_folder = FileUtils.get_classification_reports_folder()
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                output_path = os.path.join(reports_folder, f'resultado_comparacion_{timestamp}.xlsx')
             
-            # Hoja de resumen estadístico
-            resumen_data = {
-                'Métrica': ['Total Tickets', 'Precisión Promedio', 'Producto Correctos', 
-                           'Segmento Correctos', 'Fabricante Correctos', 'Motivo Correctos',
-                           'Bibliotecas Actualizadas'],
-                'Valor': [
-                    len(resultados),
-                    f"{df_resultados['precision_general'].mean():.2f}%",
-                    f"{df_resultados['producto_coincide'].sum()} ({df_resultados['producto_coincide'].sum()/len(resultados)*100:.2f}%)",
-                    f"{df_resultados['segmento_coincide'].sum()} ({df_resultados['segmento_coincide'].sum()/len(resultados)*100:.2f}%)",
-                    f"{df_resultados['fabricante_coincide'].sum()} ({df_resultados['fabricante_coincide'].sum()/len(resultados)*100:.2f}%)",
-                    f"{df_resultados['motivo_coincide'].sum()} ({df_resultados['motivo_coincide'].sum()/len(resultados)*100:.2f}%)",
-                    f"{df_resultados['biblioteca_actualizada'].sum()}"
-                ]
-            }
-            df_resumen = pd.DataFrame(resumen_data)
-            df_resumen.to_excel(writer, sheet_name='Resumen', index=False)
+            df_resultados = pd.DataFrame(resultados)
             
-            # Hoja con solo los incorrectos para análisis
-            incorrectos = df_resultados[df_resultados['precision_general'] < 100]
-            if not incorrectos.empty:
-                incorrectos.to_excel(writer, sheet_name='Necesitan Revisión', index=False)
-        
-        display.show_message(f"Resultados guardados en: {output_path}", "success")
-        return output_path
+            # Crear Excel con múltiples hojas
+            with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
+                # Hoja principal con todos los resultados
+                df_resultados.to_excel(writer, sheet_name='Resultados Completos', index=False)
+                
+                # Hoja de resumen estadístico
+                resumen_data = {
+                    'Métrica': ['Total Tickets', 'Precisión Promedio', 'Producto Correctos', 
+                            'Segmento Correctos', 'Fabricante Correctos', 'Motivo Correctos',
+                            'Bibliotecas Actualizadas'],
+                    'Valor': [
+                        len(resultados),
+                        f"{df_resultados['precision_general'].mean():.2f}%",
+                        f"{df_resultados['producto_coincide'].sum()} ({df_resultados['producto_coincide'].sum()/len(resultados)*100:.2f}%)",
+                        f"{df_resultados['segmento_coincide'].sum()} ({df_resultados['segmento_coincide'].sum()/len(resultados)*100:.2f}%)",
+                        f"{df_resultados['fabricante_coincide'].sum()} ({df_resultados['fabricante_coincide'].sum()/len(resultados)*100:.2f}%)",
+                        f"{df_resultados['motivo_coincide'].sum()} ({df_resultados['motivo_coincide'].sum()/len(resultados)*100:.2f}%)",
+                        f"{df_resultados['biblioteca_actualizada'].sum()}"
+                    ]
+                }
+                df_resumen = pd.DataFrame(resumen_data)
+                df_resumen.to_excel(writer, sheet_name='Resumen', index=False)
+                
+                # Hoja con solo los incorrectos para análisis
+                incorrectos = df_resultados[df_resultados['precision_general'] < 100]
+                if not incorrectos.empty:
+                    incorrectos.to_excel(writer, sheet_name='Necesitan Revisión', index=False)
+            
+            display.show_message(f"📊 Resultados guardados en: {output_path}", "success")
+            display.show_message(f"📁 Carpeta: {os.path.dirname(output_path)}", "info")
+            return output_path
+            
+        except Exception as e:
+            display.show_message(f"❌ Error guardando resultados: {e}", "error")
+            return None
     
     def diagnosticar_precision_cero(self, resultados: List[Dict], df_original: pd.DataFrame):
         """Diagnostica por qué la precisión es 0% - MEJORADA"""
