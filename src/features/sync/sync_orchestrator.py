@@ -23,7 +23,7 @@ class SyncOrchestrator:
         self.transaction_id = None
     
     def sincronizar_estados(self):
-        """Método principal de sincronización - INTERFAZ LIMPIA"""
+        """Método principal de sincronización - INTERFAZ MEJORADA"""
         self._mostrar_cabecera()
         
         if not self.config.validar_configuracion_clarity():
@@ -32,7 +32,6 @@ class SyncOrchestrator:
             return False
 
         try:
-            # 🎯 Usar DisplayUtils para interfaz de usuario
             display.show_message("Iniciando transacción de sincronización...", "info")
             self.transaction_id = self._iniciar_transaccion()
             
@@ -45,12 +44,11 @@ class SyncOrchestrator:
                 self._completar_transaccion_fallida(validacion.mensaje)
                 return False
 
-            # 🎯 Mensajes de progreso con DisplayUtils
             display.show_message("Archivos validados correctamente", "success")
             display.show_message(f"Freshdesk: {len(validacion.df_freshdesk)} tickets", "info")
             display.show_message(f"Clarity: {len(validacion.df_clarity)} tickets", "info")
 
-            # 🆕 ANÁLISIS DE ESTADOS ANTES DE SINCRONIZAR
+            # ANÁLISIS DE ESTADOS
             display.show_section("ANÁLISIS DE ESTADOS")
             analisis = self.state_comparator.analizar_estados_archivos(
                 validacion.df_freshdesk, 
@@ -58,27 +56,36 @@ class SyncOrchestrator:
             )
             self.state_comparator.mostrar_analisis_estados(analisis)
             
-            # 🆕 CONFIRMACIÓN PARA CONTINUAR DESPUÉS DEL ANÁLISIS
+            # MEJORA: Mostrar opciones de manera más clara
+            display.show_message("", "info")
             display.show_message("¿Desea continuar con la comparación detallada?", "info")
-            display.show_message("1. ✅ Sí, continuar con la sincronización", "info")
-            display.show_message("2. ❌ No, volver al menú", "info")
+            display.show_bullet_list([
+                "✅ Sí, continuar con la sincronización",
+                "❌ No, volver al menú"
+            ])
             
             opcion_analisis = input("\nSeleccione opción (1/2): ").strip()
             if opcion_analisis != "1":
                 display.show_message("Proceso cancelado por el usuario después del análisis", "warning")
                 self._completar_transaccion_cancelada("Usuario canceló después del análisis")
+                display.press_enter_to_continue()  # 🆕 Asegurar que espere
                 return False
 
-            # 🆕 ACTUALIZAR METADATOS DE TRANSACCIÓN
+            # Actualizar metadatos
             self._actualizar_metadatos_transaccion(validacion)
 
-            # 2. COMPARACIÓN DE ESTADOS
+            # 2. COMPARACIÓN DE ESTADOS - MEJORAR ACTUALIZACIÓN
             display.show_section("COMPARACIÓN DE ESTADOS")
             display.show_message("Comparando estados entre sistemas...", "sync")
+            
+            # 🆕 MEJORA: La barra de progreso se maneja internamente en state_comparator
             diferencias = self.state_comparator.comparar_estados(
                 validacion.df_freshdesk, 
                 validacion.df_clarity
             )
+            
+            # 🆕 LIMPIAR LÍNEA DE PROGRESO AL FINAL
+            display.clear_line()
             
             if not diferencias:
                 display.show_message("No se encontraron diferencias entre Freshdesk y Clarity", "success")
@@ -86,13 +93,28 @@ class SyncOrchestrator:
                 self._completar_transaccion_exitosa(0, 0, 0)
                 return True
 
-            # 3. RESOLUCIÓN DE IDs DE CLARITY
+            # 3. RESOLUCIÓN DE IDs DE CLARITY - MEJORAR MANEJO DE ERRORES
             display.show_section("RESOLUCIÓN DE IDs")
             display.show_message(f"Buscando IDs de Clarity para {len(diferencias)} tickets...", "search")
+            
             diferencias_completas = self.id_resolver.resolver_ids_clarity(diferencias)
             
+            # 🆕 LIMPIAR LÍNEA DE PROGRESO AL FINAL
+            display.clear_line()
+            
             if not diferencias_completas:
-                display.show_message("No se pudieron obtener los IDs de Clarity", "error")
+                display.show_message("❌ No se pudieron obtener los IDs de Clarity", "error")
+                display.show_message("🔍 Posibles causas:", "warning")
+                display.show_bullet_list([
+                    "Credenciales de Clarity incorrectas o expiradas",
+                    "Problemas de conexión con el servidor de Clarity",
+                    "Los tickets no existen en Clarity",
+                    "Problemas de permisos en la API de Clarity",
+                    "El dominio de Clarity no es accesible"
+                ])
+                
+                # 🆕 ESPERAR A QUE EL USUARIO VEA EL ERROR ANTES DE CONTINUAR
+                display.press_enter_to_continue()
                 self._completar_transaccion_fallida("No se pudieron obtener los IDs de Clarity")
                 return False
 
@@ -104,10 +126,12 @@ class SyncOrchestrator:
             if opcion == "2":
                 self.result_presenter._descargar_excel_cambios(diferencias_completas)
                 self._completar_transaccion_cancelada("Usuario descargó Excel sin aplicar cambios")
+                display.press_enter_to_continue()  # 🆕 Asegurar que espere
                 return True
             elif opcion == "3":
                 display.show_message("Proceso cancelado por el usuario", "warning")
                 self._completar_transaccion_cancelada("Usuario canceló el proceso")
+                display.press_enter_to_continue()  # 🆕 Asegurar que espere
                 return False
 
             # 5. APLICACIÓN DE CAMBIOS
@@ -119,7 +143,7 @@ class SyncOrchestrator:
             display.show_section("REPORTE FINAL")
             self.result_presenter.mostrar_reporte_final(resultado, diferencias_completas)
 
-            # 🆕 COMPLETAR TRANSACCIÓN EXITOSA
+            # COMPLETAR TRANSACCIÓN EXITOSA
             self._completar_transaccion_exitosa(
                 resultado.total_cambios, 
                 resultado.exitos, 
@@ -127,17 +151,22 @@ class SyncOrchestrator:
                 resultado.detalles
             )
             
+            # 🆕 ESPERAR ANTES DE VOLVER AL MENÚ
+            display.press_enter_to_continue()
             return resultado.exitos > 0
 
         except KeyboardInterrupt:
             display.clear_line()
             display.show_message("Sincronización cancelada por el usuario", "warning")
             self._completar_transaccion_cancelada("Cancelado por usuario (KeyboardInterrupt)")
+            display.press_enter_to_continue()  # 🆕 Asegurar que espere
             return False
         except Exception as e:
             logger.log_error(f"Error en sincronización: {str(e)}")
-            display.show_message(f"Error inesperado: {str(e)}", "error")
+            display.show_message(f"❌ Error inesperado: {str(e)}", "error")
+            display.show_message("📋 Revisa el archivo de logs para más detalles", "info")
             self._completar_transaccion_fallida(f"Excepción: {str(e)}")
+            display.press_enter_to_continue()  # 🆕 Asegurar que espere
             return False
     
     def _mostrar_cabecera(self):

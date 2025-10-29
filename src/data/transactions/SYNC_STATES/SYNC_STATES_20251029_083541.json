@@ -1,0 +1,21 @@
+{
+  "transaction_id": "SYNC_STATES_20251029_083541",
+  "process_type": "SYNC_STATES",
+  "timestamp": "2025-10-29T08:35:41.186766",
+  "description": "Sincronización estados Freshdesk → Clarity",
+  "metadata": {
+    "configuracion": "volatile",
+    "inicio_timestamp": "2025-10-29T08:35:41.186766"
+  },
+  "status": "STARTED",
+  "changes": [],
+  "rollback_data": {},
+  "failure": {
+    "completion_timestamp": "2025-10-29T08:37:04.824607",
+    "status": "FAILED",
+    "error": {
+      "estado": "FAILED",
+      "error": "Estructura de archivos inválida"
+    }
+  }
+}
