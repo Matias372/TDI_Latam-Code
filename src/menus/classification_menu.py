@@ -19,7 +19,7 @@ class ClassificationMenu:
         self.library_generator = ClassificationLibraryGenerator()
 
     def mostrar_menu_principal(self):
-        """Menú principal de clasificación"""
+        """Menú principal de clasificación - ACTUALIZADO"""
         while True:
             display.clear_screen()
             display.show_header("SISTEMA DE CLASIFICACIÓN")
@@ -27,8 +27,7 @@ class ClassificationMenu:
             opciones = [
                 "📚 1. Gestión de Biblioteca",
                 "🔍 2. Clasificar Tickets", 
-                "📊 3. Reportes y Estadísticas",
-                "⚙️  4. Configuración",
+                "⚙️  3. Configuración",
                 "↩️  0. Volver al menú principal"
             ]
             display.show_bullet_list(opciones)
@@ -40,8 +39,6 @@ class ClassificationMenu:
             elif opcion == "2":
                 self.mostrar_menu_clasificacion()
             elif opcion == "3":
-                self.mostrar_menu_reportes()
-            elif opcion == "4":
                 self.mostrar_menu_configuracion()
             elif opcion == "0":
                 break
@@ -50,7 +47,7 @@ class ClassificationMenu:
                 display.press_enter_to_continue()
 
     def mostrar_menu_clasificacion(self):
-        """Submenú para clasificación de tickets - ACTUALIZADO"""
+        """Submenú para clasificación de tickets"""
         while True:
             display.clear_screen()
             display.show_header("CLASIFICAR TICKETS")
@@ -77,9 +74,8 @@ class ClassificationMenu:
                 display.show_message("Opción inválida", "error")
                 display.press_enter_to_continue()
 
-
     def mostrar_menu_biblioteca(self):
-        """Submenú para gestión de biblioteca - REORGANIZADO"""
+        """Submenú para gestión de biblioteca"""
         while True:
             display.clear_screen()
             display.show_header("GESTIÓN DE BIBLIOTECA")
@@ -160,7 +156,7 @@ class ClassificationMenu:
         display.press_enter_to_continue()
 
     def actualizar_biblioteca_existente(self):
-        """Actualiza biblioteca existente con nuevos datos - MEJORADO"""
+        """Actualiza biblioteca existente con nuevos datos"""
         display.show_header("ACTUALIZAR BIBLIOTECA EXISTENTE")
         
         try:
@@ -226,11 +222,11 @@ class ClassificationMenu:
         display.show_header("CLASIFICAR TICKET POR ID")
         
         if not self._verificar_biblioteca_cargada():
-            print("DEBUG: Biblioteca no cargada, saliendo")  # 🐛 Depuración
+            print("DEBUG: Biblioteca no cargada, saliendo")
             return
         
         if not self.freshdesk_service:
-            print("DEBUG: Freshdesk service no disponible")  # 🐛 Depuración
+            print("DEBUG: Freshdesk service no disponible")
             display.show_message("Servicio Freshdesk no disponible", "error")
             display.press_enter_to_continue()
             return
@@ -277,11 +273,11 @@ class ClassificationMenu:
         display.show_header("PROBAR PRECISIÓN DESDE EXCEL")
         
         if not self._verificar_biblioteca_cargada():
-            print("DEBUG: Biblioteca no cargada, saliendo")  # 🐛 Depuración
+            print("DEBUG: Biblioteca no cargada, saliendo")
             return
         
         if not self.freshdesk_service:
-            print("DEBUG: Freshdesk service no disponible")  # 🐛 Depuración
+            print("DEBUG: Freshdesk service no disponible")
             display.show_message("Servicio Freshdesk no disponible", "error")
             display.press_enter_to_continue()
             return
@@ -466,7 +462,7 @@ class ClassificationMenu:
             display.show_message(f"❌ Error guardando resultado: {e}", "error")
 
     def _verificar_biblioteca_cargada(self):
-        """Verifica si hay una biblioteca cargada - MEJORADA"""
+        """Verifica si hay una biblioteca cargada"""
         try:
             if self.classification_engine is None:
                 self.classification_engine = initialize_classification_system()
@@ -532,51 +528,14 @@ class ClassificationMenu:
                             f"{top_rec['category']} (score: {top_rec['score']})"
                         )
 
-    # === MÉTODOS DE REPORTES Y CONFIGURACIÓN ===
-
-    def mostrar_menu_reportes(self):
-        """Submenú para reportes y estadísticas"""
-        while True:
-            display.clear_screen()
-            display.show_header("REPORTES Y ESTADÍSTICAS")
-            
-            opciones = [
-                "📈 1. Resumen de clasificaciones",
-                "🔤 2. Estadísticas de palabras clave", 
-                "🏷️  3. Distribución por categorías",
-                "📋 4. Exportar reporte completo",
-                "↩️  0. Volver al menú anterior"
-            ]
-            display.show_bullet_list(opciones)
-            
-            opcion = input("\n👉 Seleccione una opción: ").strip()
-
-            if opcion == "1":
-                self.generar_resumen_clasificaciones()
-            elif opcion == "2":
-                self.mostrar_estadisticas_palabras_clave()
-            elif opcion == "3":
-                self.mostrar_distribucion_categorias()
-            elif opcion == "4":
-                self.exportar_reporte_completo()
-            elif opcion == "0":
-                break
-            else:
-                display.show_message("Opción inválida", "error")
-                display.press_enter_to_continue()
-
     def mostrar_menu_configuracion(self):
-        """Submenú para configuración del sistema"""
+        """Submenú para configuración del sistema - SIMPLIFICADO"""
         while True:
             display.clear_screen()
             display.show_header("CONFIGURACIÓN")
             
             opciones = [
-                "📏 1. Ajustar umbrales de confianza",
-                "🔤 2. Gestionar siglas personalizadas",
-                "🔄 3. Gestionar patrones variables", 
-                "📁 4. Configurar rutas de archivos",
-                "🧹 5. Limpiar caché y datos temporales",
+                "🔄 1. Gestionar patrones variables", 
                 "↩️  0. Volver al menú anterior"
             ]
             display.show_bullet_list(opciones)
@@ -584,21 +543,13 @@ class ClassificationMenu:
             opcion = input("\n👉 Seleccione una opción: ").strip()
 
             if opcion == "1":
-                self.ajustar_umbrales_confianza()
-            elif opcion == "2":
-                self.gestionar_siglas_personalizadas()
-            elif opcion == "3":
                 self.pattern_manager.mostrar_menu_gestion_patrones()
-            elif opcion == "4":
-                self.configurar_rutas_archivos()
-            elif opcion == "5":
-                self.limpiar_cache_datos()
             elif opcion == "0":
                 break
             else:
                 display.show_message("Opción inválida", "error")
                 display.press_enter_to_continue()
-    
+
     def calibrar_biblioteca_desde_reporte(self):
         """Calibra la biblioteca usando un reporte de precisión para mejorar la clasificación"""
         display.show_header("CALIBRAR BIBLIOTECA DESDE REPORTE")
@@ -643,10 +594,10 @@ class ClassificationMenu:
                 display.press_enter_to_continue()
                 return
 
-            # 🆕 CORRECCIÓN: Resetear índice para evitar problemas
+            # Resetear índice para evitar problemas
             df_baja_precision = df_baja_precision.reset_index(drop=True)
             
-            # 🆕 VERIFICACIÓN ADICIONAL: Mostrar información del DataFrame
+            # VERIFICACIÓN ADICIONAL: Mostrar información del DataFrame
             display.show_message(f"Encontrados {len(df_baja_precision)} tickets con baja precisión", "info")
             display.show_message(f"Rango de IDs en el reporte: {df_baja_precision['id'].min()} a {df_baja_precision['id'].max()}", "info")
             
@@ -655,20 +606,20 @@ class ClassificationMenu:
                 display.show_message("Calibración cancelada", "info")
                 return
 
-            # 🆕 CORRECCIÓN: Usar contador propio en lugar del índice del DataFrame
+            # Usar contador propio en lugar del índice del DataFrame
             total = len(df_baja_precision)
             exitosos = 0
             procesados = 0
             
-            # 🆕 CORRECCIÓN: Iterar con enumerate para tener control del índice
+            # Iterar con enumerate para tener control del índice
             for idx, row in df_baja_precision.iterrows():
                 ticket_id = row['id']
                 procesados += 1
                 
-                # 🆕 VERIFICACIÓN: Mostrar información del ticket actual
+                # VERIFICACIÓN: Mostrar información del ticket actual
                 display.show_processing_message(f"#{ticket_id}", procesados, total, "Calibrando")
                 
-                # 🆕 VERIFICACIÓN: Limitar el número de tickets para pruebas
+                # VERIFICACIÓN: Limitar el número de tickets para pruebas
                 if procesados > 1000:  # Límite de seguridad
                     display.show_message("⚠️  Límite de seguridad alcanzado (1000 tickets)", "warning")
                     break
@@ -722,7 +673,7 @@ class ClassificationMenu:
             # Combinar texto para análisis
             texto_completo = f"{asunto} {descripcion}"
             
-            # 🆕 VERIFICACIÓN: Asegurarse de que el método existe
+            # VERIFICACIÓN: Asegurarse de que el método existe
             if not hasattr(self.classification_engine, 'extraer_palabras_clave_avanzado'):
                 display.show_message("❌ Error: Método 'extraer_palabras_clave_avanzado' no encontrado", "error")
                 return False
@@ -736,7 +687,7 @@ class ClassificationMenu:
             # Cargar la biblioteca actual
             library_path = self.classification_engine.library_path
             
-            # 🆕 VERIFICACIÓN: Asegurarse de que el archivo existe
+            # VERIFICACIÓN: Asegurarse de que el archivo existe
             if not os.path.exists(library_path):
                 display.show_message(f"❌ Biblioteca no encontrada en: {library_path}", "error")
                 return False
@@ -795,44 +746,3 @@ class ClassificationMenu:
         except Exception as e:
             display.show_message(f"❌ Error actualizando biblioteca: {e}", "error")
             return False
-
-    # Métodos de reportes y configuración (placeholders)
-    def generar_resumen_clasificaciones(self):
-        display.show_header("RESUMEN DE CLASIFICACIONES")
-        display.show_message("Función en desarrollo...", "warning")
-        display.press_enter_to_continue()
-
-    def mostrar_estadisticas_palabras_clave(self):
-        display.show_header("ESTADÍSTICAS DE PALABRAS CLAVE")
-        display.show_message("Función en desarrollo...", "warning")
-        display.press_enter_to_continue()
-
-    def mostrar_distribucion_categorias(self):
-        display.show_header("DISTRIBUCIÓN POR CATEGORÍAS")
-        display.show_message("Función en desarrollo...", "warning")
-        display.press_enter_to_continue()
-
-    def exportar_reporte_completo(self):
-        display.show_header("EXPORTAR REPORTE COMPLETO")
-        display.show_message("Función en desarrollo...", "warning")
-        display.press_enter_to_continue()
-
-    def ajustar_umbrales_confianza(self):
-        display.show_header("AJUSTAR UMBRALES DE CONFIANZA")
-        display.show_message("Función en desarrollo...", "warning")
-        display.press_enter_to_continue()
-
-    def gestionar_siglas_personalizadas(self):
-        display.show_header("GESTIONAR SIGLAS PERSONALIZADAS")
-        display.show_message("Función en desarrollo...", "warning")
-        display.press_enter_to_continue()
-
-    def configurar_rutas_archivos(self):
-        display.show_header("CONFIGURAR RUTAS DE ARCHIVOS")
-        display.show_message("Función en desarrollo...", "warning")
-        display.press_enter_to_continue()
-
-    def limpiar_cache_datos(self):
-        display.show_header("LIMPIAR CACHÉ Y DATOS TEMPORALES")
-        display.show_message("Función en desarrollo...", "warning")
-        display.press_enter_to_continue()

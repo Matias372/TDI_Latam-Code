@@ -67,8 +67,26 @@ class ResultPresenter:
         
         display.show_divider(80)
     
-    def mostrar_reporte_final(self, resultado, diferencias):
-        """🎯 MEJORADO: Reporte final con DisplayUtils"""
+    def mostrar_detalles_fallidos(self, tickets_fallidos):
+        """🎯 MOSTRAR DETALLES DE TICKETS FALLIDOS EN REPORTE FINAL"""
+        if not tickets_fallidos:
+            return
+            
+        display.show_message("\n" + "="*60, "warning")
+        display.show_message("📋 DETALLES DE TICKETS CON ERRORES", "warning")
+        display.show_message("="*60, "warning")
+        
+        for i, fallo in enumerate(tickets_fallidos, 1):
+            display.show_message(f"{i}. Ticket #{fallo['ticket_id']}", "error")
+            display.show_message(f"   Estado actual: {fallo['estado_actual']}", "info")
+            display.show_message(f"   Estado propuesto: {fallo['estado_propuesto']}", "info")
+            display.show_message(f"   Error: {fallo['error']}", "error")
+            display.show_message("   " + "-"*50, "debug")
+        
+        display.show_message(f"\n📊 Total de tickets con errores: {len(tickets_fallidos)}", "error")
+
+    def mostrar_reporte_final(self, resultado, diferencias, tickets_fallidos=None):
+        """🎯 MEJORADO: Reporte final con DisplayUtils y detalles de fallos"""
         display.show_section("REPORTE FINAL DE SINCRONIZACIÓN")
         display.show_divider(80)
         
@@ -80,7 +98,7 @@ class ResultPresenter:
         
         # 🎯 OBTENER TICKETS EXITOSOS Y FALLIDOS
         tickets_exitosos = [d['ticket_id'] for d in resultado.detalles if d['resultado'] == 'Éxito']
-        tickets_fallidos = [d['ticket_id'] for d in resultado.detalles if d['resultado'] == 'Error']
+        tickets_fallidos_detalles = [d for d in resultado.detalles if d['resultado'] == 'Error']
         
         if tickets_exitosos:
             display.show_message("", "info")  # Línea en blanco
@@ -89,15 +107,17 @@ class ResultPresenter:
             if len(tickets_exitosos) > 10:
                 display.show_message(f"   ... y {len(tickets_exitosos) - 10} más", "info")
         
+        # 🆕 MOSTRAR DETALLES DE FALLOS SI SE PROPORCIONA LA LISTA MEJORADA
         if tickets_fallidos:
+            self.mostrar_detalles_fallidos(tickets_fallidos)
+        elif tickets_fallidos_detalles:
+            # Si no se pasó la lista mejorada, usar la información de resultado.detalles
             display.show_message("", "info")  # Línea en blanco
-            display.show_message(f"🚫 TICKETS CON ERRORES ({len(tickets_fallidos)}):", "error")
-            # 🎯 MOSTRAR PRIMEROS 5 ERRORES CON DETALLE
-            errores_detallados = [d for d in resultado.detalles if d['resultado'] == 'Error']
-            for error in errores_detallados[:5]:
+            display.show_message(f"🚫 TICKETS CON ERRORES ({len(tickets_fallidos_detalles)}):", "error")
+            for error in tickets_fallidos_detalles[:5]:
                 display.show_message(f"   ❌ Ticket {error['ticket_id']}: {error['error']}", "error")
-            if len(errores_detallados) > 5:
-                display.show_message(f"   ... y {len(errores_detallados) - 5} errores más", "info")
+            if len(tickets_fallidos_detalles) > 5:
+                display.show_message(f"   ... y {len(tickets_fallidos_detalles) - 5} errores más", "info")
         
         # 🎯 ESTADÍSTICAS DE CAMBIOS APLICADOS
         if tickets_exitosos:

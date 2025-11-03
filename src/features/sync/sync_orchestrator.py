@@ -139,9 +139,40 @@ class SyncOrchestrator:
             display.show_message("Aplicando cambios en Clarity...", "sync")
             resultado = self.change_applier.aplicar_cambios_clarity(diferencias_completas, self.transaction_id)
 
+            # 🆕 MEJORA: VERIFICAR SI HUBO ÉXITOS A PESAR DE FALLOS
+            if resultado.exitos > 0:
+                display.show_message(f"✅ {resultado.exitos} tickets actualizados exitosamente", "success")
+            if resultado.fallos > 0:
+                display.show_message(f"⚠️  {resultado.fallos} tickets tuvieron errores (revisar resumen anterior)", "warning")
+            
             # 6. REPORTE FINAL
             display.show_section("REPORTE FINAL")
-            self.result_presenter.mostrar_reporte_final(resultado, diferencias_completas)
+
+            # 🆕 MEJORA: PASAR LA LISTA DE TICKETS FALLIDOS AL PRESENTADOR
+            if hasattr(self.change_applier, 'tickets_fallidos') and self.change_applier.tickets_fallidos:
+                self.result_presenter.mostrar_reporte_final(
+                    resultado, 
+                    diferencias_completas,
+                    tickets_fallidos=self.change_applier.tickets_fallidos  # 🆕 Pasar lista de fallos
+                )
+            else:
+                self.result_presenter.mostrar_reporte_final(resultado, diferencias_completas)
+
+            # 🆕 MEJORA: COMPLETAR TRANSACCIÓN CON INFORMACIÓN DE FALLOS
+            detalles_fallos = []
+            if hasattr(self.change_applier, 'tickets_fallidos'):
+                detalles_fallos = [{
+                    'ticket_id': fallo['ticket_id'],
+                    'error': fallo['error']
+                } for fallo in self.change_applier.tickets_fallidos]
+
+            self._completar_transaccion_exitosa(
+                resultado.total_cambios, 
+                resultado.exitos, 
+                resultado.fallos,
+                resultado.detalles,
+                detalles_fallos  # 🆕 Información específica de fallos
+            )
 
             # COMPLETAR TRANSACCIÓN EXITOSA
             self._completar_transaccion_exitosa(
@@ -162,11 +193,22 @@ class SyncOrchestrator:
             display.press_enter_to_continue()  # 🆕 Asegurar que espere
             return False
         except Exception as e:
-            logger.log_error(f"Error en sincronización: {str(e)}")
-            display.show_message(f"❌ Error inesperado: {str(e)}", "error")
+            # 🆕 MEJORA: LOGGING MÁS ROBUSTO
+            error_msg = f"Error en sincronización: {str(e)}"
+            logger.log_error(error_msg)
+            
+            # 🆕 MOSTRAR INFORMACIÓN MÁS CLARA AL USUARIO
+            display.show_message(f"💥 ERROR INESPERADO EN SINCRONIZACIÓN", "error")
+            display.show_message(f"📝 Detalle técnico: {str(e)}", "debug")
             display.show_message("📋 Revisa el archivo de logs para más detalles", "info")
-            self._completar_transaccion_fallida(f"Excepción: {str(e)}")
-            display.press_enter_to_continue()  # 🆕 Asegurar que espere
+            
+            # 🆕 INTENTAR COMPLETAR LA TRANSACCIÓN A PESAR DEL ERROR
+            try:
+                self._completar_transaccion_fallida(f"Excepción: {str(e)}")
+            except Exception as trans_error:
+                logger.log_error(f"Error al completar transacción fallida: {trans_error}")
+            
+            display.press_enter_to_continue()
             return False
     
     def _mostrar_cabecera(self):
@@ -207,8 +249,8 @@ class SyncOrchestrator:
         
         logger.transaction_logger._update_transaction(self.transaction_id, 'metadata', metadata)
     
-    def _completar_transaccion_exitosa(self, total, exitos, fallos, detalles=None):
-        """Completar transacción exitosa"""
+    def _completar_transaccion_exitosa(self, total, exitos, fallos, detalles=None, detalles_fallos=None):
+        """Completar transacción exitosa - MEJORADO CON INFO DE FALLOS"""
         summary = {
             'total_cambios': total,
             'cambios_exitosos': exitos,
@@ -222,9 +264,13 @@ class SyncOrchestrator:
             summary['ejemplos_exitosos'] = tickets_exitosos
             summary['ejemplos_fallidos'] = tickets_fallidos
         
+        # 🆕 AGREGAR DETALLES ESPECÍFICOS DE FALLOS SI EXISTEN
+        if detalles_fallos:
+            summary['detalles_fallos'] = detalles_fallos[:10]  # Limitar a 10 para no hacer muy grande el log
+        
         logger.transaction_logger.complete_transaction(self.transaction_id, summary)
         logger.log_info(f"Transacción completada exitosamente: {self.transaction_id}")
-    
+
     def _completar_transaccion_fallida(self, error_msg):
         """Completar transacción fallida"""
         logger.transaction_logger.fail_transaction(self.transaction_id, {
