@@ -5,32 +5,49 @@ import platform
 class DisplayUtils:
     @staticmethod
     def clear_screen():
-        """Limpia la pantalla de manera cross-platform"""
+        """Limpia la pantalla de manera cross-platform - MEJORADO"""
         try:
             if platform.system() == "Windows":
                 os.system('cls')
             else:
                 os.system('clear')
         except:
+            # Fallback más robusto
             print("\n" * 100)
     
     @staticmethod
     def clear_line():
-        """Limpia la línea actual en la terminal"""
-        print("\r" + " " * 100, end="", flush=True)
+        """Limpia la línea actual en la terminal - MEJORADO"""
+        try:
+            # Método más robusto para limpiar línea
+            print("\r" + " " * 150, end="", flush=True)
+            print("\r", end="", flush=True)
+        except:
+            # Fallback simple
+            print()
     
     @staticmethod
     def update_progress(current: int, total: int, prefix: str = "", suffix: str = ""):
-        """Actualizar barra de progreso en la misma línea"""
-        bar_length = 30
-        progress = current / total if total > 0 else 0
-        filled_length = int(bar_length * progress)
-        
-        bar = "█" * filled_length + "░" * (bar_length - filled_length)
-        percentage = f"{progress * 100:.1f}%"
-        
-        message = f"\r{prefix} [{bar}] {percentage} ({current}/{total}) {suffix}"
-        print(message, end="", flush=True)
+        """Actualizar barra de progreso en la misma línea - MEJORADO"""
+        try:
+            bar_length = 30
+            progress = current / total if total > 0 else 0
+            filled_length = int(bar_length * progress)
+            
+            bar = "█" * filled_length + "░" * (bar_length - filled_length)
+            percentage = f"{progress * 100:.1f}%"
+            
+            # 🆕 MEJORA: Limpiar línea antes de mostrar nuevo progreso
+            message = f"\r{prefix} [{bar}] {percentage} ({current}/{total}) {suffix}"
+            print(message, end="", flush=True)
+            
+            # 🆕 Si es el último, limpiar la línea
+            if current == total:
+                print("\r" + " " * len(message), end="", flush=True)
+                print("\r", end="", flush=True)
+        except Exception as e:
+            # Fallback simple si hay error
+            print(f"\rProgreso: {current}/{total} {suffix}", end="", flush=True)
     
     @staticmethod
     def show_processing_message(ticket_id: str, current: int, total: int, status: str = ""):

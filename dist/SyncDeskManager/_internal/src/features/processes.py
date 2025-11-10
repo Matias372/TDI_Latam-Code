@@ -6,8 +6,6 @@ from utils.validation_utils import ValidationUtils
 from utils.api_utils import ApiUtils
 from config.state_mapping import MAPEO_ESTADOS_FD_API_A_CLARITY, mapear_estado_desde_api
 from utils.display_utils import display
-from utils.logging import logger
-# O para funcionalidades específicas:
 from utils.logging import logger, TransactionLogger
 
 class Processes:
@@ -21,45 +19,44 @@ class Processes:
 
         # Seleccionar archivo de tickets
         display.clear_screen()
-        print("\n╔══════════════════════════════════════════════╗")
-        print("║              📨 ENVÍO DE NOTAS               ║")
-        print("╚══════════════════════════════════════════════╝")
+        display.show_header("ENVÍO DE NOTAS")
         
-        print("\n📋 Seleccione el archivo de tickets a procesar:")
+        display.show_message("Seleccione el archivo de tickets a procesar:", "file")
         ruta_archivo_tickets = FileUtils.seleccionar_archivo("Seleccione el archivo de tickets")
         if not ruta_archivo_tickets:
-            print("❌ No se seleccionó ningún archivo.")
+            display.show_message("No se seleccionó ningún archivo.", "warning")
             display.press_enter_to_continue()
             return
 
         tickets_df = FileUtils.cargar_excel(ruta_archivo_tickets)
         if tickets_df is None or tickets_df.empty:
-            print("❌ No se pudieron cargar los tickets o el archivo está vacío.")
+            display.show_message("No se pudieron cargar los tickets o el archivo está vacío.", "error")
             display.press_enter_to_continue()
             return
 
         if 'Ticket ID' not in tickets_df.columns:
-            print("❌ El archivo debe contener la columna 'Ticket ID'")
+            display.show_message("El archivo debe contener la columna 'Ticket ID'", "error")
             display.press_enter_to_continue()
             return
 
         # Cargar archivo de agentes
-        print("\n👥 Seleccione el archivo de agentes:")
+        display.show_message("Seleccione el archivo de agentes:", "file")
         ruta_agentes = FileUtils.seleccionar_archivo("Seleccione el archivo de agentes")
         if not ruta_agentes:
-            print("❌ No se seleccionó el archivo de agentes.")
+            display.show_message("No se seleccionó el archivo de agentes.", "error")
             display.press_enter_to_continue()
             return
 
         agentes_df = FileUtils.cargar_excel(ruta_agentes)
         if agentes_df is None or agentes_df.empty:
+            display.show_message("No se pudo cargar el archivo de agentes o está vacío.", "error")
             display.press_enter_to_continue()
             return
 
         # Verificar estructura del archivo de agentes
         columnas_requeridas = ['ID', 'Agente', 'MAIL']
         if not all(col in agentes_df.columns for col in columnas_requeridas):
-            print(f"❌ El archivo de agentes debe contener las columnas: {columnas_requeridas}")
+            display.show_message(f"El archivo de agentes debe contener las columnas: {columnas_requeridas}", "error")
             display.press_enter_to_continue()
             return
 
@@ -76,13 +73,12 @@ class Processes:
         total_tickets = len(tickets_df)
 
         display.clear_screen()
-        print("\n╔══════════════════════════════════════════════╗")
-        print("║              📨 ENVÍO DE NOTAS               ║")
-        print("╚══════════════════════════════════════════════╝")
+        display.show_header("ENVÍO DE NOTAS")
         
-        print(f"\n📊 Procesando {total_tickets} tickets encontrados...")
-        print("💡 Presione Ctrl+C para cancelar el proceso")
-        print("🔍 En modo manual, la barra se pausará para confirmaciones\n")
+        display.show_message(f"Procesando {total_tickets} tickets encontrados...", "info")
+        display.show_message("Presione Ctrl+C para cancelar el proceso", "info")
+        if not automatico:
+            display.show_message("En modo manual, la barra se pausará para confirmaciones", "info")
 
         try:
             for index, ticket_row in tickets_df.iterrows():
@@ -91,10 +87,10 @@ class Processes:
 
                 # 🎯 ACTUALIZACIÓN EN TIEMPO REAL
                 display.show_processing_message(
-                    ticket_id=ticket_id,
-                    current=current,
-                    total=total_tickets,
-                    status=f"✅:{enviados_ok} ⏭️:{rechazados} ❌:{errores}"
+                    str(ticket_id),
+                    current,
+                    total_tickets,
+                    f"✅:{enviados_ok} ⏭️:{rechazados} ❌:{errores}"
                 )
 
                 # Obtener ticket desde Freshdesk
@@ -125,7 +121,6 @@ class Processes:
                     continue
 
                 try:
-                    from datetime import datetime, timezone
                     updated_at = datetime.fromisoformat(updated_at_str.replace("Z", "+00:00"))
                     ahora = datetime.now(timezone.utc)
                     dias_inactividad = (ahora - updated_at).days
@@ -162,24 +157,24 @@ class Processes:
                 # 🎯 CONFIRMACIÓN EN MODO MANUAL (CON PAUSA DE BARRA)
                 if not automatico:
                     display.clear_line()
-                    print(f"\n📋 TICKET #{ticket_id} - CONFIRMACIÓN REQUERIDA")
-                    print("─" * 50)
-                    print(f"👤 Agentes: {', '.join(nombres_agentes)}")
-                    print(f"📧 Emails: {', '.join(notify_emails)}")
-                    print(f"💬 Mensaje:\n{mensaje}")
-                    print("─" * 50)
+                    display.show_header(f"TICKET #{ticket_id} - CONFIRMACIÓN REQUERIDA")
+                    display.show_key_value("Agentes", ', '.join(nombres_agentes))
+                    display.show_key_value("Emails", ', '.join(notify_emails))
+                    display.show_section("MENSAJE")
+                    print(mensaje)
+                    display.show_divider()
                     
                     confirmado = ValidationUtils.confirmar_accion("¿Desea enviar la nota interna?")
                     
                     if not confirmado:
-                        print(f"❌ Nota NO enviada para el ticket {ticket_id}")
+                        display.show_message(f"Nota NO enviada para el ticket {ticket_id}", "warning")
                         rechazados += 1
                         # Reanudar barra de progreso
-                        display.show_processing_message(ticket_id, current, total_tickets, f"✅:{enviados_ok} ⏭️:{rechazados} ❌:{errores}")
+                        display.show_processing_message(str(ticket_id), current, total_tickets, f"✅:{enviados_ok} ⏭️:{rechazados} ❌:{errores}")
                         continue
                     
                     # Reanudar barra de progreso después de la confirmación
-                    display.show_processing_message(ticket_id, current, total_tickets, f"✅:{enviados_ok} ⏭️:{rechazados} ❌:{errores}")
+                    display.show_processing_message(str(ticket_id), current, total_tickets, f"✅:{enviados_ok} ⏭️:{rechazados} ❌:{errores}")
 
                 # Enviar nota interna
                 if self._enviar_nota_interna(ticket_id, mensaje, notify_emails):
@@ -190,33 +185,30 @@ class Processes:
 
             # 🎯 RESULTADO FINAL
             display.clear_line()
-            print(f"\r🎉 Procesamiento completado!")
-            print("\n---------------------------------------")
-            print("📊 Resultados: ")
-            print(f"✅ Enviados correctamente: {enviados_ok}")  
-            print(f"⏭️ Omitidos por condición: {rechazados}")
-            print(f"❌ Error en envío: {errores}")
-            print("---------------------------------------")
+            display.show_message("Procesamiento completado!", "success")
+            display.show_section("RESULTADOS")
+            display.show_key_value("Enviados correctamente", str(enviados_ok))
+            display.show_key_value("Omitidos por condición", str(rechazados))
+            display.show_key_value("Error en envío", str(errores))
 
             # Manejo de errores
             if errores > 0:
-                print(f"\n¿Desea ver los tickets con error? (S/N): ", end="")
-                if input().strip().upper() == 'S':
-                    print("\n📋 Tickets con errores:")
+                if ValidationUtils.confirmar_accion("¿Desea ver los tickets con error?"):
+                    display.show_section("TICKETS CON ERRORES")
                     for t_id in tickets_error[:10]:
-                        print(f"   • Ticket ID: {t_id}")
+                        display.show_message(f"Ticket ID: {t_id}", "error")
                     if len(tickets_error) > 10:
-                        print(f"   ... y {len(tickets_error) - 10} más")
+                        display.show_message(f"... y {len(tickets_error) - 10} más", "info")
 
-            print("\n🎯 PROCESO FINALIZADO")
+            display.show_message("PROCESO FINALIZADO", "success")
 
         except KeyboardInterrupt:
             display.clear_line()
-            print(f"\r⏹️  Proceso cancelado por el usuario")
-            print(f"📊 Progreso hasta la cancelación:")
-            print(f"   ✅ Enviados: {enviados_ok}")
-            print(f"   ⏭️  Omitidos: {rechazados}")
-            print(f"   ❌ Errores: {errores}")
+            display.show_message("Proceso cancelado por el usuario", "warning")
+            display.show_section("PROGRESO HASTA LA CANCELACIÓN")
+            display.show_key_value("Enviados", str(enviados_ok))
+            display.show_key_value("Omitidos", str(rechazados))
+            display.show_key_value("Errores", str(errores))
 
         display.press_enter_to_continue()
 
@@ -256,11 +248,11 @@ class Processes:
         agente_reemplazo_id = 123456789
 
         if responder_id == agente_especial_id:
-            print(f"   ⚡ Reemplazando agente especial {agente_especial_id} por {agente_reemplazo_id}")
+            display.show_message(f"Reemplazando agente especial {agente_especial_id} por {agente_reemplazo_id}", "info")
             responder_id = agente_reemplazo_id
 
         if internal_id == agente_especial_id:
-            print(f"   ⚡ Reemplazando agente especial {agente_especial_id} por {agente_reemplazo_id}")
+            display.show_message(f"Reemplazando agente especial {agente_especial_id} por {agente_reemplazo_id}", "info")
             internal_id = agente_reemplazo_id
 
         # Crear conjunto de agentes únicos
@@ -278,23 +270,23 @@ class Processes:
         for ag_id in agentes_unicos:
             if ag_id in agentes_dict:
                 nombre, mail = agentes_dict[ag_id]
-                print(f"   👤 Agente conocido: {nombre} ({mail})")
+                display.show_message(f"Agente conocido: {nombre} ({mail})", "debug")
             else:
                 # 🎯 PAUSAR BARRA DE PROGRESO PARA AGREGAR NUEVO AGENTE
                 display.clear_line()
-                print(f"\r⚠️  NUEVO AGENTE DETECTADO: ID {ag_id}")
-                print("📝 Por favor, ingrese los datos del nuevo agente:")
+                display.show_message(f"NUEVO AGENTE DETECTADO: ID {ag_id}", "warning")
+                display.show_message("Por favor, ingrese los datos del nuevo agente:", "info")
                 
                 nombre = input("   👉 Nombre del agente: ").strip()
                 mail = input("   📧 Email del agente: ").strip()
                 
                 if not nombre or not mail:
-                    print("   ❌ Nombre y email son obligatorios. Agente omitido.")
+                    display.show_message("Nombre y email son obligatorios. Agente omitido.", "error")
                     continue
                     
                 # Validar email básico
                 if "@" not in mail:
-                    print("   ❌ Email inválido. Debe contener '@'. Agente omitido.")
+                    display.show_message("Email inválido. Debe contener '@'. Agente omitido.", "error")
                     continue
                     
                 # Agregar a lista de nuevos agentes
@@ -302,7 +294,7 @@ class Processes:
                 # Agregar temporalmente al diccionario para este ticket
                 agentes_dict[ag_id] = (nombre, mail)
                 
-                print(f"   ✅ Agente '{nombre}' agregado temporalmente")
+                display.show_message(f"Agente '{nombre}' agregado temporalmente", "success")
 
             notify_emails.append(mail)
             nombres_agentes.append(nombre)
@@ -311,7 +303,7 @@ class Processes:
         if nuevos_agentes:
             try:
                 display.clear_line()
-                print(f"\r💾 Guardando {len(nuevos_agentes)} nuevo(s) agente(s)...")
+                display.show_message(f"Guardando {len(nuevos_agentes)} nuevo(s) agente(s)...", "info")
                 
                 # CARGAR archivo actual COMPLETO (no usar el DataFrame en memoria)
                 agentes_existente = pd.read_excel(ruta_agentes)
@@ -330,30 +322,19 @@ class Processes:
                     mail = agente['MAIL']
                     agentes_dict[ag_id] = (nombre, mail)
                 
-                print(f"   ✅ {len(nuevos_agentes)} agente(s) guardado(s) correctamente")
-                print(f"   📊 Total de agentes en archivo: {len(agentes_completo)}")
+                display.show_message(f"{len(nuevos_agentes)} agente(s) guardado(s) correctamente", "success")
+                display.show_key_value("Total de agentes en archivo", str(len(agentes_completo)))
                 
                 # Devolver el DataFrame actualizado
                 return (notify_emails, nombres_agentes), agentes_completo
                 
             except Exception as e:
-                print(f"   ❌ Error al guardar agentes: {e}")
-                print("   ⚠️  Los agentes nuevos solo están en memoria para esta sesión")
+                display.show_message(f"Error al guardar agentes: {e}", "error")
+                display.show_message("Los agentes nuevos solo están en memoria para esta sesión", "warning")
                 # Continuar con los agentes en memoria
                 return (notify_emails, nombres_agentes), None
 
         return (notify_emails, nombres_agentes), None
-
-
-    def _confirmar_envio(self, ticket_id, agentes, mensaje, emails):
-        """Confirmar envío de nota interna"""
-        print("\n" + "="*50)
-        print(f"Ticket ID: {ticket_id}")
-        print(f"Agentes: {', '.join(agentes)}")
-        print(f"Emails: {', '.join(emails)}")
-        print(f"Mensaje:\n{mensaje}")
-        print("="*50)
-        return ValidationUtils.confirmar_accion("¿Desea enviar la nota interna?")
 
     def _enviar_nota_interna(self, ticket_id, mensaje, notify_emails):
         """Enviar nota interna al ticket via API Freshdesk"""
@@ -367,31 +348,28 @@ class Processes:
             )
             
             if respuesta.status_code in [200, 201]:
-                print(f"✅ Nota enviada correctamente al ticket {ticket_id}")
+                display.show_message(f"Nota enviada correctamente al ticket {ticket_id}", "success")
                 return True
             else:
-                print(f"❌ Error al enviar nota: {respuesta.status_code} - {respuesta.text}")
+                display.show_message(f"Error al enviar nota: {respuesta.status_code} - {respuesta.text}", "error")
                 return False
                 
         except Exception as e:
-            print(f"❌ Error al enviar nota: {e}")
+            display.show_message(f"Error al enviar nota: {e}", "error")
             return False
 
     def _mostrar_resumen(self, total, enviados, rechazados, errores, tickets_error):
         """Mostrar resumen final del proceso"""
-        print("\n" + "="*60)
-        print("📊 RESUMEN FINAL")
-        print("="*60)
-        print(f"📌 Total de tickets procesados: {total}")
-        print(f"✅ Notas enviadas correctamente: {enviados}")
-        print(f"⏭ Tickets rechazados/saltados: {rechazados}")
-        print(f"❌ Errores en el envío: {errores}")
-        print("="*60)
+        display.show_header("RESUMEN FINAL")
+        display.show_key_value("Total de tickets procesados", str(total))
+        display.show_key_value("Notas enviadas correctamente", str(enviados))
+        display.show_key_value("Tickets rechazados/saltados", str(rechazados))
+        display.show_key_value("Errores en el envío", str(errores))
 
         if errores > 0:
             if ValidationUtils.confirmar_accion("¿Deseas ver la lista de tickets con error?"):
-                print("\n=== TICKETS CON ERROR ===")
+                display.show_section("TICKETS CON ERROR")
                 for t_id in tickets_error:
-                    print(f" - Ticket ID: {t_id}")
+                    display.show_message(f"Ticket ID: {t_id}", "error")
 
-        print("\n🎯 PROCESO FINALIZADO")
+        display.show_message("PROCESO FINALIZADO", "success")

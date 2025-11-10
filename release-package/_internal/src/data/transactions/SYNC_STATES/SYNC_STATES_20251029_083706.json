@@ -1,0 +1,24 @@
+{
+  "transaction_id": "SYNC_STATES_20251029_083706",
+  "process_type": "SYNC_STATES",
+  "timestamp": "2025-10-29T08:37:06.816114",
+  "description": "Sincronización estados Freshdesk → Clarity",
+  "metadata": {
+    "freshdesk_file": "total_de_tickets_agrupados_por_fecha_de_creación_total_tickets_2114290_2025_10_29_11_36_55_715.xlsx",
+    "clarity_file": "Unsaved_10113035.csv",
+    "total_tickets_freshdesk": 1825,
+    "total_tickets_clarity": 27105,
+    "diferencias_iniciales": 1825
+  },
+  "status": "STARTED",
+  "changes": [],
+  "rollback_data": {},
+  "failure": {
+    "completion_timestamp": "2025-10-29T08:37:57.390812",
+    "status": "FAILED",
+    "error": {
+      "estado": "FAILED",
+      "error": "No se pudieron obtener los IDs de Clarity"
+    }
+  }
+}

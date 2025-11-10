@@ -7,7 +7,7 @@ class ClarityIdResolver:
         self.logger = logger
     
     def resolver_ids_clarity(self, diferencias):
-        """Obtener IDs de Clarity para las diferencias"""
+        """Obtener IDs de Clarity para las diferencias - CON MEJOR MANEJO DE ERRORES"""
         if not diferencias:
             return []
         
@@ -15,23 +15,41 @@ class ClarityIdResolver:
         
         diferencias_completas = []
         tickets_encontrados = 0
+        tickets_no_encontrados = 0
         
         for i, diff in enumerate(diferencias, 1):
-            if i % 10 == 0 or i == len(diferencias):
+            # 🆕 MEJORA: Mostrar progreso cada 5 tickets para mejor rendimiento
+            if i % 5 == 0 or i == len(diferencias):
                 display.update_progress(
                     current=i,
                     total=len(diferencias),
                     prefix="🔍 Buscando IDs Clarity:",
-                    suffix=f"| Encontrados: {tickets_encontrados}"
+                    suffix=f"| Encontrados: {tickets_encontrados}, No encontrados: {tickets_no_encontrados}"
                 )
             
             diferencia_completa = self._resolver_id_ticket(diff)
             if diferencia_completa:
                 diferencias_completas.append(diferencia_completa)
                 tickets_encontrados += 1
+            else:
+                tickets_no_encontrados += 1
+                self.logger.log_warning(f"Ticket {diff.ticket_id} no encontrado en Clarity")
         
+        # 🆕 LIMPIAR LÍNEA Y MOSTRAR RESUMEN
         display.clear_line()
+        
+        if tickets_no_encontrados > 0:
+            display.show_message(f"Resolución completada: {tickets_encontrados} encontrados, {tickets_no_encontrados} no encontrados", "warning")
+        else:
+            display.show_message(f"Resolución completada: {tickets_encontrados} encontrados", "success")
+        
         self.logger.log_info(f"IDs obtenidos: {tickets_encontrados}/{len(diferencias)} tickets")
+        
+        # 🆕 SI NO SE ENCONTRÓ NINGÚN TICKET, RETORNAR LISTA VACÍA
+        if tickets_encontrados == 0:
+            display.show_message("❌ No se pudo encontrar ningún ticket en Clarity", "error")
+            return []
+        
         return diferencias_completas
     
     def _resolver_id_ticket(self, diferencia):
