@@ -25,7 +25,7 @@ class StateComparator:
                 display.update_progress(
                     current=current,
                     total=total_tickets,
-                    prefix="🔍 Comparando estados",
+                    prefix=" Comparando estados",
                     suffix=f"| Diferencias: {len(diferencias)}"
                 )
             
@@ -75,7 +75,7 @@ class StateComparator:
         return None
 
     def analizar_estados_archivos(self, df_freshdesk, df_clarity):
-        """🎯 ANÁLISIS COMPLETO: Distribución de estados antes de sincronizar"""
+        """ ANÁLISIS COMPLETO: Distribución de estados antes de sincronizar"""
         display.show_message("Analizando distribución de estados...", "search")
         
         analisis = {
@@ -92,7 +92,7 @@ class StateComparator:
             'tickets_sin_coincidencia': 0
         }
         
-        # 🎯 IDENTIFICAR ESTADOS NO MAPEADOS
+        #  IDENTIFICAR ESTADOS NO MAPEADOS
         estados_freshdesk = df_freshdesk['Estado'].unique()
         for estado in estados_freshdesk:
             estado_mapeado = self.mapeo_estados.get(estado)
@@ -109,11 +109,11 @@ class StateComparator:
         return analisis
 
     def mostrar_analisis_estados(self, analisis):
-        """🎯 MUESTRA COMPLETA: Análisis de distribución de estados con DisplayUtils"""
+        """ MUESTRA COMPLETA: Análisis de distribución de estados con DisplayUtils"""
         display.show_section("ANÁLISIS DE DISTRIBUCIÓN DE ESTADOS")
         
         # Resumen ejecutivo
-        display.show_message("📊 RESUMEN EJECUTIVO", "header")
+        display.show_message(" RESUMEN EJECUTIVO", "header")
         display.show_key_value("Total tickets Freshdesk", str(analisis['freshdesk']['total_tickets']), 3)
         display.show_key_value("Total tickets Clarity", str(analisis['clarity']['total_tickets']), 3)
         display.show_key_value("Coincidencias de IDs", str(analisis['coincidencias']), 3)
@@ -121,28 +121,28 @@ class StateComparator:
         
         # Distribución de estados Freshdesk
         display.show_message("", "info")  # Línea en blanco
-        display.show_message("📊 DISTRIBUCIÓN DE ESTADOS FRESHDESK", "header")
+        display.show_message(" DISTRIBUCIÓN DE ESTADOS FRESHDESK", "header")
         for estado, cantidad in analisis['freshdesk']['estados'].items():
-            estado_mapeado = self.mapeo_estados.get(estado) or "❌ NO MAPEADO"
+            estado_mapeado = self.mapeo_estados.get(estado) or " NO MAPEADO"
             display.show_key_value(f"{estado} ({cantidad})", estado_mapeado, 3)
         
         # Distribución de estados Clarity
         display.show_message("", "info")  # Línea en blanco
-        display.show_message("📊 DISTRIBUCIÓN DE 'ESTADO FRESHDESK' EN CLARITY", "header")
+        display.show_message(" DISTRIBUCIÓN DE 'ESTADO FRESHDESK' EN CLARITY", "header")
         for estado, cantidad in analisis['clarity']['estados'].items():
             display.show_key_value(f"{estado}", f"{cantidad} tickets", 3)
         
         # Estados no mapeados
         if analisis['freshdesk']['estados_no_mapeados']:
             display.show_message("", "info")  # Línea en blanco
-            display.show_message("⚠️  ESTADOS NO MAPEADOS EN FRESHDESK", "warning")
+            display.show_message("  ESTADOS NO MAPEADOS EN FRESHDESK", "warning")
             for estado in analisis['freshdesk']['estados_no_mapeados']:
-                display.show_message(f"   ❌ {estado}", "error")
+                display.show_message(f"    {estado}", "error")
         
         display.show_divider(60)
 
     def _normalizar_texto(self, texto):
-        """🚀 NORMALIZACIÓN CONSISTENTE: maneja acentos, mayúsculas y espacios"""
+        """ NORMALIZACIÓN CONSISTENTE: maneja acentos, mayúsculas y espacios"""
         if pd.isna(texto):
             return ""
         

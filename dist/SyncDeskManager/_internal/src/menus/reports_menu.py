@@ -10,15 +10,15 @@ class ReportsMenu:
         while True:
             display.clear_screen()
             print("\n╔══════════════════════════════════════════════╗")
-            print("║                📊 REPORTES                   ║")
+            print("║                  REPORTES                    ║")
             print("╚══════════════════════════════════════════════╝")
             
-            print("   🏢 1. Lista de empresas") 
-            print("   🔄 2. Productos diferentes (FD vs Clarity)")
-            print("   🧠 3. Ir a Sistema de Clasificación")
-            print("   ↩️  0. Volver al menú principal")
+            print("    1. Lista de empresas") 
+            print("    2. Productos diferentes (FD vs Clarity)")
+            print("    3. Ir a Sistema de Clasificación")
+            print("   ↩  0. Volver al menú principal")
             
-            opcion = input("\n👉 Seleccione una opción: ").strip()
+            opcion = input("\n Seleccione una opción: ").strip()
 
             if opcion == "1":
                 self.reports.reporte_empresas()
@@ -32,5 +32,5 @@ class ReportsMenu:
             elif opcion == "0":
                 break
             else:
-                print("❌ Opción inválida. Por favor, intente de nuevo.")
+                print(" Opción inválida. Por favor, intente de nuevo.")
                 display.press_enter_to_continue()

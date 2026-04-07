@@ -22,14 +22,14 @@ class TemplateManager:
             }
             df = pd.DataFrame(template_data)
             df.to_excel(AGENTES_TEMPLATE, index=False)
-            print("✅ Template de agentes creado en:", AGENTES_TEMPLATE)
+            print(" Template de agentes creado en:", AGENTES_TEMPLATE)
     
     @staticmethod
     def cargar_o_seleccionar_agentes():
         """Cargar template de agentes o permitir seleccionar uno nuevo"""
         TemplateManager.inicializar_template_agentes()
         
-        print("\n👥 OPCIONES DE ARCHIVO DE AGENTES:")
+        print("\n OPCIONES DE ARCHIVO DE AGENTES:")
         print("1. Usar template guardado")
         print("2. Seleccionar archivo diferente")
         
@@ -47,7 +47,7 @@ class TemplateManager:
                     TemplateManager.actualizar_template_agentes(archivo)
             return archivo
         else:
-            print("❌ Opción inválida, usando template por defecto")
+            print(" Opción inválida, usando template por defecto")
             return AGENTES_TEMPLATE
     
     @staticmethod
@@ -56,6 +56,6 @@ class TemplateManager:
         try:
             df_nuevo = pd.read_excel(nuevo_archivo)
             df_nuevo.to_excel(AGENTES_TEMPLATE, index=False)
-            print("✅ Template de agentes actualizado")
+            print(" Template de agentes actualizado")
         except Exception as e:
-            print(f"❌ Error al actualizar template: {e}")
+            print(f" Error al actualizar template: {e}")

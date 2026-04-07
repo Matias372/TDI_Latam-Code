@@ -15,19 +15,19 @@ def setup_environment():
     if getattr(sys, 'frozen', False):
         # En el ejecutable, los archivos están en sys._MEIPASS
         base_dir = getattr(sys, '_MEIPASS', current_dir)
-        print(f"🔍 Modo Ejecutable - Base dir: {base_dir}")
+        print(f"Modo Ejecutable - Base dir: {base_dir}")
     else:
         # En desarrollo
         base_dir = current_dir
-        print(f"🔍 Modo Desarrollo - Base dir: {base_dir}")
+        print(f"Modo Desarrollo - Base dir: {base_dir}")
     
     # Agregar src al path
     src_path = os.path.join(base_dir, 'src')
     if src_path not in sys.path:
         sys.path.insert(0, src_path)
     
-    print(f"📁 Path configurado: {src_path}")
-    print(f"📁 Sys.path: {sys.path}")
+    print(f"Path configurado: {src_path}")
+    print(f"Sys.path: {sys.path}")
     
     return base_dir, src_path
 
@@ -54,18 +54,18 @@ try:
     
     # Verificar que src existe
     if os.path.exists(SRC_DIR):
-        emergency_startup_log(f"✅ SRC_DIR existe: {os.listdir(SRC_DIR)}")
+        emergency_startup_log(f"SRC_DIR existe: {os.listdir(SRC_DIR)}")
     else:
-        emergency_startup_log(f"❌ SRC_DIR no existe: {SRC_DIR}")
-        print(f"❌ ERROR: No se encuentra la carpeta src en: {SRC_DIR}")
-        print("📁 Directorio actual:", os.getcwd())
-        print("📁 Contenido del directorio actual:", os.listdir('.'))
+        emergency_startup_log(f"SRC_DIR no existe: {SRC_DIR}")
+        print(f"ERROR: No se encuentra la carpeta src en: {SRC_DIR}")
+        print("Directorio actual:", os.getcwd())
+        print("Contenido del directorio actual:", os.listdir('.'))
         input("Presiona Enter para salir...")
         sys.exit(1)
     
     # Importar desde main - usar importación absoluta
     from src.main import main
-    print("✅ Importación exitosa")
+    print("Importación exitosa")
     main()
     
 except ImportError as e:
@@ -75,23 +75,23 @@ except ImportError as e:
     emergency_startup_log(f"Traceback: {traceback.format_exc()}")
     
     # Diagnóstico detallado
-    print(f"\n🔍 DIAGNÓSTICO:")
-    print(f"📁 Directorio actual: {os.getcwd()}")
-    print(f"📁 BASE_DIR: {BASE_DIR}")
-    print(f"📁 SRC_DIR: {SRC_DIR}")
-    print(f"📁 Existe SRC_DIR: {os.path.exists(SRC_DIR)}")
+    print(f"\nDIAGNÓSTICO:")
+    print(f"Directorio actual: {os.getcwd()}")
+    print(f"BASE_DIR: {BASE_DIR}")
+    print(f"SRC_DIR: {SRC_DIR}")
+    print(f"Existe SRC_DIR: {os.path.exists(SRC_DIR)}")
     
     if os.path.exists(SRC_DIR):
-        print(f"📁 Contenido de SRC_DIR: {os.listdir(SRC_DIR)}")
+        print(f"Contenido de SRC_DIR: {os.listdir(SRC_DIR)}")
         if os.path.exists(os.path.join(SRC_DIR, 'utils')):
-            print(f"📁 Contenido de src/utils: {os.listdir(os.path.join(SRC_DIR, 'utils'))}")
+            print(f"Contenido de src/utils: {os.listdir(os.path.join(SRC_DIR, 'utils'))}")
     
-    print(f"🐍 Python path: {sys.path}")
+    print(f"Python path: {sys.path}")
     
     input("\nPresiona Enter para salir...")
     
 except Exception as e:
-    error_msg = f"❌ Error inesperado en run.py: {e}"
+    error_msg = f"Error inesperado en run.py: {e}"
     print(error_msg)
     emergency_startup_log(error_msg)
     emergency_startup_log(f"Traceback: {traceback.format_exc()}")

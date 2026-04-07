@@ -1,0 +1,341 @@
+[2025-11-25 09:49:52] Iniciando main()
+[2025-11-25 09:49:55] Importando logger...
+[2025-11-25 09:49:55] Logger importado, configurando...
+[2025-11-25 09:49:55] Verificando imports críticos...
+[2025-11-25 09:49:55] Creando menú principal...
+[2025-11-25 09:49:55] Mostrando menú...
+[2025-11-25 10:14:35] Iniciando main()
+[2025-11-25 10:14:38] Importando logger...
+[2025-11-25 10:14:38] Logger importado, configurando...
+[2025-11-25 10:14:38] Verificando imports críticos...
+[2025-11-25 10:14:38] Creando menú principal...
+[2025-11-25 10:14:38] Mostrando menú...
+[2025-11-25 10:57:11] Aplicación finalizada normalmente
+[2025-11-25 10:57:11] Limpiando datos sensibles antes de cerrar...
+[2025-11-25 10:57:11] Aplicación cerrada - datos sensibles eliminados
+[2025-12-01 08:17:05] Iniciando main()
+[2025-12-01 08:17:11] Importando logger...
+[2025-12-01 08:17:11] Logger importado, configurando...
+[2025-12-01 08:17:11] Verificando imports críticos...
+[2025-12-01 08:17:11] Creando menú principal...
+[2025-12-01 08:17:11] Mostrando menú...
+[2025-12-01 08:26:48] Aplicación finalizada normalmente
+[2025-12-01 08:26:48] Limpiando datos sensibles antes de cerrar...
+[2025-12-01 08:26:48] Aplicación cerrada - datos sensibles eliminados
+[2025-12-09 08:31:30] Iniciando main()
+[2025-12-09 08:31:35] Importando logger...
+[2025-12-09 08:31:35] Logger importado, configurando...
+[2025-12-09 08:31:35] Verificando imports críticos...
+[2025-12-09 08:31:35] Creando menú principal...
+[2025-12-09 08:31:35] Mostrando menú...
+[2025-12-09 10:15:04] Aplicación finalizada normalmente
+[2025-12-09 10:15:04] Limpiando datos sensibles antes de cerrar...
+[2025-12-09 10:15:04] Aplicación cerrada - datos sensibles eliminados
+[2025-12-15 08:06:30] Iniciando main()
+[2025-12-15 08:06:35] Importando logger...
+[2025-12-15 08:06:35] Logger importado, configurando...
+[2025-12-15 08:06:35] Verificando imports críticos...
+[2025-12-15 08:06:35] Creando menú principal...
+[2025-12-15 08:06:35] Mostrando menú...
+[2025-12-16 08:39:25] Iniciando main()
+[2025-12-16 08:39:30] Importando logger...
+[2025-12-16 08:39:30] Logger importado, configurando...
+[2025-12-16 08:39:30] Verificando imports críticos...
+[2025-12-16 08:39:30] Creando menú principal...
+[2025-12-16 08:39:30] Mostrando menú...
+[2025-12-16 08:44:27] Aplicación finalizada normalmente
+[2025-12-16 08:44:27] Limpiando datos sensibles antes de cerrar...
+[2025-12-16 08:44:27] Aplicación cerrada - datos sensibles eliminados
+[2025-12-22 08:27:46] Iniciando main()
+[2025-12-22 08:27:51] Importando logger...
+[2025-12-22 08:27:51] Logger importado, configurando...
+[2025-12-22 08:27:51] Verificando imports críticos...
+[2025-12-22 08:27:51] Creando menú principal...
+[2025-12-22 08:27:51] Mostrando menú...
+[2025-12-22 09:19:36] Aplicación finalizada normalmente
+[2025-12-22 09:19:36] Limpiando datos sensibles antes de cerrar...
+[2025-12-22 09:19:36] Aplicación cerrada - datos sensibles eliminados
+[2025-12-29 09:47:19] Iniciando main()
+[2025-12-29 09:47:28] Importando logger...
+[2025-12-29 09:47:28] Logger importado, configurando...
+[2025-12-29 09:47:28] Verificando imports críticos...
+[2025-12-29 09:47:28] Creando menú principal...
+[2025-12-29 09:47:28] Mostrando menú...
+[2025-12-29 10:16:46] Aplicación finalizada normalmente
+[2025-12-29 10:16:46] Limpiando datos sensibles antes de cerrar...
+[2025-12-29 10:16:46] Aplicación cerrada - datos sensibles eliminados
+[2026-01-05 08:28:12] Iniciando main()
+[2026-01-05 08:28:17] Importando logger...
+[2026-01-05 08:28:17] Logger importado, configurando...
+[2026-01-05 08:28:17] Verificando imports críticos...
+[2026-01-05 08:28:17] Creando menú principal...
+[2026-01-05 08:28:17] Mostrando menú...
+[2026-01-05 08:38:25] ❌ ERROR: Error en main: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connection.py", line 790, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connection.py", line 969, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 480, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 524, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1042, in _create
+    self.do_handshake()
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1320, in do_handshake
+    self._sslobj.do_handshake()
+ConnectionResetError: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connection.py", line 790, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connection.py", line 969, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 480, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 524, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1042, in _create
+    self.do_handshake()
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1320, in do_handshake
+    self._sslobj.do_handshake()
+urllib3.exceptions.ProtocolError: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\main.py", line 71, in main
+    menu.mostrar_menu()
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\menus\main_menu.py", line 101, in mostrar_menu
+    self.processes_menu.mostrar_menu()
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\menus\processes_menu.py", line 26, in mostrar_menu
+    self.processes.enviar_notas_internas()
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\features\processes.py", line 97, in enviar_notas_internas
+    respuesta = ApiUtils.get_ticket(
+                ^^^^^^^^^^^^^^^^^^^^
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\utils\api_utils.py", line 23, in get_ticket
+    return requests.get(url, auth=auth)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\adapters.py", line 501, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+
+[2026-01-05 08:39:42] Limpiando datos sensibles antes de cerrar...
+[2026-01-05 08:39:42] Aplicación cerrada - datos sensibles eliminados
+[2026-01-05 08:40:36] Iniciando main()
+[2026-01-05 08:40:36] Importando logger...
+[2026-01-05 08:40:36] Logger importado, configurando...
+[2026-01-05 08:40:36] Verificando imports críticos...
+[2026-01-05 08:40:36] Creando menú principal...
+[2026-01-05 08:40:36] Mostrando menú...
+[2026-01-05 09:42:42] Aplicación finalizada normalmente
+[2026-01-05 09:42:42] Limpiando datos sensibles antes de cerrar...
+[2026-01-05 09:42:42] Aplicación cerrada - datos sensibles eliminados
+[2026-01-12 08:20:38] Iniciando main()
+[2026-01-12 08:20:44] Importando logger...
+[2026-01-12 08:20:44] Logger importado, configurando...
+[2026-01-12 08:20:44] Verificando imports críticos...
+[2026-01-12 08:20:44] Creando menú principal...
+[2026-01-12 08:20:44] Mostrando menú...
+[2026-01-12 08:35:56] ❌ ERROR: Error en main: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connection.py", line 790, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connection.py", line 969, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 480, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 524, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1042, in _create
+    self.do_handshake()
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1320, in do_handshake
+    self._sslobj.do_handshake()
+ConnectionResetError: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connection.py", line 790, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\connection.py", line 969, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 480, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 524, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1042, in _create
+    self.do_handshake()
+  File "C:\Users\usuario\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1320, in do_handshake
+    self._sslobj.do_handshake()
+urllib3.exceptions.ProtocolError: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\main.py", line 71, in main
+    menu.mostrar_menu()
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\menus\main_menu.py", line 101, in mostrar_menu
+    self.processes_menu.mostrar_menu()
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\menus\processes_menu.py", line 26, in mostrar_menu
+    self.processes.enviar_notas_internas()
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\features\processes.py", line 97, in enviar_notas_internas
+    respuesta = ApiUtils.get_ticket(
+                ^^^^^^^^^^^^^^^^^^^^
+  File "c:\xampp\htdocs\TDI_Task_Manager\src\utils\api_utils.py", line 23, in get_ticket
+    return requests.get(url, auth=auth)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\TDI_Task_Manager\.venv\Lib\site-packages\requests\adapters.py", line 501, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None))
+
+[2026-01-12 08:39:01] Limpiando datos sensibles antes de cerrar...
+[2026-01-12 08:39:01] Aplicación cerrada - datos sensibles eliminados
+[2026-01-12 08:41:02] Iniciando main()
+[2026-01-12 08:41:06] Importando logger...
+[2026-01-12 08:41:06] Logger importado, configurando...
+[2026-01-12 08:41:06] Verificando imports críticos...
+[2026-01-12 08:41:06] Creando menú principal...
+[2026-01-12 08:41:06] Mostrando menú...
+[2026-01-26 15:15:41] Iniciando main()
+[2026-01-26 15:15:45] Importando logger...
+[2026-01-26 15:15:45] Logger importado, configurando...
+[2026-01-26 15:15:45] Verificando imports críticos...
+[2026-01-26 15:15:45] Creando menú principal...
+[2026-01-26 15:15:45] Mostrando menú...
+[2026-02-23 10:16:49] Iniciando main()
+[2026-02-23 10:16:58] Importando logger...
+[2026-02-23 10:16:58] Logger importado, configurando...
+[2026-02-23 10:16:58] Verificando imports críticos...
+[2026-02-23 10:16:58] Creando menú principal...
+[2026-02-23 10:16:58] Mostrando menú...
+[2026-04-01 10:02:33] Iniciando main()
+[2026-04-01 10:02:37] Importando logger...
+[2026-04-01 10:02:37] Logger importado, configurando...
+[2026-04-01 10:02:37] Verificando imports críticos...
+[2026-04-01 10:02:37] Creando menú principal...
+[2026-04-01 10:02:37] Mostrando menú...
+[2026-04-01 10:02:39] Aplicación finalizada normalmente
+[2026-04-01 10:02:39] Limpiando datos sensibles antes de cerrar...
+[2026-04-01 10:02:39] Aplicación cerrada - datos sensibles eliminados
+[2026-04-07 08:46:58] Iniciando main()
+[2026-04-07 08:47:01] Importando logger...
+[2026-04-07 08:47:01] Logger importado, configurando...
+[2026-04-07 08:47:01] Verificando imports críticos...
+[2026-04-07 08:47:02] Creando menú principal...
+[2026-04-07 08:47:02] Mostrando menú...
+[2026-04-07 08:51:00] Aplicación finalizada normalmente
+[2026-04-07 08:51:00] Limpiando datos sensibles antes de cerrar...
+[2026-04-07 08:51:00] Aplicación cerrada - datos sensibles eliminados

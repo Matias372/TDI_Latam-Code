@@ -1,0 +1,18 @@
+2026-04-07 08:46:58 - SyncDeskManager - INFO - ==================================================
+2026-04-07 08:46:58 - SyncDeskManager - INFO - 🚀 INICIANDO SYNC DESK MANAGER
+2026-04-07 08:46:58 - SyncDeskManager - INFO - ==================================================
+2026-04-07 08:46:58 - SyncDeskManager - INFO - Sistema operativo: Windows 11
+2026-04-07 08:46:58 - SyncDeskManager - INFO - Python: 3.12.4
+2026-04-07 08:46:58 - SyncDeskManager - INFO - Usuario: usuario
+2026-04-07 08:46:58 - SyncDeskManager - INFO - Directorio de trabajo: C:\xampp\htdocs\TDI_Task_Manager
+2026-04-07 08:46:58 - SyncDeskManager - INFO - Directorio de logs: c:\xampp\htdocs\TDI_Task_Manager\src\logs
+2026-04-07 08:46:58 - SyncDeskManager - INFO - ==================================================
+2026-04-07 08:47:01 - SyncDeskManager - INFO - ConfigManager inicializado - Modo volátil en memoria
+2026-04-07 08:47:01 - SyncDeskManager - INFO - Iniciando aplicación
+2026-04-07 08:47:02 - SyncDeskManager - INFO - Módulos cargados correctamente
+2026-04-07 08:47:02 - SyncDeskManager - INFO - ConfigManager inicializado - Modo volátil en memoria
+2026-04-07 08:47:02 - SyncDeskManager - INFO - FreshdeskService inicializado
+2026-04-07 08:47:02 - SyncDeskManager - INFO - Configuración de clasificación cargada desde: data/classification/classification_config.json
+2026-04-07 08:47:02 - SyncDeskManager - INFO - ClassificationConfigManager inicializado
+2026-04-07 08:47:02 - SyncDeskManager - INFO - ClassificationLibraryGenerator inicializado
+2026-04-07 08:51:00 - SyncDeskManager - INFO - Datos sensibles limpiados de la memoria

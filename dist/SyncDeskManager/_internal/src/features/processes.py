@@ -85,12 +85,12 @@ class Processes:
                 ticket_id = ticket_row['Ticket ID']
                 current = index + 1
 
-                # 🎯 ACTUALIZACIÓN EN TIEMPO REAL
+                #  ACTUALIZACIÓN EN TIEMPO REAL
                 display.show_processing_message(
                     str(ticket_id),
                     current,
                     total_tickets,
-                    f"✅:{enviados_ok} ⏭️:{rechazados} ❌:{errores}"
+                    f":{enviados_ok} ⏭️:{rechazados} ❌:{errores}"
                 )
 
                 # Obtener ticket desde Freshdesk
@@ -107,11 +107,60 @@ class Processes:
                     continue
 
                 ticket = respuesta.json()
+
+                #  CONDICIÓN TEMPORAL - OMITIR TICKETS DE CMPC - ELIMINAR DESPUÉS
+                company_id = ticket.get("company_id")
+                if company_id == 82001555186:
+                    rechazados += 1
+                    display.show_message(f"Ticket {ticket_id} omitido - Compañía CMPC", "warning")
+                    continue
+
+                group_id = ticket.get("group_id")
+                if group_id in [82000658038, 82000461735, 82000662630]: # Grupos a omitir temporalmente 82000658038: BMC Control-M, 82000461735: CA Workload Automation DE, 82000662630: TRIAGE CHILE
+                    rechazados += 1
+                    display.show_message(
+                        f"Ticket {ticket_id} omitido - Grupo excluido ({group_id})",
+                        "warning"
+                    )
+                    continue
+                #  FIN CONDICIÓN TEMPORAL
                 
+                # OMITIR SI COMPANY ES NULL
+                group_info = ticket.get("group")
+                company_id_es_null = (
+                    company_id is None or 
+                    str(company_id).lower() == 'null' or 
+                    company_id == ''
+                )
+                
+                if company_id_es_null: 
+                    rechazados += 1
+                    display.show_message(f"Ticket {ticket_id} omitido - Empresa Null", "warning")
+                    continue
+
                 # Verificar si es ticket de bitácora
                 subject = ticket.get("subject", "")
                 if "BITACORA" in subject.upper():
                     rechazados += 1
+                    continue
+                
+                subject = ticket.get("subject", "")
+                if "TAREA CMPC" in subject.upper():
+                    rechazados += 1
+                    continue
+
+                # Verificar contacto específico a omitir: Loki Loki
+                requester_id = ticket.get("requester_id")  # Campo que contiene el ID del contacto
+                if requester_id == 82068799698:
+                    rechazados += 1
+                    display.show_message(f"Ticket {ticket_id} omitido - Contacto específico", "warning")
+                    continue
+
+                # Verificar contacto específico a omitir: Soporte Automatizacion
+                requester_id = ticket.get("requester_id")  # Campo que contiene el ID del contacto
+                if requester_id == 82234514937:
+                    rechazados += 1
+                    display.show_message(f"Ticket {ticket_id} omitido - Contacto específico", "warning")
                     continue
 
                 # Verificar inactividad (más de 10 días)
@@ -154,7 +203,7 @@ class Processes:
                 if "[NOMBRE_DE_AGENTE]" in mensaje:
                     mensaje = mensaje.replace("[NOMBRE_DE_AGENTE]", nombres_agentes[0])
 
-                # 🎯 CONFIRMACIÓN EN MODO MANUAL (CON PAUSA DE BARRA)
+                #  CONFIRMACIÓN EN MODO MANUAL (CON PAUSA DE BARRA)
                 if not automatico:
                     display.clear_line()
                     display.show_header(f"TICKET #{ticket_id} - CONFIRMACIÓN REQUERIDA")
@@ -170,11 +219,11 @@ class Processes:
                         display.show_message(f"Nota NO enviada para el ticket {ticket_id}", "warning")
                         rechazados += 1
                         # Reanudar barra de progreso
-                        display.show_processing_message(str(ticket_id), current, total_tickets, f"✅:{enviados_ok} ⏭️:{rechazados} ❌:{errores}")
+                        display.show_processing_message(str(ticket_id), current, total_tickets, f"OK:{enviados_ok} SKIP:{rechazados} ERROR:{errores}")
                         continue
                     
                     # Reanudar barra de progreso después de la confirmación
-                    display.show_processing_message(str(ticket_id), current, total_tickets, f"✅:{enviados_ok} ⏭️:{rechazados} ❌:{errores}")
+                    display.show_processing_message(str(ticket_id), current, total_tickets, f"OK:{enviados_ok} SKIP:{rechazados} ERROR:{errores}")
 
                 # Enviar nota interna
                 if self._enviar_nota_interna(ticket_id, mensaje, notify_emails):
@@ -183,7 +232,7 @@ class Processes:
                     errores += 1
                     tickets_error.append(ticket_id)
 
-            # 🎯 RESULTADO FINAL
+            #  RESULTADO FINAL
             display.clear_line()
             display.show_message("Procesamiento completado!", "success")
             display.show_section("RESULTADOS")
@@ -214,7 +263,7 @@ class Processes:
 
     def _generar_mensaje_segun_estado(self, ticket):
         """Generar mensaje personalizado según el estado del ticket"""
-        # 🎯 USAR MAPEO UNIFICADO
+        #  USAR MAPEO UNIFICADO
         status_numerico = ticket.get("status")
         status = mapear_estado_desde_api(status_numerico)
         
@@ -272,13 +321,13 @@ class Processes:
                 nombre, mail = agentes_dict[ag_id]
                 display.show_message(f"Agente conocido: {nombre} ({mail})", "debug")
             else:
-                # 🎯 PAUSAR BARRA DE PROGRESO PARA AGREGAR NUEVO AGENTE
+                #  PAUSAR BARRA DE PROGRESO PARA AGREGAR NUEVO AGENTE
                 display.clear_line()
                 display.show_message(f"NUEVO AGENTE DETECTADO: ID {ag_id}", "warning")
                 display.show_message("Por favor, ingrese los datos del nuevo agente:", "info")
                 
-                nombre = input("   👉 Nombre del agente: ").strip()
-                mail = input("   📧 Email del agente: ").strip()
+                nombre = input("    Nombre del agente: ").strip()
+                mail = input("    Email del agente: ").strip()
                 
                 if not nombre or not mail:
                     display.show_message("Nombre y email son obligatorios. Agente omitido.", "error")
@@ -299,7 +348,7 @@ class Processes:
             notify_emails.append(mail)
             nombres_agentes.append(nombre)
 
-        # 🎯 GUARDADO SIMPLIFICADO Y EFECTIVO
+        #  GUARDADO SIMPLIFICADO Y EFECTIVO
         if nuevos_agentes:
             try:
                 display.clear_line()

@@ -6,14 +6,14 @@ from typing import Dict, Optional, List
 from utils.logging import logger
 from utils.display_utils import display
 
-# 🚨 COMENTADO POR SEGURIDAD
+#  COMENTADO POR SEGURIDAD
 # urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class ClarityService:
     def __init__(self, config_manager):
         self.config = config_manager
         self.session = requests.Session()
-        self.session.verify = True  # ✅ SEGURIDAD HABILITADA
+        self.session.verify = True  #  SEGURIDAD HABILITADA
         self.session.headers.update({
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ class ClarityService:
         """Buscar ticket específico - INTERFAZ LIMPIA"""
         logger.log_debug(f"Buscando ticket {codigo_ticket} directamente en Clarity...")
         
-        # 🆕 VERIFICACIÓN MEJORADA DE CONFIGURACIÓN
+        #  VERIFICACIÓN MEJORADA DE CONFIGURACIÓN
         if not self.config.validar_configuracion_clarity():
             return None
 
@@ -68,7 +68,7 @@ class ClarityService:
                     display.show_message(f"Ticket {codigo_ticket} no encontrado en Clarity", "warning")
                     return None
             else:
-                # 🆕 MANEJO MEJORADO DE ERRORES
+                #  MANEJO MEJORADO DE ERRORES
                 if response.status_code == 401:
                     display.show_message("Error de autenticación en Clarity. Verifique usuario y contraseña", "error")
                     self.config.clear_sensitive_data()
@@ -89,7 +89,7 @@ class ClarityService:
         """Obtener todos los tickets de Clarity - INTERFAZ LIMPIA"""
         display.show_message("Obteniendo todos los tickets de Clarity...", "info")
         
-        # 🆕 VERIFICACIÓN MEJORADA
+        #  VERIFICACIÓN MEJORADA
         if not self.config.validar_configuracion_clarity():
             return {}
 
@@ -103,7 +103,7 @@ class ClarityService:
         total_tickets = 0
         MAX_TICKETS = 5000
         
-        # 🆕 BARRA DE PROGRESO PARA OPERACIÓN LARGA
+        #  BARRA DE PROGRESO PARA OPERACIÓN LARGA
         display.show_message("Esta operación puede tomar varios minutos...", "warning")
         
         while True:
@@ -139,7 +139,7 @@ class ClarityService:
                     
                     total_tickets += len(tasks)
                     
-                    # 🆕 ACTUALIZAR PROGRESO
+                    #  ACTUALIZAR PROGRESO
                     if offset % 500 == 0:  # Mostrar cada 500 tickets
                         display.show_message(f"Procesados {total_tickets} tickets...", "info")
                     
@@ -256,17 +256,17 @@ class ClarityService:
             response = self.session.get(url, params=params, auth=auth, timeout=10)
             
             if response.status_code == 200:
-                return True, "✅ Conexión exitosa a Clarity"
+                return True, " Conexión exitosa a Clarity"
             elif response.status_code == 401:
-                return False, "❌ Error de autenticación - Usuario o contraseña inválidos"
+                return False, " Error de autenticación - Usuario o contraseña inválidos"
             elif response.status_code == 403:
-                return False, "❌ Acceso denegado - verifique permisos"
+                return False, " Acceso denegado - verifique permisos"
             else:
-                return False, f"❌ Error {response.status_code}: {response.text}"
+                return False, f" Error {response.status_code}: {response.text}"
                 
         except requests.exceptions.Timeout:
-            return False, "⏰ Timeout - verifique la conexión a internet y el dominio de Clarity"
+            return False, " Timeout - verifique la conexión a internet y el dominio de Clarity"
         except requests.exceptions.ConnectionError:
-            return False, "🔌 Error de conexión - verifique el dominio de Clarity"
+            return False, " Error de conexión - verifique el dominio de Clarity"
         except Exception as e:
-            return False, f"❌ Error inesperado: {str(e)}"
+            return False, f" Error inesperado: {str(e)}"

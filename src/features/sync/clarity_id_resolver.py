@@ -18,7 +18,7 @@ class ClarityIdResolver:
         tickets_no_encontrados = 0
         
         for i, diff in enumerate(diferencias, 1):
-            # 🆕 MEJORA: Mostrar progreso cada 5 tickets para mejor rendimiento
+            #  MEJORA: Mostrar progreso cada 5 tickets para mejor rendimiento
             if i % 5 == 0 or i == len(diferencias):
                 display.update_progress(
                     current=i,
@@ -35,7 +35,7 @@ class ClarityIdResolver:
                 tickets_no_encontrados += 1
                 self.logger.log_warning(f"Ticket {diff.ticket_id} no encontrado en Clarity")
         
-        # 🆕 LIMPIAR LÍNEA Y MOSTRAR RESUMEN
+        #  LIMPIAR LÍNEA Y MOSTRAR RESUMEN
         display.clear_line()
         
         if tickets_no_encontrados > 0:
@@ -45,9 +45,9 @@ class ClarityIdResolver:
         
         self.logger.log_info(f"IDs obtenidos: {tickets_encontrados}/{len(diferencias)} tickets")
         
-        # 🆕 SI NO SE ENCONTRÓ NINGÚN TICKET, RETORNAR LISTA VACÍA
+        #  SI NO SE ENCONTRÓ NINGÚN TICKET, RETORNAR LISTA VACÍA
         if tickets_encontrados == 0:
-            display.show_message("❌ No se pudo encontrar ningún ticket en Clarity", "error")
+            display.show_message(" No se pudo encontrar ningún ticket en Clarity", "error")
             return []
         
         return diferencias_completas

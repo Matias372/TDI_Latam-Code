@@ -39,10 +39,10 @@ class Reports:
         
         try:
             df.to_excel(ruta_completa, index=False)
-            print(f"📁 Archivo guardado en: {ruta_completa}")
+            print(f" Archivo guardado en: {ruta_completa}")
             return ruta_completa
         except Exception as e:
-            print(f"❌ Error al guardar el archivo: {str(e)}")
+            print(f" Error al guardar el archivo: {str(e)}")
             # Fallback: guardar en la carpeta output original
             return FileUtils.guardar_excel(df, nombre_archivo)
 
@@ -53,8 +53,8 @@ class Reports:
         try:
             empresas = self.service.obtener_empresas()
             if not empresas:
-                print("❌ No se pudieron obtener las empresas.")
-                print("\n💡 Presione Enter para volver al menú de reportes...")
+                print(" No se pudieron obtener las empresas.")
+                print("\n Presione Enter para volver al menú de reportes...")
                 input()
                 return
 
@@ -72,16 +72,16 @@ class Reports:
             ruta_guardado = self._guardar_en_descargas(df, nombre_archivo)
             
             if ruta_guardado:
-                print(f"✅ Reporte generado con {len(datos_empresas)} empresas.")
-                print(f"📁 Archivo guardado en: {ruta_guardado}")
+                print(f" Reporte generado con {len(datos_empresas)} empresas.")
+                print(f" Archivo guardado en: {ruta_guardado}")
             else:
-                print("❌ Error al guardar el reporte.")
+                print(" Error al guardar el reporte.")
 
         except Exception as e:
-            print(f"❌ Error inesperado durante la generación del reporte: {str(e)}")
+            print(f" Error inesperado durante la generación del reporte: {str(e)}")
         
         # Pausa final para confirmación
-        print(f"\n💡 Presione Enter para volver al menú de reportes...")
+        print(f"\n Presione Enter para volver al menú de reportes...")
         input()
     
     def reporte_productos_diferentes(self):
@@ -92,7 +92,7 @@ class Reports:
         
         try:
             # Cargar archivo de Freshdesk
-            print("\n📁 Seleccione el archivo de Freshdesk (Excel):")
+            print("\n Seleccione el archivo de Freshdesk (Excel):")
             from utils.file_utils import FileUtils
             ruta_freshdesk = FileUtils.seleccionar_archivo(
                 "Seleccione archivo Freshdesk", 
@@ -100,45 +100,45 @@ class Reports:
             )
             
             if not ruta_freshdesk:
-                print("❌ No se seleccionó archivo de Freshdesk.")
-                print("\n💡 Presione Enter para volver al menú de reportes...")
+                print(" No se seleccionó archivo de Freshdesk.")
+                print("\n Presione Enter para volver al menú de reportes...")
                 input()
                 return
 
             df_freshdesk = FileUtils.cargar_excel(ruta_freshdesk)
             if df_freshdesk is None or df_freshdesk.empty:
-                print("❌ No se pudo cargar el archivo de Freshdesk.")
-                print("\n💡 Presione Enter para volver al menú de reportes...")
+                print(" No se pudo cargar el archivo de Freshdesk.")
+                print("\n Presione Enter para volver al menú de reportes...")
                 input()
                 return
 
             # Cargar archivo de Clarity
-            print("\n📁 Seleccione el archivo de Clarity (CSV):")
+            print("\n Seleccione el archivo de Clarity (CSV):")
             ruta_clarity = FileUtils.seleccionar_archivo(
                 "Seleccione archivo Clarity", 
                 [("CSV files", "*.csv")]
             )
             
             if not ruta_clarity:
-                print("❌ No se seleccionó archivo de Clarity.")
-                print("\n💡 Presione Enter para volver al menú de reportes...")
+                print(" No se seleccionó archivo de Clarity.")
+                print("\n Presione Enter para volver al menú de reportes...")
                 input()
                 return
 
             df_clarity = FileUtils.cargar_csv(ruta_clarity)
             if df_clarity is None or df_clarity.empty:
-                print("🔄 La carga automática falló, intentando carga manual...")
+                print(" La carga automática falló, intentando carga manual...")
                 df_clarity = FileUtils.cargar_csv_manual(ruta_clarity)
             
             if df_clarity is None or df_clarity.empty:
-                print("❌ No se pudo cargar el archivo de Clarity.")
-                print("\n💡 Presione Enter para volver al menú de reportes...")
+                print(" No se pudo cargar el archivo de Clarity.")
+                print("\n Presione Enter para volver al menú de reportes...")
                 input()
                 return
 
             # Verificar estructura de archivos
             if not self._verificar_estructura_productos(df_freshdesk, df_clarity):
-                print("\n💡 Presione Enter para volver al menú de reportes...")
+                print("\n Presione Enter para volver al menú de reportes...")
                 input()
                 return
 
@@ -146,8 +146,8 @@ class Reports:
             productos_diferentes = self._comparar_productos(df_freshdesk, df_clarity)
             
             if not productos_diferentes:
-                print("🎉 No se encontraron tickets con productos diferentes.")
-                print("\n💡 Presione Enter para volver al menú de reportes...")
+                print(" No se encontraron tickets con productos diferentes.")
+                print("\n Presione Enter para volver al menú de reportes...")
                 input()
                 return
 
@@ -155,10 +155,10 @@ class Reports:
             self._guardar_reporte_productos(productos_diferentes)
             
         except Exception as e:
-            print(f"❌ Error inesperado durante la generación del reporte: {str(e)}")
+            print(f" Error inesperado durante la generación del reporte: {str(e)}")
         
         # Pausa final para confirmación
-        print(f"\n💡 Presione Enter para volver al menú de reportes...")
+        print(f"\n Presione Enter para volver al menú de reportes...")
         input()
 
     def _verificar_estructura_productos(self, df_freshdesk, df_clarity):
@@ -167,7 +167,7 @@ class Reports:
         
         # Verificar Freshdesk
         if 'Ticket ID' not in df_freshdesk.columns:
-            errores.append("❌ Freshdesk debe contener 'Ticket ID'")
+            errores.append(" Freshdesk debe contener 'Ticket ID'")
         
         columna_producto_fd = None
         
@@ -178,7 +178,7 @@ class Reports:
         for nombre_preferido in posibles_nombres:
             if nombre_preferido in df_freshdesk.columns:
                 columna_producto_fd = nombre_preferido
-                print(f"✅ Encontrada columna preferida: '{columna_producto_fd}'")
+                print(f" Encontrada columna preferida: '{columna_producto_fd}'")
                 break
         
         # Si no encontramos las preferidas, buscar columnas que contengan "producto"
@@ -188,7 +188,7 @@ class Reports:
                 col_lower = col.lower()
                 if 'producto' in col_lower and 'seleccione' not in col_lower:
                     columna_producto_fd = col
-                    print(f"✅ Encontrada columna alternativa: '{columna_producto_fd}'")
+                    print(f" Encontrada columna alternativa: '{columna_producto_fd}'")
                     break
         
         # Último recurso: cualquier columna con "producto"
@@ -196,17 +196,17 @@ class Reports:
             for col in df_freshdesk.columns:
                 if 'producto' in col.lower():
                     columna_producto_fd = col
-                    print(f"⚠️  Usando columna menos ideal: '{columna_producto_fd}'")
+                    print(f"  Usando columna menos ideal: '{columna_producto_fd}'")
                     break
 
         if not columna_producto_fd:
-            errores.append("❌ No se encontró columna 'Producto' en Freshdesk")
+            errores.append(" No se encontró columna 'Producto' en Freshdesk")
             # Mostrar columnas disponibles para ayudar en diagnóstico
-            print("📋 Columnas disponibles en Freshdesk:")
+            print(" Columnas disponibles en Freshdesk:")
             for col in df_freshdesk.columns:
                 print(f"   - {col}")
         else:
-            print(f"✅ Columna producto Freshdesk seleccionada: '{columna_producto_fd}'")
+            print(f" Columna producto Freshdesk seleccionada: '{columna_producto_fd}'")
 
         # Verificar Clarity (mantener lógica original mejorada)
         columna_id_clarity = None
@@ -220,16 +220,16 @@ class Reports:
                 columna_producto_clarity = col
         
         if not columna_id_clarity:
-            errores.append("❌ No se encontró columna de ID en Clarity")
+            errores.append(" No se encontró columna de ID en Clarity")
         else:
-            print(f"✅ Columna ID Clarity: '{columna_id_clarity}'")
+            print(f" Columna ID Clarity: '{columna_id_clarity}'")
             # Renombrar para consistencia
             df_clarity.rename(columns={columna_id_clarity: 'ID'}, inplace=True)
 
         if not columna_producto_clarity:
-            errores.append("❌ No se encontró columna 'Producto TDI' en Clarity")
+            errores.append(" No se encontró columna 'Producto TDI' en Clarity")
         else:
-            print(f"✅ Columna producto Clarity: '{columna_producto_clarity}'")
+            print(f" Columna producto Clarity: '{columna_producto_clarity}'")
             df_clarity.rename(columns={columna_producto_clarity: 'Producto_TDI_Clarity'}, inplace=True)
 
         if errores:
@@ -240,12 +240,12 @@ class Reports:
         # Renombrar columna de producto en Freshdesk para consistencia
         df_freshdesk.rename(columns={columna_producto_fd: 'Producto_Freshdesk'}, inplace=True)
         
-        print("✅ Estructura de archivos verificada correctamente")
+        print(" Estructura de archivos verificada correctamente")
         return True
 
     def _comparar_productos(self, df_freshdesk, df_clarity):
         """Comparar productos entre Freshdesk y Clarity"""
-        print("\n🔍 Comparando productos...")
+        print("\n Comparando productos...")
         
         productos_diferentes = []
         total_tickets = len(df_freshdesk)
@@ -277,9 +277,9 @@ class Reports:
             if (index + 1) % 100 == 0:
                 print(f"   Procesados {index + 1}/{total_tickets} tickets...")
         
-        print(f"✅ Comparación completada:")
-        print(f"   📊 Tickets con productos diferentes: {len(productos_diferentes)}")
-        print(f"   ✅ Tickets con productos iguales: {coincidencias}")
+        print(f" Comparación completada:")
+        print(f"    Tickets con productos diferentes: {len(productos_diferentes)}")
+        print(f"    Tickets con productos iguales: {coincidencias}")
         
         return productos_diferentes
 
@@ -299,29 +299,29 @@ class Reports:
         ruta_guardado = self._guardar_en_descargas(df_reporte, nombre_archivo)
         
         if ruta_guardado:
-            print(f"\n🎉 Reporte generado exitosamente!")
-            print(f"📁 Archivo: {ruta_guardado}")
-            print(f"📊 Total de registros: {len(productos_diferentes)}")
+            print(f"\n Reporte generado exitosamente!")
+            print(f" Archivo: {ruta_guardado}")
+            print(f" Total de registros: {len(productos_diferentes)}")
             
             # Mostrar resumen estadístico
             self._mostrar_estadisticas_productos(df_reporte)
         else:
-            print("❌ Error al guardar el reporte.")
+            print(" Error al guardar el reporte.")
 
     def _mostrar_estadisticas_productos(self, df_reporte):
         """Mostrar estadísticas del reporte de productos"""
-        print(f"\n📈 ESTADÍSTICAS DEL REPORTE:")
+        print(f"\n ESTADÍSTICAS DEL REPORTE:")
         print("─" * 50)
         
         # Productos más comunes en cada sistema
         productos_fd_comunes = df_reporte['Producto_Freshdesk'].value_counts().head(5)
         productos_clarity_comunes = df_reporte['Producto_Clarity'].value_counts().head(5)
         
-        print(f"🔄 TOP 5 PRODUCTOS DIFERENTES - FRESHDESK:")
+        print(f" TOP 5 PRODUCTOS DIFERENTES - FRESHDESK:")
         for producto, cantidad in productos_fd_comunes.items():
             print(f"   {producto}: {cantidad} tickets")
         
-        print(f"\n🔄 TOP 5 PRODUCTOS DIFERENTES - CLARITY:")
+        print(f"\n TOP 5 PRODUCTOS DIFERENTES - CLARITY:")
         for producto, cantidad in productos_clarity_comunes.items():
             print(f"   {producto}: {cantidad} tickets")
         
@@ -329,7 +329,7 @@ class Reports:
         sin_producto_fd = len(df_reporte[df_reporte['Producto_Freshdesk'] == ''])
         sin_producto_clarity = len(df_reporte[df_reporte['Producto_Clarity'] == ''])
         
-        print(f"\n📝 RESUMEN:")
-        print(f"   🎫 Tickets sin producto en Freshdesk: {sin_producto_fd}")
-        print(f"   🎫 Tickets sin producto en Clarity: {sin_producto_clarity}")
-        print(f"   📋 Total de discrepancias: {len(df_reporte)}")
+        print(f"\n RESUMEN:")
+        print(f"    Tickets sin producto en Freshdesk: {sin_producto_fd}")
+        print(f"    Tickets sin producto en Clarity: {sin_producto_clarity}")
+        print(f"    Total de discrepancias: {len(df_reporte)}")

@@ -10,7 +10,7 @@ class FileValidator:
     def cargar_y_validar_archivos(self) -> FileValidationResult:
         """Cargar y validar archivos de Freshdesk y Clarity - INTERFAZ LIMPIA"""
         display.clear_screen()
-        display.show_header("📁 VALIDACIÓN DE ARCHIVOS")
+        display.show_header(" VALIDACIÓN DE ARCHIVOS")
         display.show_message("Cargando archivos para sincronización...", "file")
         display.show_divider(50)
         
@@ -73,7 +73,7 @@ class FileValidator:
         return True
     
     def _validar_estructura_archivos(self, df_freshdesk, df_clarity):
-        """🎯 VALIDACIÓN COMPLETA: Adaptación del código original con DisplayUtils"""
+        """ VALIDACIÓN COMPLETA: Adaptación del código original con DisplayUtils"""
         errores = []
         
         display.show_message(f"Columnas Freshdesk: {list(df_freshdesk.columns)}", "debug")
@@ -89,7 +89,7 @@ class FileValidator:
             estados_freshdesk = df_freshdesk['Estado'].unique()
             display.show_message(f"Estados Freshdesk: {list(estados_freshdesk)}", "debug")
 
-        # 🎯 BUSCAR ESPECÍFICAMENTE "Estado Freshdesk" EN CLARITY
+        #  BUSCAR ESPECÍFICAMENTE "Estado Freshdesk" EN CLARITY
         columna_id = None
         columna_estado_freshdesk = None
         
@@ -154,7 +154,7 @@ class FileValidator:
         return True
 
     def _buscar_columna_flexible(self, df, palabras_clave):
-        """🚀 MÉTODO REUTILIZABLE: Búsqueda flexible de columnas"""
+        """ MÉTODO REUTILIZABLE: Búsqueda flexible de columnas"""
         columnas = df.columns.tolist()
         for col in columnas:
             col_lower = col.lower()

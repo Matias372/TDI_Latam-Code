@@ -36,7 +36,7 @@ MAPEO_ESTADOS_FD_TEXTO_A_CLARITY = {
     "Resolved": "Resuelto",
     "Derivado al Fabricante": "Derivado al Fabricante",
     "En evaluación": "En evaluación",
-    "En progreso": "En progreso",
+    "In Progress": "En progreso",
     "Esperando al cliente": "Esperando al cliente"
 }
 

@@ -34,12 +34,12 @@ class FileUtils:
             if archivo:
                 return archivo
         except Exception as e:
-            print(f"⚠️  Diálogo gráfico no disponible: {e}")
+            print(f"  Diálogo gráfico no disponible: {e}")
         
         # Fallback a entrada por consola
-        print(f"\n📁 {titulo}")
-        print("💡 Ingrese la ruta del archivo manualmente:")
-        ruta_manual = input("👉 Ruta: ").strip()
+        print(f"\n {titulo}")
+        print(" Ingrese la ruta del archivo manualmente:")
+        ruta_manual = input(" Ruta: ").strip()
         return ruta_manual if ruta_manual else None
 
     @staticmethod
@@ -53,13 +53,13 @@ class FileUtils:
         try:
             return pd.read_excel(ruta_archivo)
         except Exception as e:
-            print(f"❌ Error al cargar archivo Excel: {e}")
+            print(f" Error al cargar archivo Excel: {e}")
             return None
 
     @staticmethod
     def cargar_csv(ruta_archivo, separador=',', encoding_alternativos=['utf-8', 'latin-1', 'iso-8859-1']):
         """Cargar archivo CSV con detección automática de encoding y estructura"""
-        print(f"📁 Intentando cargar CSV: {ruta_archivo}")
+        print(f" Intentando cargar CSV: {ruta_archivo}")
         
         for encoding in encoding_alternativos:
             try:
@@ -75,52 +75,52 @@ class FileUtils:
                 if len(primeras_lineas) >= 2:
                     segunda_linea = primeras_lineas[1]
                     if 'Cliente' in segunda_linea and 'ID' in segunda_linea and 'Estado Freshdesk' in segunda_linea:
-                        print("   ✅ Formato detectado: CSV con dos líneas de encabezado")
+                        print("    Formato detectado: CSV con dos líneas de encabezado")
                         df = pd.read_csv(ruta_archivo, sep=separador, encoding=encoding, skiprows=1, header=0)
                         
-                        print(f"   📋 Columnas detectadas: {list(df.columns)}")
+                        print(f"    Columnas detectadas: {list(df.columns)}")
                         if not df.empty:
-                            print(f"   📊 Primera fila de datos: {df.iloc[0].to_dict()}")
+                            print(f"    Primera fila de datos: {df.iloc[0].to_dict()}")
                         return df
                 
-                print("   ✅ Formato detectado: CSV estándar")
+                print("    Formato detectado: CSV estándar")
                 df = pd.read_csv(ruta_archivo, sep=separador, encoding=encoding)
                 
-                print(f"   📋 Columnas detectadas: {list(df.columns)}")
+                print(f"    Columnas detectadas: {list(df.columns)}")
                 if not df.empty:
-                    print(f"   📊 Primera fila de datos: {df.iloc[0].to_dict()}")
+                    print(f"    Primera fila de datos: {df.iloc[0].to_dict()}")
                 
                 return df
                     
             except UnicodeDecodeError:
-                print(f"   ❌ Error de encoding con {encoding}, probando siguiente...")
+                print(f"    Error de encoding con {encoding}, probando siguiente...")
                 continue
             except Exception as e:
-                print(f"   ❌ Error al cargar con encoding {encoding}: {e}")
+                print(f"    Error al cargar con encoding {encoding}: {e}")
                 continue
         
-        print("❌ No se pudo cargar el archivo CSV con ningún encoding")
+        print(" No se pudo cargar el archivo CSV con ningún encoding")
         return None
 
     @staticmethod
     def cargar_csv_manual(ruta_archivo):
         """Cargar archivo CSV manualmente para archivos problemáticos con dos encabezados"""
         try:
-            print("🔄 Intentando carga manual del CSV...")
+            print(" Intentando carga manual del CSV...")
             
             with open(ruta_archivo, 'r', encoding='utf-8') as f:
                 lineas = f.readlines()
             
             if len(lineas) < 3:
-                print("❌ Archivo no tiene suficientes líneas")
+                print(" Archivo no tiene suficientes líneas")
                 return None
             
-            print("📝 Estructura del archivo:")
+            print(" Estructura del archivo:")
             for i, linea in enumerate(lineas[:3]):
                 print(f"   Línea {i+1}: {linea.strip()}")
             
             encabezados = lineas[1].strip().split(',')
-            print(f"📋 Encabezados reales detectados: {encabezados}")
+            print(f" Encabezados reales detectados: {encabezados}")
             
             datos = []
             for i, linea in enumerate(lineas[2:], 2):
@@ -131,22 +131,22 @@ class FileUtils:
                     if len(valores) == len(encabezados):
                         datos.append(valores)
                     else:
-                        print(f"⚠️  Línea {i} tiene {len(valores)} valores, esperaba {len(encabezados)}: {valores}")
+                        print(f"  Línea {i} tiene {len(valores)} valores, esperaba {len(encabezados)}: {valores}")
             
             if not datos:
-                print("❌ No se encontraron datos válidos")
+                print(" No se encontraron datos válidos")
                 return None
                 
             df = pd.DataFrame(datos, columns=encabezados)
-            print(f"✅ CSV cargado manualmente: {len(df)} filas, {len(df.columns)} columnas")
+            print(f" CSV cargado manualmente: {len(df)} filas, {len(df.columns)} columnas")
             
             df.columns = [col.strip() for col in df.columns]
-            print(f"📋 Columnas finales: {list(df.columns)}")
+            print(f" Columnas finales: {list(df.columns)}")
             
             return df
             
         except Exception as e:
-            print(f"❌ Error en carga manual: {e}")
+            print(f" Error en carga manual: {e}")
             return None
 
     @staticmethod
@@ -154,7 +154,7 @@ class FileUtils:
         """Guardar DataFrame como Excel en output"""
         ruta_completa = os.path.join(OUTPUT_DIR, nombre_archivo)
         dataframe.to_excel(ruta_completa, index=False)
-        print(f"✅ Archivo guardado: {ruta_completa}")
+        print(f" Archivo guardado: {ruta_completa}")
         return ruta_completa
     
     @staticmethod
@@ -187,7 +187,7 @@ class FileUtils:
             
         except Exception as e:
             # Fallback a la carpeta actual si no se puede determinar Downloads
-            print(f"⚠️ No se pudo detectar carpeta Downloads: {e}")
+            print(f" No se pudo detectar carpeta Downloads: {e}")
             return os.getcwd()
 
     @staticmethod

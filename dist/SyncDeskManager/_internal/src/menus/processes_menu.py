@@ -12,15 +12,15 @@ class ProcessesMenu:
         while True:
             display.clear_screen()
             print("\n╔══════════════════════════════════════════════╗")
-            print("║                ⚙️ PROCESOS                    ║")
+            print("║                  PROCESOS                    ║")
             print("╚══════════════════════════════════════════════╝")
             
-            print("   📨 1. Revisar tickets sin actividad")
-            print("   🔄 2. Sincronizar estados (Freshdesk → Clarity)")
-            print("   🏷️  3. Forzar regeneración de etiquetas CREATE CLARITY")
-            print("   ↩️  0. Volver al menú principal")
+            print("    1. Revisar tickets sin actividad")
+            print("    2. Sincronizar estados (Freshdesk → Clarity)")
+            print("     3. Forzar regeneración de etiquetas CREATE CLARITY")
+            print("   ↩  0. Volver al menú principal")
             
-            opcion = input("\n👉 Seleccione una opción: ").strip()
+            opcion = input("\n Seleccione una opción: ").strip()
 
             if opcion == "1":
                 self.processes.enviar_notas_internas()
@@ -32,13 +32,13 @@ class ProcessesMenu:
             elif opcion == "0":
                 break
             else:
-                print("❌ Opción inválida. Por favor, intente de nuevo.")
+                print(" Opción inválida. Por favor, intente de nuevo.")
                 display.press_enter_to_continue()
 
     def regenerar_etiquetas_create_clarity(self):
         """Forzar regeneración de etiquetas CREATE CLARITY"""
         if not self.config_manager.validar_configuracion():
-            print("❌ Configuración de Freshdesk no válida.")
+            print(" Configuración de Freshdesk no válida.")
             display.press_enter_to_continue()
             return
 

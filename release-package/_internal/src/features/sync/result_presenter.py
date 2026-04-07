@@ -22,9 +22,9 @@ class ResultPresenter:
         
         # Opciones de ordenamiento
         display.show_message("Opciones de ordenamiento:", "info")
-        display.show_message("1. 🔢 Por cantidad (mayor a menor)", "info")
-        display.show_message("2. 🔄 Por estado actual (alfabético)", "info") 
-        display.show_message("3. 🎯 Por estado propuesto (alfabético)", "info")
+        display.show_message("1.  Por cantidad (mayor a menor)", "info")
+        display.show_message("2.  Por estado actual (alfabético)", "info") 
+        display.show_message("3.  Por estado propuesto (alfabético)", "info")
         
         opcion_orden = input("\nSeleccione ordenamiento (1-3, Enter=1): ").strip()
         
@@ -44,7 +44,7 @@ class ResultPresenter:
         
         # Mostrar detalle
         display.show_message("", "info")  # Línea en blanco
-        display.show_message("📝 DETALLE (primeros 20 tickets):", "header")
+        display.show_message(" DETALLE (primeros 20 tickets):", "header")
         display.show_divider(80)
         
         # Crear tabla para mostrar detalle
@@ -68,12 +68,12 @@ class ResultPresenter:
         display.show_divider(80)
     
     def mostrar_detalles_fallidos(self, tickets_fallidos):
-        """🎯 MOSTRAR DETALLES DE TICKETS FALLIDOS EN REPORTE FINAL"""
+        """ MOSTRAR DETALLES DE TICKETS FALLIDOS EN REPORTE FINAL"""
         if not tickets_fallidos:
             return
             
         display.show_message("\n" + "="*60, "warning")
-        display.show_message("📋 DETALLES DE TICKETS CON ERRORES", "warning")
+        display.show_message(" DETALLES DE TICKETS CON ERRORES", "warning")
         display.show_message("="*60, "warning")
         
         for i, fallo in enumerate(tickets_fallidos, 1):
@@ -83,43 +83,43 @@ class ResultPresenter:
             display.show_message(f"   Error: {fallo['error']}", "error")
             display.show_message("   " + "-"*50, "debug")
         
-        display.show_message(f"\n📊 Total de tickets con errores: {len(tickets_fallidos)}", "error")
+        display.show_message(f"\n Total de tickets con errores: {len(tickets_fallidos)}", "error")
 
     def mostrar_reporte_final(self, resultado, diferencias, tickets_fallidos=None):
-        """🎯 MEJORADO: Reporte final con DisplayUtils y detalles de fallos"""
+        """ MEJORADO: Reporte final con DisplayUtils y detalles de fallos"""
         display.show_section("REPORTE FINAL DE SINCRONIZACIÓN")
         display.show_divider(80)
         
         # Resumen ejecutivo
-        display.show_message("📊 RESUMEN EJECUTIVO", "header")
+        display.show_message(" RESUMEN EJECUTIVO", "header")
         display.show_key_value("Actualizaciones exitosas", f"{resultado.exitos}", 3)
         display.show_key_value("Actualizaciones fallidas", f"{resultado.fallos}", 3)
         display.show_key_value("Total de cambios identificados", f"{resultado.total_cambios}", 3)
         
-        # 🎯 OBTENER TICKETS EXITOSOS Y FALLIDOS
+        #  OBTENER TICKETS EXITOSOS Y FALLIDOS
         tickets_exitosos = [d['ticket_id'] for d in resultado.detalles if d['resultado'] == 'Éxito']
         tickets_fallidos_detalles = [d for d in resultado.detalles if d['resultado'] == 'Error']
         
         if tickets_exitosos:
             display.show_message("", "info")  # Línea en blanco
-            display.show_message(f"🎯 TICKETS ACTUALIZADOS EXITOSAMENTE ({len(tickets_exitosos)}):", "success")
-            display.show_bullet_list(tickets_exitosos[:10], "✅")
+            display.show_message(f" TICKETS ACTUALIZADOS EXITOSAMENTE ({len(tickets_exitosos)}):", "success")
+            display.show_bullet_list(tickets_exitosos[:10], "OK")
             if len(tickets_exitosos) > 10:
                 display.show_message(f"   ... y {len(tickets_exitosos) - 10} más", "info")
         
-        # 🆕 MOSTRAR DETALLES DE FALLOS SI SE PROPORCIONA LA LISTA MEJORADA
+        #  MOSTRAR DETALLES DE FALLOS SI SE PROPORCIONA LA LISTA MEJORADA
         if tickets_fallidos:
             self.mostrar_detalles_fallidos(tickets_fallidos)
         elif tickets_fallidos_detalles:
             # Si no se pasó la lista mejorada, usar la información de resultado.detalles
             display.show_message("", "info")  # Línea en blanco
-            display.show_message(f"🚫 TICKETS CON ERRORES ({len(tickets_fallidos_detalles)}):", "error")
+            display.show_message(f" TICKETS CON ERRORES ({len(tickets_fallidos_detalles)}):", "error")
             for error in tickets_fallidos_detalles[:5]:
-                display.show_message(f"   ❌ Ticket {error['ticket_id']}: {error['error']}", "error")
+                display.show_message(f"    Ticket {error['ticket_id']}: {error['error']}", "error")
             if len(tickets_fallidos_detalles) > 5:
                 display.show_message(f"   ... y {len(tickets_fallidos_detalles) - 5} errores más", "info")
         
-        # 🎯 ESTADÍSTICAS DE CAMBIOS APLICADOS
+        #  ESTADÍSTICAS DE CAMBIOS APLICADOS
         if tickets_exitosos:
             cambios_aplicados = {}
             for detalle in resultado.detalles:
@@ -128,20 +128,20 @@ class ResultPresenter:
                     cambios_aplicados[clave] = cambios_aplicados.get(clave, 0) + 1
             
             display.show_message("", "info")  # Línea en blanco
-            display.show_message("📈 ESTADÍSTICAS DE CAMBIOS APLICADOS:", "header")
+            display.show_message(" ESTADÍSTICAS DE CAMBIOS APLICADOS:", "header")
             for cambio, cantidad in cambios_aplicados.items():
                 display.show_key_value(cambio, f"{cantidad} tickets", 3)
         
         display.show_message("", "info")  # Línea en blanco
-        display.show_message(f"⏰ Hora de finalización: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", "info")
+        display.show_message(f" Hora de finalización: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", "info")
         display.show_divider(80)
         
-        # 🎯 OPCIÓN: DESCARGAR REPORTE DE RESULTADOS
+        #  OPCIÓN: DESCARGAR REPORTE DE RESULTADOS
         if resultado.detalles:
             display.show_message("¿DESEA DESCARGAR EL REPORTE DETALLADO DE RESULTADOS?", "info")
             display.show_divider(50)
-            display.show_message("1. ✅ Sí, descargar Excel con resultados completos", "info")
-            display.show_message("2. ❌ No, finalizar proceso", "info")
+            display.show_message("1.  Sí, descargar Excel con resultados completos", "info")
+            display.show_message("2.  No, finalizar proceso", "info")
             display.show_divider(50)
             
             opcion = input("\nSeleccione una opción (1-2): ").strip()
@@ -185,7 +185,7 @@ class ResultPresenter:
             
             # Mostrar resumen del archivo
             display.show_message("", "info")  # Línea en blanco
-            display.show_message("📋 CONTENIDO DEL ARCHIVO:", "header")
+            display.show_message(" CONTENIDO DEL ARCHIVO:", "header")
             display.show_bullet_list([
                 "Ticket ID: Identificador único del ticket",
                 "Estado Actual (Clarity): Estado actual en Clarity",
@@ -200,11 +200,11 @@ class ResultPresenter:
             return False
 
     def _descargar_excel_resultados(self, resultado):
-        """🎯 NUEVO: Descargar Excel con resultados detallados de la sincronización"""
+        """ NUEVO: Descargar Excel con resultados detallados de la sincronización"""
         try:
             display.show_message("Preparando descarga de resultados...", "file")
             
-            # 🎯 CREAR DATAFRAME CON RESULTADOS DETALLADOS
+            #  CREAR DATAFRAME CON RESULTADOS DETALLADOS
             datos_excel = []
             for detalle in resultado.detalles:
                 datos_excel.append({
@@ -213,7 +213,7 @@ class ResultPresenter:
                     'Estado Propuesto (Freshdesk)': detalle['estado_propuesto'],
                     'Estado Freshdesk Original': detalle['estado_freshdesk_original'],
                     'Resultado': detalle['resultado'],
-                    'Error': detalle['error'] or '',  # 🎯 INCLUIR MOTIVO DE ERROR
+                    'Error': detalle['error'] or '', 
                     'Investment ID': detalle['investment_id'],
                     'Internal ID': detalle['internal_id']
                 })
@@ -232,9 +232,9 @@ class ResultPresenter:
             display.show_message(f"Ubicación: {ruta_completa}", "info")
             display.show_message(f"Total de registros: {len(resultado.detalles)} tickets", "info")
             
-            # 🎯 MOSTRAR RESUMEN MEJORADO
+            #  MOSTRAR RESUMEN MEJORADO
             display.show_message("", "info")  # Línea en blanco
-            display.show_message("📋 CONTENIDO DEL ARCHIVO:", "header")
+            display.show_message(" CONTENIDO DEL ARCHIVO:", "header")
             display.show_bullet_list([
                 "Ticket ID: Identificador único del ticket",
                 "Estado Actual (Clarity): Estado actual en Clarity",
@@ -245,13 +245,13 @@ class ResultPresenter:
                 "Investment ID: ID de inversión en Clarity",
                 "Internal ID: ID interno en Clarity"
             ])
-            
-            # 🎯 ESTADÍSTICAS RÁPIDAS
+        
+            #  ESTADÍSTICAS RÁPIDAS
             exitos = sum(1 for d in resultado.detalles if d['resultado'] == 'Éxito')
             fallos = sum(1 for d in resultado.detalles if d['resultado'] == 'Error')
             
             display.show_message("", "info")  # Línea en blanco
-            display.show_message("📈 ESTADÍSTICAS INCLUIDAS:", "header")
+            display.show_message(" ESTADÍSTICAS INCLUIDAS:", "header")
             display.show_key_value("Actualizaciones exitosas", f"{exitos}", 3)
             display.show_key_value("Actualizaciones fallidas", f"{fallos}", 3)
             
@@ -288,9 +288,9 @@ class ResultPresenter:
         display.show_message("CONFIRMACIÓN REQUERIDA", "warning")
         display.show_divider(50)
         display.show_message("Opciones disponibles:", "info")
-        display.show_message("1. ✅ Aplicar cambios en Clarity", "info")
-        display.show_message("2. 📥 Descargar Excel con cambios propuestos", "info")
-        display.show_message("3. ❌ Cancelar proceso y volver al menú", "info")
+        display.show_message("1.  Aplicar cambios en Clarity", "info")
+        display.show_message("2.  Descargar Excel con cambios propuestos", "info")
+        display.show_message("3.  Cancelar proceso y volver al menú", "info")
         display.show_divider(50)
         
         while True:

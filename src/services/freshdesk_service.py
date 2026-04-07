@@ -14,7 +14,7 @@ class FreshdeskService:
 
     def obtener_tickets_paginados(self, pagina=1, por_pagina=100, updated_since=None):
         """Obtener tickets paginados - INTERFAZ LIMPIA"""
-        # 🆕 VERIFICACIÓN CON DISPLAYUTILS
+        #  VERIFICACIÓN CON DISPLAYUTILS
         if not self.config.validar_configuracion():
             return None
 
@@ -60,7 +60,7 @@ class FreshdeskService:
                     return []
                     
                 else:
-                    # 🆕 MANEJO DE ERRORES CON DISPLAYUTILS
+                    #  MANEJO DE ERRORES CON DISPLAYUTILS
                     if response.status_code == 401:
                         display.show_message("Error de autenticación en Freshdesk. Verifique la API Key", "error")
                         self.config.clear_sensitive_data()
@@ -106,7 +106,7 @@ class FreshdeskService:
         pagina = 1
         
         while True:
-            # 🆕 MOSTRAR PROGRESO DE PAGINACIÓN
+            #  MOSTRAR PROGRESO DE PAGINACIÓN
             if pagina % 10 == 0 or pagina == 1:
                 display.show_message(f"Procesando página {pagina}...", "info")
             
@@ -165,7 +165,7 @@ class FreshdeskService:
                     empresas.extend(data)
                     pagina += 1
                     
-                    # 🆕 MOSTRAR PROGRESO
+                    #  MOSTRAR PROGRESO
                     if len(empresas) % 50 == 0:
                         display.show_message(f"Obtenidas {len(empresas)} empresas...", "info")
                         

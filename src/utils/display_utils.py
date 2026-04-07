@@ -37,11 +37,11 @@ class DisplayUtils:
             bar = "█" * filled_length + "░" * (bar_length - filled_length)
             percentage = f"{progress * 100:.1f}%"
             
-            # 🆕 MEJORA: Limpiar línea antes de mostrar nuevo progreso
+            #  MEJORA: Limpiar línea antes de mostrar nuevo progreso
             message = f"\r{prefix} [{bar}] {percentage} ({current}/{total}) {suffix}"
             print(message, end="", flush=True)
             
-            # 🆕 Si es el último, limpiar la línea
+            #  Si es el último, limpiar la línea
             if current == total:
                 print("\r" + " " * len(message), end="", flush=True)
                 print("\r", end="", flush=True)
@@ -52,31 +52,31 @@ class DisplayUtils:
     @staticmethod
     def show_processing_message(ticket_id: str, current: int, total: int, status: str = ""):
         """Mostrar mensaje de procesamiento actualizado en línea"""
-        message = f"\r🔄 Procesando: Ticket #{ticket_id} [{current}/{total}] {status}"
+        message = f"\r Procesando: Ticket #{ticket_id} [{current}/{total}] {status}"
         print(message, end="", flush=True)
     
     @staticmethod
     def press_enter_to_continue():
         """Esperar que el usuario presione Enter"""
-        input("\n↩️  Presione Enter para continuar...")
+        input("\n↩  Presione Enter para continuar...")
     
     @staticmethod
     def show_message(message: str, message_type: str = "info"):
-        """🎯 MOSTRAR MENSAJES FORMATEADOS AL USUARIO"""
+        """ MOSTRAR MENSAJES FORMATEADOS AL USUARIO"""
         icons = {
             "info": "ℹ️",
-            "success": "✅", 
-            "warning": "⚠️",
-            "error": "❌",
-            "debug": "🔍",
-            "header": "🚀",
-            "file": "📁",
-            "search": "🔍",
-            "sync": "🔄",
-            "config": "🔧",
-            "user": "👤",
-            "key": "🔑",
-            "domain": "🌐"
+            "success": "success", 
+            "warning": "warning",
+            "error": "error",
+            "debug": "debug",
+            "header": "header",
+            "file": "file",
+            "search": "search",
+            "sync": "sync",
+            "config": "config",
+            "user": "user",
+            "key": "key",
+            "domain": "domain"
         }
         
         icon = icons.get(message_type, "•")
@@ -84,7 +84,7 @@ class DisplayUtils:
     
     @staticmethod
     def show_header(title: str):
-        """🎯 MOSTRAR CABECERAS FORMATEADAS"""
+        """ MOSTRAR CABECERAS FORMATEADAS"""
         width = len(title) + 4  # +4 por los espacios y emojis
         print(f"\n╔{'═' * width}╗")
         print(f"║  {title}  ║")
@@ -92,36 +92,36 @@ class DisplayUtils:
     
     @staticmethod
     def show_section(title: str):
-        """🎯 MOSTRAR SECCIONES"""
-        print(f"\n📋 {title}")
+        """ MOSTRAR SECCIONES"""
+        print(f"\n {title}")
         print("─" * (len(title) + 2))
     
     @staticmethod
     def show_subsection(title: str):
-        """🎯 MOSTRAR SUBSECCIONES"""
-        print(f"\n   📌 {title}")
+        """ MOSTRAR SUBSECCIONES"""
+        print(f"\n    {title}")
         print("   " + "─" * (len(title) + 2))
     
     @staticmethod
     def show_divider(length: int = 50):
-        """🎯 MOSTRAR DIVISOR"""
+        """ MOSTRAR DIVISOR"""
         print("─" * length)
     
     @staticmethod
     def show_bullet_list(items: list, bullet: str = "•"):
-        """🎯 MOSTRAR LISTA CON VIÑETAS"""
+        """ MOSTRAR LISTA CON VIÑETAS"""
         for item in items:
             print(f"   {bullet} {item}")
     
     @staticmethod
     def show_key_value(key: str, value: str, indent: int = 0):
-        """🎯 MOSTRAR PAR CLAVE-VALOR"""
+        """ MOSTRAR PAR CLAVE-VALOR"""
         indent_str = " " * indent
         print(f"{indent_str}{key}: {value}")
     
     @staticmethod
     def show_table(headers: list, rows: list, column_widths: list = None):
-        """🎯 MOSTRAR TABLA FORMATEADA"""
+        """ MOSTRAR TABLA FORMATEADA"""
         if not rows:
             return
             

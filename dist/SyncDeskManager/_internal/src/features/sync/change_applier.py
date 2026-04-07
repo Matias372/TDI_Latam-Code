@@ -7,12 +7,12 @@ class ChangeApplier:
     def __init__(self, clarity_service, logger):
         self.clarity_service = clarity_service
         self.logger = logger
-        self.tickets_fallidos = []  # 🆕 Lista para tickets con errores
+        self.tickets_fallidos = []  #  Lista para tickets con errores
     
     def aplicar_cambios_clarity(self, diferencias, transaction_id):
         """Aplicar cambios en Clarity - CONTINÚA CON ERRORES"""
         self.logger.log_info(f"Aplicando {len(diferencias)} cambios en Clarity...")
-        self.tickets_fallidos = []  # 🆕 Reiniciar lista
+        self.tickets_fallidos = []  #  Reiniciar lista
         
         resultado = SyncResult(exitos=0, fallos=0, detalles=[], total_cambios=len(diferencias))
         
@@ -24,7 +24,7 @@ class ChangeApplier:
                 status=f"Aplicando cambios..."
             )
             
-            # 🆕 REGISTRAR CAMBIO CON MANEJO DE ERRORES
+            #  REGISTRAR CAMBIO CON MANEJO DE ERRORES
             try:
                 self._registrar_cambio_transaccional(transaction_id, diff, 'PENDING')
             except Exception as e:
@@ -36,33 +36,33 @@ class ChangeApplier:
                 
                 if detalle['resultado'] == 'Éxito':
                     resultado.exitos += 1
-                    # 🆕 ACTUALIZAR CON MANEJO DE ERRORES
+                    #  ACTUALIZAR CON MANEJO DE ERRORES
                     try:
                         self._actualizar_estado_cambio(transaction_id, diff.ticket_id, 'SUCCESS')
                     except Exception as e:
                         self.logger.log_warning(f"Error actualizando estado de éxito para {diff.ticket_id}: {e}")
                 else:
                     resultado.fallos += 1
-                    # 🆕 AGREGAR A LISTA DE FALLIDOS
+                    #  AGREGAR A LISTA DE FALLIDOS
                     self.tickets_fallidos.append({
                         'ticket_id': diff.ticket_id,
                         'error': detalle['error'],
                         'estado_actual': diff.clarity_estado_actual,
                         'estado_propuesto': diff.clarity_estado_propuesto
                     })
-                    # 🆕 ACTUALIZAR CON MANEJO DE ERRORES
+                    #  ACTUALIZAR CON MANEJO DE ERRORES
                     try:
                         self._actualizar_estado_cambio(transaction_id, diff.ticket_id, 'FAILED', detalle['error'])
                     except Exception as e:
                         self.logger.log_warning(f"Error actualizando estado de fallo para {diff.ticket_id}: {e}")
                         
             except Exception as e:
-                # 🆕 CAPTURA DE ERRORES CRÍTICOS - CONTINÚA IGUAL
+                #  CAPTURA DE ERRORES CRÍTICOS - CONTINÚA IGUAL
                 resultado.fallos += 1
                 error_msg = f"Error crítico procesando ticket {diff.ticket_id}: {str(e)}"
                 self.logger.log_error(error_msg)
                 
-                # 🆕 AGREGAR A LISTA DE FALLIDOS
+                #  AGREGAR A LISTA DE FALLIDOS
                 self.tickets_fallidos.append({
                     'ticket_id': diff.ticket_id,
                     'error': error_msg,
@@ -70,16 +70,16 @@ class ChangeApplier:
                     'estado_propuesto': diff.clarity_estado_propuesto
                 })
         
-        # 🆕 MOSTRAR RESUMEN AL FINAL
+        #  MOSTRAR RESUMEN AL FINAL
         self._mostrar_resumen_fallos(resultado)
         
         return resultado
     
     def _mostrar_resumen_fallos(self, resultado):
-        """🎯 MOSTRAR RESUMEN DE TICKETS FALLIDOS"""
+        """ MOSTRAR RESUMEN DE TICKETS FALLIDOS"""
         if self.tickets_fallidos:
             display.show_message("\n" + "="*60, "warning")
-            display.show_message("📋 RESUMEN DE TICKETS CON ERRORES", "warning")
+            display.show_message(" RESUMEN DE TICKETS CON ERRORES", "warning")
             display.show_message("="*60, "warning")
             
             for i, fallo in enumerate(self.tickets_fallidos, 1):
@@ -89,10 +89,10 @@ class ChangeApplier:
                 display.show_message(f"   Error: {fallo['error']}", "error")
                 display.show_message("   " + "-"*50, "debug")
             
-            display.show_message(f"\n📊 Total: {len(self.tickets_fallidos)} tickets con errores", "error")
-            display.show_message(f"✅ {resultado.exitos} tickets actualizados exitosamente", "success")
+            display.show_message(f"\n Total: {len(self.tickets_fallidos)} tickets con errores", "error")
+            display.show_message(f" {resultado.exitos} tickets actualizados exitosamente", "success")
         else:
-            display.show_message(f"🎉 ¡Todos los {resultado.exitos} tickets se actualizaron exitosamente!", "success")
+            display.show_message(f" ¡Todos los {resultado.exitos} tickets se actualizaron exitosamente!", "success")
     
     def _registrar_cambio_transaccional(self, transaction_id, diferencia, estado):
         """Registrar cambio individual en la transacción"""
@@ -136,7 +136,7 @@ class ChangeApplier:
             )
             
             if exito:
-                self.logger.log_info(f"✅ Ticket {diferencia.ticket_id} actualizado exitosamente")
+                self.logger.log_info(f" Ticket {diferencia.ticket_id} actualizado exitosamente")
                 return {
                     'ticket_id': diferencia.ticket_id,
                     'estado_actual': diferencia.clarity_estado_actual,
@@ -149,9 +149,9 @@ class ChangeApplier:
                     'timestamp': self.logger._get_current_timestamp()
                 }
             else:
-                # 🆕 ERROR ESPECÍFICO DE LA API
+                #  ERROR ESPECÍFICO DE LA API
                 error_msg = "Error en la API - HTTP 400 (posiblemente datos inválidos)"
-                self.logger.log_warning(f"❌ Error actualizando ticket {diferencia.ticket_id}: {error_msg}")
+                self.logger.log_warning(f" Error actualizando ticket {diferencia.ticket_id}: {error_msg}")
                 return {
                     'ticket_id': diferencia.ticket_id,
                     'estado_actual': diferencia.clarity_estado_actual,
@@ -165,9 +165,9 @@ class ChangeApplier:
                 }
                 
         except Exception as e:
-            # 🆕 CAPTURA DE ERRORES DURANTE LA ACTUALIZACIÓN
+            #  CAPTURA DE ERRORES DURANTE LA ACTUALIZACIÓN
             error_msg = f"Excepción durante actualización: {str(e)}"
-            self.logger.log_error(f"❌ Excepción actualizando ticket {diferencia.ticket_id}: {error_msg}")
+            self.logger.log_error(f" Excepción actualizando ticket {diferencia.ticket_id}: {error_msg}")
             return {
                 'ticket_id': diferencia.ticket_id,
                 'estado_actual': diferencia.clarity_estado_actual,

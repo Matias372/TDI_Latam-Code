@@ -5,7 +5,7 @@ class ValidationUtils:
         emails_corregidos = []
         for mail in emails:
             if "@" not in mail:
-                print(f"❌ Email inválido detectado: {mail}")
+                print(f" Email inválido detectado: {mail}")
                 nuevo_mail = input(f"Ingrese un correo válido para reemplazar '{mail}': ").strip()
                 emails_corregidos.append(nuevo_mail)
             else:
@@ -29,5 +29,5 @@ class ValidationUtils:
             modo = input("Seleccione el modo (1/2): ").strip()
             return modo == "2"  # True para automático, False para manual
         except:
-            print("❌ Opción inválida. Se usará modo manual.")
+            print(" Opción inválida. Se usará modo manual.")
             return False

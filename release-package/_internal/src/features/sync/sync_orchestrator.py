@@ -60,15 +60,15 @@ class SyncOrchestrator:
             display.show_message("", "info")
             display.show_message("¿Desea continuar con la comparación detallada?", "info")
             display.show_bullet_list([
-                "✅ Sí, continuar con la sincronización",
-                "❌ No, volver al menú"
+                " Sí, continuar con la sincronización",
+                " No, volver al menú"
             ])
             
             opcion_analisis = input("\nSeleccione opción (1/2): ").strip()
             if opcion_analisis != "1":
                 display.show_message("Proceso cancelado por el usuario después del análisis", "warning")
                 self._completar_transaccion_cancelada("Usuario canceló después del análisis")
-                display.press_enter_to_continue()  # 🆕 Asegurar que espere
+                display.press_enter_to_continue()  #  Asegurar que espere
                 return False
 
             # Actualizar metadatos
@@ -78,13 +78,13 @@ class SyncOrchestrator:
             display.show_section("COMPARACIÓN DE ESTADOS")
             display.show_message("Comparando estados entre sistemas...", "sync")
             
-            # 🆕 MEJORA: La barra de progreso se maneja internamente en state_comparator
+            #  MEJORA: La barra de progreso se maneja internamente en state_comparator
             diferencias = self.state_comparator.comparar_estados(
                 validacion.df_freshdesk, 
                 validacion.df_clarity
             )
             
-            # 🆕 LIMPIAR LÍNEA DE PROGRESO AL FINAL
+            #  LIMPIAR LÍNEA DE PROGRESO AL FINAL
             display.clear_line()
             
             if not diferencias:
@@ -99,12 +99,12 @@ class SyncOrchestrator:
             
             diferencias_completas = self.id_resolver.resolver_ids_clarity(diferencias)
             
-            # 🆕 LIMPIAR LÍNEA DE PROGRESO AL FINAL
+            #  LIMPIAR LÍNEA DE PROGRESO AL FINAL
             display.clear_line()
             
             if not diferencias_completas:
-                display.show_message("❌ No se pudieron obtener los IDs de Clarity", "error")
-                display.show_message("🔍 Posibles causas:", "warning")
+                display.show_message(" No se pudieron obtener los IDs de Clarity", "error")
+                display.show_message(" Posibles causas:", "warning")
                 display.show_bullet_list([
                     "Credenciales de Clarity incorrectas o expiradas",
                     "Problemas de conexión con el servidor de Clarity",
@@ -113,7 +113,7 @@ class SyncOrchestrator:
                     "El dominio de Clarity no es accesible"
                 ])
                 
-                # 🆕 ESPERAR A QUE EL USUARIO VEA EL ERROR ANTES DE CONTINUAR
+                #  ESPERAR A QUE EL USUARIO VEA EL ERROR ANTES DE CONTINUAR
                 display.press_enter_to_continue()
                 self._completar_transaccion_fallida("No se pudieron obtener los IDs de Clarity")
                 return False
@@ -126,12 +126,12 @@ class SyncOrchestrator:
             if opcion == "2":
                 self.result_presenter._descargar_excel_cambios(diferencias_completas)
                 self._completar_transaccion_cancelada("Usuario descargó Excel sin aplicar cambios")
-                display.press_enter_to_continue()  # 🆕 Asegurar que espere
+                display.press_enter_to_continue()  #  Asegurar que espere
                 return True
             elif opcion == "3":
                 display.show_message("Proceso cancelado por el usuario", "warning")
                 self._completar_transaccion_cancelada("Usuario canceló el proceso")
-                display.press_enter_to_continue()  # 🆕 Asegurar que espere
+                display.press_enter_to_continue()  #  Asegurar que espere
                 return False
 
             # 5. APLICACIÓN DE CAMBIOS
@@ -139,26 +139,26 @@ class SyncOrchestrator:
             display.show_message("Aplicando cambios en Clarity...", "sync")
             resultado = self.change_applier.aplicar_cambios_clarity(diferencias_completas, self.transaction_id)
 
-            # 🆕 MEJORA: VERIFICAR SI HUBO ÉXITOS A PESAR DE FALLOS
+            #  MEJORA: VERIFICAR SI HUBO ÉXITOS A PESAR DE FALLOS
             if resultado.exitos > 0:
-                display.show_message(f"✅ {resultado.exitos} tickets actualizados exitosamente", "success")
+                display.show_message(f" {resultado.exitos} tickets actualizados exitosamente", "success")
             if resultado.fallos > 0:
-                display.show_message(f"⚠️  {resultado.fallos} tickets tuvieron errores (revisar resumen anterior)", "warning")
+                display.show_message(f"  {resultado.fallos} tickets tuvieron errores (revisar resumen anterior)", "warning")
             
             # 6. REPORTE FINAL
             display.show_section("REPORTE FINAL")
 
-            # 🆕 MEJORA: PASAR LA LISTA DE TICKETS FALLIDOS AL PRESENTADOR
+            #  MEJORA: PASAR LA LISTA DE TICKETS FALLIDOS AL PRESENTADOR
             if hasattr(self.change_applier, 'tickets_fallidos') and self.change_applier.tickets_fallidos:
                 self.result_presenter.mostrar_reporte_final(
                     resultado, 
                     diferencias_completas,
-                    tickets_fallidos=self.change_applier.tickets_fallidos  # 🆕 Pasar lista de fallos
+                    tickets_fallidos=self.change_applier.tickets_fallidos  #  Pasar lista de fallos
                 )
             else:
                 self.result_presenter.mostrar_reporte_final(resultado, diferencias_completas)
 
-            # 🆕 MEJORA: COMPLETAR TRANSACCIÓN CON INFORMACIÓN DE FALLOS
+            #  MEJORA: COMPLETAR TRANSACCIÓN CON INFORMACIÓN DE FALLOS
             detalles_fallos = []
             if hasattr(self.change_applier, 'tickets_fallidos'):
                 detalles_fallos = [{
@@ -171,7 +171,7 @@ class SyncOrchestrator:
                 resultado.exitos, 
                 resultado.fallos,
                 resultado.detalles,
-                detalles_fallos  # 🆕 Información específica de fallos
+                detalles_fallos  #  Información específica de fallos
             )
 
             # COMPLETAR TRANSACCIÓN EXITOSA
@@ -182,7 +182,7 @@ class SyncOrchestrator:
                 resultado.detalles
             )
             
-            # 🆕 ESPERAR ANTES DE VOLVER AL MENÚ
+            #  ESPERAR ANTES DE VOLVER AL MENÚ
             display.press_enter_to_continue()
             return resultado.exitos > 0
 
@@ -190,19 +190,19 @@ class SyncOrchestrator:
             display.clear_line()
             display.show_message("Sincronización cancelada por el usuario", "warning")
             self._completar_transaccion_cancelada("Cancelado por usuario (KeyboardInterrupt)")
-            display.press_enter_to_continue()  # 🆕 Asegurar que espere
+            display.press_enter_to_continue()  #  Asegurar que espere
             return False
         except Exception as e:
-            # 🆕 MEJORA: LOGGING MÁS ROBUSTO
+            #  MEJORA: LOGGING MÁS ROBUSTO
             error_msg = f"Error en sincronización: {str(e)}"
             logger.log_error(error_msg)
             
-            # 🆕 MOSTRAR INFORMACIÓN MÁS CLARA AL USUARIO
-            display.show_message(f"💥 ERROR INESPERADO EN SINCRONIZACIÓN", "error")
-            display.show_message(f"📝 Detalle técnico: {str(e)}", "debug")
-            display.show_message("📋 Revisa el archivo de logs para más detalles", "info")
+            #  MOSTRAR INFORMACIÓN MÁS CLARA AL USUARIO
+            display.show_message(f" ERROR INESPERADO EN SINCRONIZACIÓN", "error")
+            display.show_message(f" Detalle técnico: {str(e)}", "debug")
+            display.show_message(" Revisa el archivo de logs para más detalles", "info")
             
-            # 🆕 INTENTAR COMPLETAR LA TRANSACCIÓN A PESAR DEL ERROR
+            #  INTENTAR COMPLETAR LA TRANSACCIÓN A PESAR DEL ERROR
             try:
                 self._completar_transaccion_fallida(f"Excepción: {str(e)}")
             except Exception as trans_error:
@@ -212,9 +212,9 @@ class SyncOrchestrator:
             return False
     
     def _mostrar_cabecera(self):
-        """🎯 INTERFAZ LIMPIA: Cabecera con DisplayUtils"""
+        """ INTERFAZ LIMPIA: Cabecera con DisplayUtils"""
         display.clear_screen()
-        display.show_header("🔄 SINCRONIZACIÓN ESTADOS")
+        display.show_header(" SINCRONIZACIÓN ESTADOS")
         display.show_message("Iniciando sincronización desde archivos Excel/CSV", "header")
         display.show_message("Log transaccional activado - Todos los cambios serán registrados", "info")
         display.show_divider(60)
@@ -264,7 +264,7 @@ class SyncOrchestrator:
             summary['ejemplos_exitosos'] = tickets_exitosos
             summary['ejemplos_fallidos'] = tickets_fallidos
         
-        # 🆕 AGREGAR DETALLES ESPECÍFICOS DE FALLOS SI EXISTEN
+        #  AGREGAR DETALLES ESPECÍFICOS DE FALLOS SI EXISTEN
         if detalles_fallos:
             summary['detalles_fallos'] = detalles_fallos[:10]  # Limitar a 10 para no hacer muy grande el log
         

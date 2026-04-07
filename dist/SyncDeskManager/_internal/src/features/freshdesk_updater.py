@@ -243,12 +243,12 @@ class FreshdeskDirectUpdater:
         """Proceso automático para forzar regeneración de etiquetas CREATE CLARITY"""
         display.clear_screen()
         print("\n╔══════════════════════════════════════════════╗")
-        print("║           🏷️ REGENERAR ETIQUETAS             ║")
+        print("║            REGENERAR ETIQUETAS             ║")
         print("╚══════════════════════════════════════════════╝")
         
-        print("🚀 INICIANDO PROCESO AUTOMÁTICO")
+        print(" INICIANDO PROCESO AUTOMÁTICO")
         print("=" * 50)
-        print("📋 Buscando tickets sin etiquetas CLARITY...")
+        print(" Buscando tickets sin etiquetas CLARITY...")
         print("=" * 50)
         
         # Seleccionar archivo Excel
@@ -258,15 +258,15 @@ class FreshdeskDirectUpdater:
         )
         
         if not ruta_archivo:
-            print("❌ No se seleccionó ningún archivo.")
+            print(" No se seleccionó ningún archivo.")
             display.press_enter_to_continue()
             return
         
         try:
             df = pd.read_excel(ruta_archivo)
-            print(f"📊 Archivo cargado: {len(df)} tickets")
+            print(f" Archivo cargado: {len(df)} tickets")
         except Exception as e:
-            print(f"❌ Error al cargar archivo: {e}")
+            print(f" Error al cargar archivo: {e}")
             display.press_enter_to_continue()
             return
         
@@ -275,7 +275,7 @@ class FreshdeskDirectUpdater:
         columnas_faltantes = [col for col in columnas_requeridas if col not in df.columns]
         
         if columnas_faltantes:
-            print(f"❌ Columnas faltantes: {columnas_faltantes}")
+            print(f" Columnas faltantes: {columnas_faltantes}")
             display.press_enter_to_continue()
             return
         
@@ -289,8 +289,8 @@ class FreshdeskDirectUpdater:
         tickets_con_error = []  # Lista de diccionarios con ticket_id y error
         tickets_salteados_detalle = []  # Lista de diccionarios con ticket_id y motivo
         
-        print(f"\n🔄 Procesando {total_tickets} tickets...")
-        print("💡 Modo automático - todos los tickets válidos se actualizarán\n")
+        print(f"\n Procesando {total_tickets} tickets...")
+        print(" Modo automático - todos los tickets válidos se actualizarán\n")
         
         try:
             for index, fila in df.iterrows():
@@ -298,11 +298,11 @@ class FreshdeskDirectUpdater:
                 current = index + 1
                 
                 # Estado actual para mostrar
-                estado = f"✅:{tickets_actualizados} ⏭️:{tickets_salteados} ❌:{tickets_error}"
+                estado = f"OK:{tickets_actualizados} SKIP:{tickets_salteados} ERROR:{tickets_error}"
                 
                 # Mostrar cabecera del ticket actual
                 display.clear_line()
-                print(f"\r🔄 Procesando: Ticket #{ticket_id} [{current}/{total_tickets}] {estado}")
+                print(f"\r Procesando: Ticket #{ticket_id} [{current}/{total_tickets}] {estado}")
                 
                 # 1. Verificar campos en Excel
                 valores_excel = {
@@ -355,12 +355,12 @@ class FreshdeskDirectUpdater:
                 if exito:
                     tickets_actualizados += 1
                     print(f"   - Actualización completa exitosa para ticket {ticket_id}")
-                    print(f"   - ✅ Ticket {ticket_id} actualizado exitosamente")
+                    print(f"   -  Ticket {ticket_id} actualizado exitosamente")
                     # Log interno
                     logger.logger.info(f"Ticket {ticket_id} actualizado exitosamente")
                 else:
                     tickets_error += 1
-                    print(f"   - ❌ Error en ticket {ticket_id}: {mensaje}")
+                    print(f"   -  Error en ticket {ticket_id}: {mensaje}")
                     # Guardar ticket con error para reporte final
                     tickets_con_error.append({'ticket_id': ticket_id, 'error': mensaje})
                     # Log interno con detalles
@@ -371,11 +371,11 @@ class FreshdeskDirectUpdater:
                 
         except KeyboardInterrupt:
             display.clear_line()
-            print(f"\r⏹️  Proceso cancelado por el usuario")
-            print(f"📊 Progreso hasta la cancelación:")
-            print(f"   ✅ Actualizados: {tickets_actualizados}")
-            print(f"   ⏭️  Salteados: {tickets_salteados}")
-            print(f"   ❌ Errores: {tickets_error}")
+            print(f"\r  Proceso cancelado por el usuario")
+            print(f" Progreso hasta la cancelación:")
+            print(f"    Actualizados: {tickets_actualizados}")
+            print(f"     Salteados: {tickets_salteados}")
+            print(f"    Errores: {tickets_error}")
         
         # Mostrar resumen final
         display.clear_line()
@@ -390,16 +390,16 @@ class FreshdeskDirectUpdater:
     def mostrar_detalle_errores(self, tickets_con_error):
         """Mostrar detalle de tickets con errores"""
         print("\n" + "=" * 80)
-        print("❌ DETALLE DE TICKETS CON ERRORES - REVISIÓN MANUAL REQUERIDA")
+        print(" DETALLE DE TICKETS CON ERRORES - REVISIÓN MANUAL REQUERIDA")
         print("=" * 80)
         
         for i, ticket_error in enumerate(tickets_con_error, 1):
-            print(f"{i:2d}. 🎫 Ticket #{ticket_error['ticket_id']}")
-            print(f"      📋 Error: {ticket_error['error']}")
-            print(f"      🔧 Acción: Revisar manualmente en Freshdesk")
+            print(f"{i:2d}.  Ticket #{ticket_error['ticket_id']}")
+            print(f"       Error: {ticket_error['error']}")
+            print(f"       Acción: Revisar manualmente en Freshdesk")
             print()
         
-        print("💡 RECOMENDACIONES:")
+        print(" RECOMENDACIONES:")
         print("   • Verificar que el ticket exista en Freshdesk")
         print("   • Revisar permisos de la API Key")
         print("   • Verificar conexión a internet")
@@ -409,20 +409,20 @@ class FreshdeskDirectUpdater:
     def mostrar_resumen_final(self, total, actualizados, salteados, errores):
         """Mostrar resumen compacto del proceso"""
         print("\n" + "=" * 60)
-        print("📊 RESUMEN FINAL - REGENERACIÓN DE ETIQUETAS")
+        print(" RESUMEN FINAL - REGENERACIÓN DE ETIQUETAS")
         print("=" * 60)
         
-        print(f"📋 Total tickets procesados: {total}")
-        print(f"✅ Tickets actualizados exitosamente: {actualizados}")
-        print(f"⏭️ Tickets salteados: {salteados}")
-        print(f"❌ Errores en actualización: {errores}")
+        print(f" Total tickets procesados: {total}")
+        print(f" Tickets actualizados exitosamente: {actualizados}")
+        print(f" Tickets salteados: {salteados}")
+        print(f" Errores en actualización: {errores}")
         print("=" * 60)
         
         if actualizados > 0:
-            print("🎯 Las etiquetas CREATE CLARITY deberían generarse automáticamente")
+            print(" Las etiquetas CREATE CLARITY deberían generarse automáticamente")
         
         if errores > 0:
-            print("⚠️  Se encontraron errores - revisar detalle arriba")
+            print("  Se encontraron errores - revisar detalle arriba")
         
         # Log detallado
         logger.logger.info(f"Resumen proceso regeneración etiquetas: "

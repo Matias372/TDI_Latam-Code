@@ -1,7 +1,7 @@
 import os
 import sys
 import traceback
-import atexit  # 🆕 Importar atexit
+import atexit  #  Importar atexit
 
 def setup_paths():
     """Configurar paths - DEBE SER IDÉNTICA A run.py"""
@@ -34,14 +34,14 @@ def emergency_log(message):
         print(f"EMERGENCY: {message}")
 
 def main():
-    print("🚀 Iniciando SyncDesk Manager...")
+    print(" Iniciando SyncDesk Manager...")
     emergency_log("Iniciando main()")
     
-    # 🆕 Inicializar ConfigManager temprano para poder registrar la limpieza
+    #  Inicializar ConfigManager temprano para poder registrar la limpieza
     from config.config_manager import ConfigManager
     config_manager = ConfigManager()
     
-    # 🆕 Registrar limpieza al salir
+    #  Registrar limpieza al salir
     def cleanup_on_exit():
         emergency_log("Limpiando datos sensibles antes de cerrar...")
         config_manager.clear_sensitive_data()
@@ -55,13 +55,13 @@ def main():
         from utils.logging import logger
         
         emergency_log("Logger importado, configurando...")
-        logger.log_info("Iniciando aplicación", "🚀 Iniciando SyncDesk Manager...")
+        logger.log_info("Iniciando aplicación", " Iniciando SyncDesk Manager...")
         
         # Verificar otros módulos importantes
         emergency_log("Verificando imports críticos...")
         from menus.main_menu import MainMenu
         
-        logger.log_info("Módulos cargados correctamente", "✅ Sistema listo")
+        logger.log_info("Módulos cargados correctamente", " Sistema listo")
         
         # Iniciar aplicación
         emergency_log("Creando menú principal...")
@@ -74,18 +74,18 @@ def main():
         
     except Exception as e:
         error_msg = f"Error en main: {str(e)}\n{traceback.format_exc()}"
-        emergency_log(f"❌ ERROR: {error_msg}")
+        emergency_log(f" ERROR: {error_msg}")
         
-        # 🆕 Limpiar datos sensibles incluso en error
+        #  Limpiar datos sensibles incluso en error
         try:
             config_manager.clear_sensitive_data()
         except:
             pass
         
         # Mostrar error al usuario
-        print(f"\n💥 ERROR INESPERADO:")
-        print(f"📝 {str(e)}")
-        print(f"\n🔍 Para más detalles, revisa el archivo logs/emergency.log")
+        print(f"\n ERROR INESPERADO:")
+        print(f" {str(e)}")
+        print(f"\n Para más detalles, revisa el archivo logs/emergency.log")
         
         input("\nPresiona Enter para salir...")
 
